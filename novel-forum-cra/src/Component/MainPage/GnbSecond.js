@@ -22,14 +22,7 @@ const GnbSecond = () => {
 
 
             </nav>
-            <Routes>
-                <Route path="/category" element={<PageCategory></PageCategory>}></Route>
-                <Route path="/collection" element={<PageCollection></PageCollection>}></Route>
-                <Route path="/community" element={<PageCommunity></PageCommunity>}></Route>
-                <Route path="/review" element={<PageReview></PageReview>}></Route>
-                <Route path="/recommend" element={<PageRecommend></PageRecommend>}></Route>
-                <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
-            </Routes>
+
         </div>
 
 

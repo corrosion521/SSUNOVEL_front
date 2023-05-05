@@ -18,14 +18,15 @@ const GnbFirst = () => {
         // </div>
 
         <div>
-            <nav className="GnbFirst" >
-                <Link to="/" className='HomepageLogo'><HomepageLogo></HomepageLogo></Link>
-                <Link to="/search" className='SearchBox'><SearchBox></SearchBox></Link>
-                <BtnAlarm></BtnAlarm>
-                <Link to="/mypage" className='BtnMyPage'><BtnMyPage></BtnMyPage></Link>
-                <Link to="/login" className='BtnLoginSignin'><BtnLoginSignin></BtnLoginSignin></Link>
+            <nav className="GnbFirst">
+                <Link to="/" className="HomepageLogo"><HomepageLogo /></Link>
+                <div className="SearchBoxWrapper">
+                    <SearchBox />
+                </div>
+                <BtnAlarm />
+                <Link to="/mypage" className="BtnMyPage"><BtnMyPage /></Link>
+                <Link to="/login" className="BtnLoginSignin"><BtnLoginSignin /></Link>
             </nav>
-
 
         </div>
 

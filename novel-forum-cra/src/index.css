@@ -24,8 +24,8 @@
 
   /*마진 10%*/
   margin-top: 7%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 16%;
+  margin-right: 16%;
   margin-bottom: 10%;
 
 }
@@ -103,10 +103,46 @@
   margin-right: 4%;
 
   /*gnb2아래에 약간 갭주기*/
-  margin-bottom: 10%;
+  margin-bottom: 3%;
 }
 
 
+/*collection page*/
+/*modal창*/
+
+.modalframe {
+  /*화면 패딩 3%*/
+  padding: 3%;
+
+  width: 950px;
+  height: 600px;
+
+  /*z축 최상단*/
+  z-index: 999;
+
+  /*중앙*/
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+  border: 2px solid black;
+
+}
+
+
+
+/*modal 바깥 배경*/
+.modalbackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
 
 /*}*/
 
