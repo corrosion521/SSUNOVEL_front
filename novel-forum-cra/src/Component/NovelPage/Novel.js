@@ -7,7 +7,8 @@ function Novel({ info }) {
     const navigate = useNavigate();
 
     const onClickNovelImage = () => {
-        navigate('/novel', { state: { data: info } });
+        console.log(info)
+        navigate(`/novel?data=${info}`);
     }
     return (
 

@@ -6,8 +6,15 @@ import { useLocation } from "react-router-dom";
 import Review from "../ReviewPage/Review"
 
 function PageNovel() {
-    const location = useLocation();
-    const data = location.state?.data;
+
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search)
+    }
+    let query = useQuery();
+    const dataString = query.get('data');
+    const data = dataString ? dataString.split(',') : [];
+    console.log(data);
+
     {/*여기서의 추천 반영 https://jaimemin.tistory.com/1539 참고해보기 */ }
 
     // 즐겨찾기 상태와 이미지 상태

@@ -13,7 +13,7 @@ const CollectionSearchBox = () => {
     const handleKeyDown = (event) => {
         if (event.keyCode === 13) {
             {/*data싣자 */ }
-            navigate("/collectionsearch", { state: { data: inputValue } });
+            navigate(`/collectionsearch?data=${inputValue}`);
         }
     };
 
