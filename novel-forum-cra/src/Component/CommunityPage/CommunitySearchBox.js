@@ -26,6 +26,7 @@ const CommunitySearchBox = () => {
             <img src="../BtnSearchBox.png" style={{ padding: '7px' }}></img>
             <input
                 type="text"
+                maxLength={40}
                 style={{
                     border: 'none',
                     background: 'transparent',

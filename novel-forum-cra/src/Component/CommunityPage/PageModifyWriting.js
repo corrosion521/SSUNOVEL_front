@@ -25,7 +25,7 @@ function PageModifyWriting() {
         <div style={{ position: "relative" }}>
             <h1 style={{ fontSize: "2rem", textAlign: "start" }}>
                 <textarea
-                    maxLength={25}
+                    maxLength={23}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     style={{
@@ -34,11 +34,12 @@ function PageModifyWriting() {
                         outline: "none",
                         cursor: "text",
                         backgroundColor: "rgba(0, 0, 0, 0.05)",
-                        fontSize: "2rem",
+                        fontSize: "1.8rem",
                         width: "94%",
-                        height: "40px",
+                        height: "38px",
                         resize: "none",
-                        padding: '3%'
+                        padding: '3%',
+                        overflow: 'hidden'
                     }}
                     placeholder="제목을 입력하세요"
                 ></textarea>
@@ -62,7 +63,7 @@ function PageModifyWriting() {
                     outline: "none",
                     cursor: "text",
                     backgroundColor: "rgba(0, 0, 0, 0.05)",
-                    fontSize: "2rem",
+                    fontSize: "1.6rem",
                     width: "94%",
                     height: "800px",
                     resize: "none",

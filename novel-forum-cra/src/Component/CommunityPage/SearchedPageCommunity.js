@@ -50,7 +50,7 @@ function SearchedPageCommunity() {
     const navigate = useNavigate();
 
     const gotowrt = (item) => {
-        navigate(`./writing?data=${item}`);
+        navigate(`../community/writing?data=${item}`);
         console.log("!!");
     };
 
@@ -72,7 +72,7 @@ function SearchedPageCommunity() {
                 </div>
 
                 <div
-                    style={{ margin: '0', width: '50%', margin: 'auto' }}
+                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
                     onClick={() => gotowrt(item)}
                 >
                     {item[1]}
@@ -179,14 +179,16 @@ function SearchedPageCommunity() {
         <div style={{ position: 'relative' }}>
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>커뮤니티</h1>
             <hr style={{ width: '100%' }}></hr>
-            <div>
-                <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
-            </div>
+
             <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3%' }}>
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <CommunitySearchBox></CommunitySearchBox>
+                    <div >
+                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
+                    </div>
                 </div>
+
                 <div>
                     <button
                         style={{
@@ -206,12 +208,12 @@ function SearchedPageCommunity() {
                             fontWeight: 'bold',
                         }}
                     >
-                        공감순
+                        오래된순
                     </button>
                 </div>
             </div>
             <button
-                onClick={() => navigate('./write')}
+                onClick={() => navigate('../community/write')}
                 className="HomepageLogo"
                 style={{
                     color: 'white',

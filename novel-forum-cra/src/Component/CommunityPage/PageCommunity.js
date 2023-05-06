@@ -63,7 +63,7 @@ function PageCommunity() {
                 </div>
 
                 <div
-                    style={{ margin: '0', width: '50%', margin: 'auto' }}
+                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
                     onClick={() => gotowrt(item)}
                 >
                     {item[1]}

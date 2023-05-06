@@ -69,7 +69,7 @@ function PageWriting() {
         setInputCount(currentLength);
 
         // 현재 글자 수가 30의 배수일 때 개행을 추가
-        if (currentLength % 30 === 0) {
+        if (currentLength % 32 === 0) {
             e.target.value += '\n';
         }
 
