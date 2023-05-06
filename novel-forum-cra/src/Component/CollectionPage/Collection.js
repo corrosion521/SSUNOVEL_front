@@ -30,7 +30,7 @@ function Collection(props) {
             <h5 style={{ margin: '0', marginTop: '13px' }}>{props.info[2]}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                <img src="IconLike.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{props.info[3]}</h3>
+                <img src="../IconLike.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{props.info[3]}</h3>
             </div>
             <div style={{ textAlign: 'center' }}>무협 판타지 위주로 구성한 보관함입니다.</div>
 

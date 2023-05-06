@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommunitySearchBox from './CommunitySearchBox';
+import { useLocation } from 'react-router-dom';
 
-function PageCommunity() {
+function SearchedPageCommunity() {
+
+    //검색어 받아오기
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search)
+    }
+    let query = useQuery()
+    const searchTerm = query.get('data')
+
+
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
 
@@ -24,7 +35,6 @@ function PageCommunity() {
     };
 
     // 페이지 번호 배열 생성
-    //최대 페이지넘버 10개 보이게 동적 조정중. (보이는 페이지 번호에 대한 리스트)
     const pageNumbers = [];
     if (totalPages <= 10) {
         for (let i = 1; i <= totalPages; i++) {
@@ -44,7 +54,6 @@ function PageCommunity() {
         console.log("!!");
     };
 
-    //글 하나의 컴포넌트
     const Onewrt = ({ item }) => {
         return (
             <div
@@ -80,14 +89,12 @@ function PageCommunity() {
         );
     };
 
-    //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
         return (
-            //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
                 <ul className="pagination">
                     {/* Display the previous button */}
-                    {currentPage > 1 && (// 현재 페이지가 1보다 큰지를 확인하는 조건문입니다. 현재 페이지가 1보다 크다면, 즉 이전 페이지가 존재한다면 이전 버튼을 표시합니다.
+                    {currentPage > 1 && (
                         <button
                             style={{
                                 border: 'none',
@@ -100,7 +107,7 @@ function PageCommunity() {
                         </button>
                     )}
 
-                    {/* Display the 1st page button . 1page가 아닌경우 1page보여주기*/}
+                    {/* Display the 1st page button */}
                     {currentPage !== 1 && (
                         <button
                             style={{
@@ -117,7 +124,7 @@ function PageCommunity() {
                         </button>
                     )}
 
-                    {/* Render the page numbers . */}
+                    {/* Render the page numbers */}
                     {pageNumbers.map((pageNumber) => (
                         <button
                             style={{
@@ -134,7 +141,7 @@ function PageCommunity() {
                         </button>
                     ))}
 
-                    {/* Always display the 50th page button . 50page가 아닌경우 50page보여주기*/}
+                    {/* Always display the 50th page button */}
                     <button
                         style={{
                             border: 'none',
@@ -149,7 +156,7 @@ function PageCommunity() {
                         50
                     </button>
 
-                    {/* Display the next button . 다음버튼*/}
+                    {/* Display the next button */}
                     {currentPage < totalPages && (
                         <button
                             style={{
@@ -172,10 +179,13 @@ function PageCommunity() {
         <div style={{ position: 'relative' }}>
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>커뮤니티</h1>
             <hr style={{ width: '100%' }}></hr>
+            <div>
+                <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3%' }}>
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
-                    <CommunitySearchBox />
+                    <CommunitySearchBox></CommunitySearchBox>
                 </div>
                 <div>
                     <button
@@ -196,7 +206,7 @@ function PageCommunity() {
                             fontWeight: 'bold',
                         }}
                     >
-                        오래된순
+                        공감순
                     </button>
                 </div>
             </div>
@@ -243,7 +253,7 @@ function PageCommunity() {
             </div>
 
             {itemList
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                 .map((item) => (
                     <Onewrt item={item} key={item[0]} />
                 ))}
@@ -258,6 +268,6 @@ function PageCommunity() {
     );
 }
 
-export default PageCommunity;
+export default SearchedPageCommunity;
 
 

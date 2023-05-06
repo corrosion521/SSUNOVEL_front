@@ -13,7 +13,7 @@ const CollectionSearchBox = () => {
     const handleKeyDown = (event) => {
         if (event.keyCode === 13) {
             {/*data싣자 */ }
-            navigate(`/collectionsearch?data=${inputValue}`);
+            navigate(`../collection/search?data=${inputValue}`);
         }
     };
 
@@ -23,7 +23,7 @@ const CollectionSearchBox = () => {
 
     return (
         <div className="SearchBox" style={{ display: 'flex' }}>
-            <img src="./BtnSearchBox.png" style={{ padding: '7px' }}></img>
+            <img src="../BtnSearchBox.png" style={{ padding: '7px' }}></img>
             <input
                 type="text"
                 style={{

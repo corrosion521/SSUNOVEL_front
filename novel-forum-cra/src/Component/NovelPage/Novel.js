@@ -7,7 +7,7 @@ function Novel({ info }) {
     const navigate = useNavigate();
 
     const onClickNovelImage = () => {
-        console.log(info)
+        //console.log(info)
         navigate(`/novel?data=${info}`);
     }
     return (
@@ -18,7 +18,7 @@ function Novel({ info }) {
             <h3 style={{ margin: '0', marginTop: '13px' }}>{info[1]}</h3>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{info[2]}</h3><img src="IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{info[3]}</h3>
+                <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{info[2]}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{info[3]}</h3>
 
             </div>
 

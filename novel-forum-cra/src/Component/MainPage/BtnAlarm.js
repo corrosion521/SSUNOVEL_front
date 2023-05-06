@@ -2,7 +2,7 @@ const BtnAlarm = () => {
 
     return (
         <div className="BtnAlarm">
-            <img src="./BtnAlarm.png" />
+            <img src="../BtnAlarm.png" />
         </div>
     )
 

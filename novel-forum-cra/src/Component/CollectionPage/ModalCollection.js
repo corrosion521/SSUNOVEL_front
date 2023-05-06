@@ -20,34 +20,34 @@ const ModalCollection = ({ setModalOpen, info }) => {
 
     // 즐겨찾기 상태와 이미지 상태
     const [star, setStar] = useState(false);
-    const [starimg, setStarimg] = useState("IconStarOff.png");
+    const [starimg, setStarimg] = useState("../IconStarOff.png");
 
     // 즐겨찾기 함수
     const onClickStar = () => {
         if (star === false) {
             setStar(true);
-            setStarimg("IconStarOn.png");
+            setStarimg("../IconStarOn.png");
             console.log("클릭1");
         } else {
             setStar(false);
-            setStarimg("IconStarOff.png");
+            setStarimg("../IconStarOff.png");
             console.log("클릭2");
         }
     };
 
     // 공감 상태와 이미지 상태
     const [like, setLike] = useState(false);
-    const [likeimg, setLikeimg] = useState("IconLike.png");
+    const [likeimg, setLikeimg] = useState("../IconLike.png");
 
     // 공감(좋아요) 함수
     const onClickLike = () => {
         if (like === false) {
             setLike(true);
-            setLikeimg("IconLikeOn.png");
+            setLikeimg("../IconLikeOn.png");
             console.log("클릭1");
         } else {
             setLike(false);
-            setLikeimg("IconLike.png");
+            setLikeimg("../IconLike.png");
             console.log("클릭2");
         }
     };
@@ -68,7 +68,7 @@ const ModalCollection = ({ setModalOpen, info }) => {
                             <h3 style={{ fontSize: '1rem' }}>공감</h3>
                         </div>
                     </div>
-                    <img onClick={closeModal} src="IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
+                    <img onClick={closeModal} src="../IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
 
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
