@@ -45,11 +45,11 @@ const PageSignup = () => {
     return (
         <div className="signup-container">
             <h3>회원가입</h3>
-            <form onSubmit={onSubmit}>
-                <label>이메일 주소</label><br />
+            <form onSubmit={onSubmit} style={{display:'flex', flexDirection: 'column'}}>
+                <label>이메일 주소</label>
                 <input
                     name="email"
-                    type="text"
+                    type="email"
                     required
                     value={email}
                     onChange={onChange}
