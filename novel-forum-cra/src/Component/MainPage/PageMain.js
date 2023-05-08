@@ -1,7 +1,10 @@
 import React from "react"
+
 import GnbFirst from "./GnbFirst"
 import GnbSecond from "./GnbSecond"
 import Novel from "../NovelPage/Novel"
+import PageLogin from "../LoginPage/PageLogin"
+import PageSignup from "../LoginPage/PageSignup";
 import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
 
 import PageNovel from "../NovelPage/PageNovel";
@@ -22,6 +25,10 @@ function PageMain() {
         <div className="page">
             <GnbFirst></GnbFirst>
             <GnbSecond></GnbSecond>
+            <Routes>
+                <Route path="/login" element={<PageLogin />}></Route>
+                <Route path="/signup" element={<PageSignup/>}></Route>
+            </Routes>
 
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
