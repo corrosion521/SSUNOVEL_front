@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './login.css'
 
 function PageLogin() {
     const [email, setEmail] = useState("");
@@ -32,23 +33,31 @@ function PageLogin() {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <h3>로그인</h3>
-            <form onSubmit={handleSubmit}>
-                <label title="inputEmail">
-                    <input type="email" placeholder="이메일" value={email} onChange={handleEmailChange} />
-                </label><br />
-                <label title="inputPassword">
-                    <input type="password" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
-                </label><br/>
-                <button type="submit">로그인</button>                
-            </form>
-            <button onClick={()=>{navigate("/signup")}}>회원가입</button>
-            <div>
-                SNS 계정으로 로그인
+        <div className="page">
+            <div className="login template">
+                <div className="template__title">로그인</div>
+                <div className="template__line"></div>
+                <form onSubmit={handleSubmit}>
+                    <label for="email">
+                        <input id="email" type="email" placeholder="이메일" value={email} onChange={handleEmailChange} />
+                    </label>
+                    <label for="password">
+                        <input id="password" type="password" placeholder="비밀번호" value={password} onChange={handlePasswordChange} />
+                    </label>
+                    {/* 링크 수정하기 */}
+                    <a className="search-pw" href="/member/find?findType=password">비밀번호 찾기</a>
+                    <button className="login-btn" type="submit">로그인</button>
+                </form>
+                {/* <button className="btn signupbtn" onClick={() => { navigate("/signup") }}>회원가입</button> */}
+                <a className="signup-btn" href="/signup">회원가입</a>
+                <div className="sns-login">
+                    <div class="group1">
+                        <div class="line"></div>
+                        <div class="sns-text">SNS 계정으로 로그인</div>
+                    </div>
+                </div>
             </div>
         </div>
-
     );
 }
 
