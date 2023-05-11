@@ -30,13 +30,11 @@ function PageLogin() {
         //   }
     };
 
-    const navigate = useNavigate();
-
     return (
-        <div className="page">
-            <div className="login template">
-                <div className="template__title">로그인</div>
-                <div className="template__line"></div>
+        <div className="login-signup page">
+            <div className="login container">
+                <div className="container__title">로그인</div>
+                <div className="container__line"></div>
                 <form onSubmit={handleSubmit}>
                     <label for="email">
                         <input id="email" type="email" placeholder="이메일" value={email} onChange={handleEmailChange} />
@@ -46,8 +44,9 @@ function PageLogin() {
                     </label>
                     {/* 링크 수정하기 */}
                     <a className="search-pw" href="/member/find?findType=password">비밀번호 찾기</a>
-                    <button className="login-btn" type="submit">로그인</button>
+                    {/* <button className="login-btn" type="submit">로그인</button> */}
                 </form>
+                <button className="login-btn" type="submit">로그인</button>
                 {/* <button className="btn signupbtn" onClick={() => { navigate("/signup") }}>회원가입</button> */}
                 <a className="signup-btn" href="/signup">회원가입</a>
                 <div className="sns-login">
