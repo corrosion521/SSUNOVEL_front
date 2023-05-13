@@ -34,6 +34,7 @@ const PageLogin = () => {
         //   } catch (error) {
         //     console.error(error);
         //   }
+
         fetch("https://www.novelforum.site/member/login", {
             method: 'POST',
             headers: {
@@ -46,6 +47,7 @@ const PageLogin = () => {
         })
             .then((response) => response.json())
             .then((result) => console.log("결과: ", result));
+            // 성공시 홈페이지로 이동하게!!!
     };
 
     return (
@@ -60,7 +62,7 @@ const PageLogin = () => {
                             name="email"
                             type="email"
                             placeholder="이메일"
-                            required
+                            required    // 입력요청
                             value={email}
                             onChange={handleChange}
                         />
