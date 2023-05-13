@@ -8,14 +8,6 @@ import BtnAlarm from './BtnAlarm';
 
 const GnbFirst = () => {
     return (
-        // <div className='GnbFirst'>
-        //     <HomepageLogo />
-        //     <SearchBox />
-        //     <BtnAlarm />
-        //     <BtnMyPage />
-        //     <BtnLoginSignin />
-        // </div>
-
         <div>
             <nav className="GnbFirst">
                 <Link to="/" className="HomepageLogo"><HomepageLogo /></Link>
@@ -24,13 +16,9 @@ const GnbFirst = () => {
                 </div>
                 <BtnAlarm />
                 <Link to="/mypage" className="BtnMyPage"><BtnMyPage /></Link>
-                <Link to="/login" className="BtnLoginSignup"><BtnLoginSignup /></Link>
+                <Link to="/member/login" className="BtnLoginSignup"><BtnLoginSignup /></Link>
             </nav>
         </div>
-
-
-
-
     )
 }
 

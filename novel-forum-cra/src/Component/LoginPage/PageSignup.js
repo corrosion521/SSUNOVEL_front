@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import './login.css';
 
 const PageSignup = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -18,13 +20,13 @@ const PageSignup = () => {
         } else if (name === "password") {
             setPassword(value);
         }
-        else if (name === "passwordConfirm") {
+        else if (name === "password-confirm") {
             setPasswordConfirm(value);
         }
         else if (name === "nickname") {
             setNickname(value);
         }
-        else if (name === "birthYear") {
+        else if (name === "birth-year") {
             setBirthYear(value);
         }
         else if (name === "gender") {
@@ -38,60 +40,91 @@ const PageSignup = () => {
             // 다시확인 유도
             return alert("비밀번호를 다시 확인해 주세요")
         }
-        //console.log(gender);
-        //
+
+        // 서버로 전송
+        fetch("http://www.novelforum.site/member/signup", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                nickname: nickname,
+                gender: gender,
+                birthYear: birthYear
+            }),
+        })
+            .then((response) => response.json())
+            //.then((result) => console.log("결과: ", result))
+            .then((result) => { // 조건문 고치기!!
+                if (result.result) {    // 성공시 페이지 이동
+                    navigate('/member/signup/success');
+                } 
+                // 수정하기(실패시 처리할 사항들..)
+                else if (result.message === "INVALID_USER") { 
+                    console.log(result.message);
+                } else if (result.message === "KEY_ERROR") {    
+                    alert("id, pw를 확인해주세요.")
+                }
+            });
     };
+
     return (
         <div className="login-signup page">
             <div className="signup container">
                 <div className="container__title">회원가입</div>
                 <div className="container__line"></div>
                 <form onSubmit={handelSubmit}>
-                    <label for="email">이메일 주소</label>
+                    <label htmlFor="email">이메일 주소</label>
                     <div className="input-email">
                         <input
+                            name="email"
                             id="email"
                             type="email"
                             required
                             value={email}
                             onChange={handelChange}
-                            placeholder=""
                         />
                         <button className="dup-btn" type="button">중복확인</button>
                     </div>
-                    <label for="password">비밀번호</label>
+                    <label htmlFor="password">비밀번호</label>
                     <input
+                        name="password"
                         id="password"
                         type="password"
                         required
                         value={password}
                         onChange={handelChange}
                     />
-                    <label for="password-confirm">비밀번호 확인</label>
+                    <label htmlFor="password-confirm">비밀번호 확인</label>
                     <input
                         id="password-confirm"
+                        name="password-confirm"
                         type="password"
                         required
                         value={passwordConfirm}
                         onChange={handelChange}
                     />
-                    <label for="nickname">닉네임</label>
+                    <label htmlFor="nickname">닉네임</label>
                     <input
                         id="nickname"
+                        name="nickname"
                         type="text"
                         required
                         value={nickname}
                         onChange={handelChange}
                     />
-                    <label for="birth-year">출생연도</label>
+                    <label htmlFor="birth-year">출생연도</label>
                     <input
                         id="birth-year"
+                        name="birth-year"
                         type="text"
                         required
                         value={birthYear}
                         onChange={handelChange}
                     />
-                    <label for="gender">성별</label>
+                    <label htmlFor="gender">성별</label>
                     <div className="select">
                         <select
                             id="gender"
@@ -105,8 +138,9 @@ const PageSignup = () => {
                             <option value="여자">여자</option>
                         </select>
                     </div>
-                    <br />
-                    <button className="signup-btn" type="submit">가입하기</button>
+                    <button className="signup-btn" type="submit"
+                        style={{ marginTop: "1rem", marginBottom: "0" }}
+                    >가입하기</button>
                 </form>
             </div>
         </div>

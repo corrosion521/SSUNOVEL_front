@@ -1,11 +1,12 @@
 import React from "react"
+import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
 
 import GnbFirst from "./GnbFirst"
 import GnbSecond from "./GnbSecond"
 import Novel from "../NovelPage/Novel"
 import PageLogin from "../LoginPage/PageLogin"
 import PageSignup from "../LoginPage/PageSignup";
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
+import PageSignupSuccess from "../LoginPage/PageSignupSuccess";
 
 import PageNovel from "../NovelPage/PageNovel";
 import PageCategory from "../CategoryPage/PageCategory";
@@ -26,12 +27,12 @@ function PageMain() {
             <GnbFirst></GnbFirst>
             <GnbSecond></GnbSecond>
             <Routes>
-                <Route path="/login" element={<PageLogin />}></Route>
-                <Route path="/signup" element={<PageSignup/>}></Route>
-            </Routes>
-
-            <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
+
+                <Route path="/member/login" element={<PageLogin />}></Route>
+                <Route path="/member/signup" element={<PageSignup/>}></Route>
+                <Route path="/member/signup/success" element={<PageSignupSuccess/>}></Route>
+                
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/review" element={<PageReview></PageReview>}></Route>
@@ -47,9 +48,6 @@ function PageMain() {
                 <Route path="/community/search" element={<SearchedPageCommunity></SearchedPageCommunity>}></Route>
 
             </Routes>
-
-
-
         </div>
     );
 }
