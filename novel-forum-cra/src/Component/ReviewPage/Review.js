@@ -2,8 +2,8 @@ import React from "react";
 
 const Review = ({ review }) => {
     return (
-        <div style={{ border: '2px solid black', width: '100%', height: '130px', margin: 'auto', textAlign: 'center', fontSize: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexDirection: 'column' }}>
+        <div style={{ border: '2px solid black', width: '100%', height: '100%', margin: 'auto', textAlign: 'center', fontSize: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexDirection: 'column', position: 'relative' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                 <div>
                     <h3 style={{ fontSize: '0.8rem' }}>{review[2]}</h3>

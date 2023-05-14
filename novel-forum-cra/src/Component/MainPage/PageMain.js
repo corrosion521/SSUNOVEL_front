@@ -19,6 +19,7 @@ import PageWriting from "../CommunityPage/PageWriting"
 import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
+import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
 
 function PageMain() {
     return (
@@ -27,13 +28,16 @@ function PageMain() {
             <GnbSecond></GnbSecond>
             <Routes>
                 <Route path="/login" element={<PageLogin />}></Route>
-                <Route path="/signup" element={<PageSignup/>}></Route>
+                <Route path="/signup" element={<PageSignup />}></Route>
             </Routes>
 
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
+                <Route path="/category/search" element={<SearchedPageCategory></SearchedPageCategory>}></Route>
+
+
                 <Route path="/review" element={<PageReview></PageReview>}></Route>
                 <Route path="/recommend" element={<PageRecommend></PageRecommend>}></Route>
                 <Route path="/collection" element={<PageCollection></PageCollection>}></Route>

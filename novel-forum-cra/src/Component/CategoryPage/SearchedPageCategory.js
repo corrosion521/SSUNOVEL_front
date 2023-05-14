@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import CategorySearchBox from "./CategorySearchBox";
 import { useLocation } from "react-router-dom";
 
-function PageCategory() {
+
+function SearchedPageCategory() {
     const Novel1 = [
         "https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2",
         "이말년시리즈",
@@ -18,13 +19,13 @@ function PageCategory() {
         "정통 무협 회귀 판타지!!",
     ];
 
+
     //검색어 받아오기
     const useQuery = () => {
         return new URLSearchParams(useLocation().search)
     }
     let query = useQuery()
     const searchTerm = query.get('data')
-
 
     // 전체 아이템 리스트 (500개의 아이템 생성)
     const itemList = Array.from({ length: 500 }, (_, index) => [Novel1]);
@@ -208,19 +209,17 @@ function PageCategory() {
     useEffect(() => console.log(selectedFnVal, selectedGenreVal, selectedFlpVal), [selectedFnVal, selectedGenreVal, selectedFlpVal]);
 
     return (
-        <div>
+        <div style={{ display: 'flex', gap: '2vw', position: 'relative', flexDirection: 'column' }}>
 
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>커뮤니티</h1>
             <hr style={{ width: '100%' }}></hr>
-            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '7%' }}>
-
-
-
-
-                <div style={{ marginRight: 'auto', marginBottom: '3%' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3%' }}>
+                <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <CategorySearchBox />
-
+                    <div >
+                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
+                    </div>
                 </div>
                 <div  >
                     <button
@@ -476,4 +475,4 @@ function PageCategory() {
         </div >
     )
 }
-export default PageCategory;
+export default SearchedPageCategory;
