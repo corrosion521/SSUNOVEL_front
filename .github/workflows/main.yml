@@ -1,49 +1,25 @@
-name: Deploy
+name: Deploy to Production
 
 on:
   push:
-    branches: ['master']
-
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: ${{ github.workflow }}
-      cancel-in-progress: true
-
+    runs-on: ubuntu-18.04
     steps:
-      - name: Use repository source
-        uses: actions/checkout@v3
+      - name: Checkout source code
+        uses: actions/checkout@master
 
-      - name: Use node.js
-        uses: actions/setup-node@v3
+      - name: Cache node modules
+        uses: actions/cache@v1
         with:
-          node-version: 18
-
-
-      - name: Cache node_modules
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci
-        if: steps.cache.outputs.cache-hit != 'true'
-
-      - name: Set PUBLIC_URL
-        run: |
-          PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^.+\/(.+)$/\/\1\//')
-          echo PUBLIC_URL=$PUBLIC_URL > .env
-
-      - name: Build
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
 
       - name: Install Dependencies
         run: npm install
@@ -52,19 +28,13 @@ jobs:
         run: npm run build
         env:
           CI: ''
-        
 
       - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
         run: |
-          npm run build
-          cp ./build/index.html ./build/404.html
-
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            build s3://novelforum.shop
