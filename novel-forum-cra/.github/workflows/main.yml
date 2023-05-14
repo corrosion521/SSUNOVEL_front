@@ -3,7 +3,7 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - t3
+      [t3]
 
 jobs:
   deploy:
