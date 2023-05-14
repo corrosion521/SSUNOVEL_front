@@ -1,0 +1,169 @@
+/* @media only screen and (max-width: 767px) {
+
+  /* 스마트폰 화면 */
+/*우선은 비워두기. pc기준부터*/
+
+
+/*@media only screen and (min-width: 768px) {
+*/
+/* 데스크톱 화면 */
+/*
+1. 컴포넌트 크기가 변하는 건 사용자 경험에 좋지 않기에 vr,vh보다 %를 사용한다.
+*/
+
+/*--전 페이지 공통--------------------------------------------------*/
+/*page: 각 페이지의 스타일*/
+.page {
+  background-color: white;
+
+  /*page 중앙정렬*/
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+
+  /*마진 10%*/
+  margin-top: 7%;
+  margin-left: 16%;
+  margin-right: 16%;
+  margin-bottom: 10%;
+
+}
+
+
+/*메인 페이지*/
+/*gnb1*/
+.GnbFirst {
+  display: flex;
+  /*수평 정렬*/
+  flex-direction: row;
+
+
+
+}
+
+/*HomepageLogo : gnb1의 홈페이지 로고*/
+.HomepageLogo {
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+
+  width: 200px;
+  height: 50px;
+
+  /*로고는 왼쪽으로*/
+  margin-right: auto;
+
+
+}
+
+/*SearchBox : 검색창*/
+.SearchBox {
+  background-color: #f1f3f5;
+
+  width: 250px;
+  height: 50px;
+  margin-right: 20px;
+
+}
+
+/*BtnAlarm : 알람 버튼*/
+.BtnAlarm {
+
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+
+}
+
+
+/*BtnMyPage : 마이페이지 버튼*/
+.BtnMyPage {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+
+}
+
+/*BtnLoginSignin : 로그인,회원가입버튼*/
+.BtnLoginSignin {
+  width: 150px;
+  height: 50px;
+
+}
+
+/*gnb2*/
+
+.GnbSecond {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 8vh;
+  margin-left: 4%;
+  margin-right: 4%;
+
+  /*gnb2아래에 약간 갭주기*/
+  margin-bottom: 3%;
+}
+
+
+/*collection page*/
+/*modal창*/
+
+.modalframe {
+  /*화면 패딩 3%*/
+  padding: 3%;
+
+  width: 950px;
+  height: 600px;
+
+  /*z축 최상단*/
+  z-index: 999;
+
+  /*중앙*/
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: white;
+  border: 2px solid black;
+
+}
+
+
+
+/*modal 바깥 배경*/
+.modalbackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+/*}*/
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+
+
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html {
+  font-size: 20px;
+}
