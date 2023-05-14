@@ -3,7 +3,7 @@ import HomepageLogo from './HomepageLogo';
 import SearchBox from './SearchBox';
 import BtnMyPage from './BtnMyPage';
 import BtnLoginSignup from './BtnLoginSignup';
-import BtnAlarm from './BtnAlarm';
+import BtnNotification from './BtnNotification';
 
 
 const GnbFirst = () => {
@@ -22,7 +22,7 @@ const GnbFirst = () => {
                 <div className="SearchBoxWrapper">
                     <SearchBox />
                 </div>
-                <BtnAlarm />
+                <BtnNotification />
                 <Link to="/mypage" className="BtnMyPage"><BtnMyPage /></Link>
                 <Link to="/login" className="BtnLoginSignup"><BtnLoginSignup /></Link>
             </nav>
