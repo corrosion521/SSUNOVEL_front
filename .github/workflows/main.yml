@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: 18
 
+
       - name: Cache node_modules
         id: cache
         uses: actions/cache@v3
@@ -43,6 +44,21 @@ jobs:
           echo PUBLIC_URL=$PUBLIC_URL > .env
 
       - name: Build
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: ''
+        
+
+      - name: Deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
         run: |
           npm run build
           cp ./build/index.html ./build/404.html
