@@ -3,14 +3,14 @@ name: Deploy to Production
 on:
   push:
     branches:
-      - t2
+      - t3
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@master
+        uses: actions/checkout@t3
 
       - name: Cache node modules
         uses: actions/cache@v1
