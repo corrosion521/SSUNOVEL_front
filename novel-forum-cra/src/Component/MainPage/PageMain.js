@@ -19,6 +19,7 @@ import PageWriting from "../CommunityPage/PageWriting"
 import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
+import PageSearchResult from "../SearchResultPage/PageSearchResult"
 
 function PageMain() {
     return (
@@ -32,6 +33,8 @@ function PageMain() {
 
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
+                
+                <Route path="/search" element={<PageSearchResult/>}></Route>
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/review" element={<PageReview></PageReview>}></Route>
