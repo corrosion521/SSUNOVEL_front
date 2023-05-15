@@ -42,7 +42,7 @@ const PageSignup = () => {
         }
 
         // 서버로 전송
-        fetch("http://www.novelforum.site/member/signup", {
+        fetch("/member/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,20 +52,30 @@ const PageSignup = () => {
                 password: password,
                 nickname: nickname,
                 gender: gender,
-                birthYear: birthYear
+                // birthYear: birthYear, --> 서버 수정요청
+                age: birthYear,
             }),
         })
             .then((response) => response.json())
-            //.then((result) => console.log("결과: ", result))
-            .then((result) => { // 조건문 고치기!!
-                if (result.result) {    // 성공시 페이지 이동
-                    navigate('/member/signup/success');
-                } 
-                // 수정하기(실패시 처리할 사항들..)
-                else if (result.message === "INVALID_USER") { 
-                    console.log(result.message);
-                } else if (result.message === "KEY_ERROR") {    
-                    alert("id, pw를 확인해주세요.")
+            .then((result) => { 
+                if (result.code==="OK") {    // 회원가입 성공시                    
+                    fetch("/member/login", {    // 로그인 시키기 
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                        }),
+                    }).then((response) => response.json())
+                    .then((result) => console.log("결과: ", result))   // 로그인 여부 확인
+                    
+                    navigate('/member/signup/success'); // 성공페이지로 이동
+                } else if(result.code==="BAD_REQUEST") {    // 에러 메세지 출력 
+                    return alert(result.message);
+                } else {
+                    return alert(result.message);
                 }
             });
     };
@@ -133,9 +143,9 @@ const PageSignup = () => {
                             }}
                             className="custom-select"
                         >
-                            <option value="선택">선택</option>
-                            <option value="남자">남자</option>
-                            <option value="여자">여자</option>
+                            <option value="NULL">선택</option>
+                            <option value="MALE">남자</option>
+                            <option value="FEMALE">여자</option>
                         </select>
                     </div>
                     <button className="signup-btn" type="submit"
