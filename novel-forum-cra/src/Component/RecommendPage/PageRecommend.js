@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Novel from "../NovelPage/Novel";
 
 function PageRecommend() {
+
+    const [rate, setRate] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
+
     const Novel1 = [
         "https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2",
         "이말년시리즈",
@@ -15,21 +19,40 @@ function PageRecommend() {
 
     const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
 
-    const [recommendResult, setRecommendResult] = useState(Array.from({ length: novels.length }, () => ""));
 
-    const handleTextareaChange = (index, event) => {
-        const updatedResults = [...recommendResult];
-        updatedResults[index] = event.target.value;
-        setRecommendResult(updatedResults);
-        console.log(recommendResult);
-    };
 
     const onClickre = () => {
         // 완료된 후 페이지 새로고침
         window.location.reload();
-        console.log(recommendResult);
+
+        console.log(rate)
 
     }
+    //상
+    const onClickrate = (index, event) => {
+        setRate(prevRate => {
+            const updatedRate = [...prevRate];
+            updatedRate[index] = 2;
+            return updatedRate;
+        });
+
+    }
+
+    const onClickrate2 = (index, event) => {
+        setRate(prevRate => {
+            const updatedRate = [...prevRate];
+            updatedRate[index] = -2;
+            return updatedRate;
+        });
+
+    }
+
+
+
+
+
+
+
 
     return (
         <div style={{ position: "relative", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -45,25 +68,21 @@ function PageRecommend() {
                             <Novel info={novel}></Novel>
                         </div>
 
-                        <div style={{ display: 'flex', width: '150px', height: '50px', alignItems: 'center', justifyContent: 'center' }}>
-                            <h3 style={{ width: '100px', margin: '0', textAlign: 'center' }}>
-                                평점
-                            </h3>
-                            <textarea
-                                value={recommendResult[index]}
-                                onChange={(event) => handleTextareaChange(index, event)}
-                                style={{
-                                    resize: "none", // 크기 조정 비활성화
-                                    border: "2px solid #000", // 굵은 테두리
-                                    outline: "none", // 포커스 시 테두리 제거
-                                    width: '50px',
-                                    height: '25px',
-                                    fontSize: '1rem',
-                                    textAlign: 'center',
-                                    margin: '0',
-                                }}
-                                maxLength={1}
-                            ></textarea>
+                        <div style={{ display: 'flex', width: '150px', height: '50px', alignItems: 'center', justifyContent: 'center', margin: 'auto' }}>
+
+                            <button
+                                onClick={() => onClickrate(index)}
+                                style={{ backgroundColor: rate[index] === 2 ? 'green' : 'gray', color: 'white' }}>
+                                Good
+                            </button>
+
+
+
+                            <button
+                                onClick={() => onClickrate2(index)}
+                                style={{ backgroundColor: rate[index] === -2 ? 'red' : 'gray', color: 'white' }}>
+                                Bad
+                            </button>
                         </div>
 
 

@@ -36,7 +36,7 @@ function PageCategory() {
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 18; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 16; // 한 페이지에 보여줄 아이템 개수
 
 
     // 전체 페이지 수 계산
@@ -446,7 +446,7 @@ function PageCategory() {
                     </div>
 
                 </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%' }}>
                     {itemList
                         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                         .map((item) => (
@@ -464,13 +464,15 @@ function PageCategory() {
 
 
 
+            <div style={{ marginTop: '10%' }}>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                    pageNumbers={pageNumbers}
+                />
+            </div>
 
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-                pageNumbers={pageNumbers}
-            />
 
 
         </div >
