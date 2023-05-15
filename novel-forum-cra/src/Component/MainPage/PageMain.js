@@ -1,11 +1,12 @@
 import React from "react"
+import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
 
 import GnbFirst from "./GnbFirst"
 import GnbSecond from "./GnbSecond"
 import Novel from "../NovelPage/Novel"
 import PageLogin from "../LoginPage/PageLogin"
 import PageSignup from "../LoginPage/PageSignup";
-import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
+import PageSignupSuccess from "../LoginPage/PageSignupSuccess";
 
 import PageNovel from "../NovelPage/PageNovel";
 import PageCategory from "../CategoryPage/PageCategory";
@@ -20,6 +21,7 @@ import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
 import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
+import PageSearchResult from "../SearchResultPage/PageSearchResult"
 
 function PageMain() {
     return (
@@ -33,6 +35,13 @@ function PageMain() {
 
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
+
+                <Route path="/search" element={<PageSearchResult />}></Route>
+
+                <Route path="/member/login" element={<PageLogin />}></Route>
+                <Route path="/member/signup" element={<PageSignup />}></Route>
+                <Route path="/member/signup/success" element={<PageSignupSuccess />}></Route>
+
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/category/search" element={<SearchedPageCategory></SearchedPageCategory>}></Route>
@@ -51,9 +60,6 @@ function PageMain() {
                 <Route path="/community/search" element={<SearchedPageCommunity></SearchedPageCommunity>}></Route>
 
             </Routes>
-
-
-
         </div>
     );
 }
