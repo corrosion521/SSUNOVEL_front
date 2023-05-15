@@ -70,7 +70,7 @@ const PageLogin = () => {
                     <label htmlFor="password">
                         <input
                             id="password"
-                            name="email"
+                            name="password"
                             type="password"
                             placeholder="비밀번호"
                             required
