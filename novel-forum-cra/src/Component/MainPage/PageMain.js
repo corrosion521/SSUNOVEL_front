@@ -20,6 +20,7 @@ import PageWriting from "../CommunityPage/PageWriting"
 import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
+import PageSearchResult from "../SearchResultPage/PageSearchResult"
 
 function PageMain() {
     return (
@@ -28,6 +29,8 @@ function PageMain() {
             <GnbSecond></GnbSecond>
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
+                
+                <Route path="/search" element={<PageSearchResult/>}></Route>
 
                 <Route path="/member/login" element={<PageLogin />}></Route>
                 <Route path="/member/signup" element={<PageSignup/>}></Route>
