@@ -35,7 +35,7 @@ const PageLogin = () => {
         //     console.error(error);
         //   }
 
-        fetch("https://www.novelforum.site/member/login", {
+        fetch("/member/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const PageLogin = () => {
         })
             .then((response) => response.json())
             .then((result) => console.log("결과: ", result));
-            // 성공시 홈페이지로 이동하게!!!
+        // 성공시 홈페이지로 이동하게!!!
     };
 
     return (
@@ -70,7 +70,7 @@ const PageLogin = () => {
                     <label htmlFor="password">
                         <input
                             id="password"
-                            name="email"
+                            name="password"
                             type="password"
                             placeholder="비밀번호"
                             required
