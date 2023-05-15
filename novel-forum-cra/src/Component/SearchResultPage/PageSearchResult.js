@@ -10,8 +10,14 @@ const PageSearchResult = () => {
     let query = useQuery();
     const searchTerm = query.get('data');
 
-    const NovelResultCnt = 0;    // 작품 검색 결과 개수
-    const AuthorResultCnt = 0;    // 작가 검색 결과 개수
+    // apif로 가져온 데이터 내에서 검색 기능 구현
+    const Novel1 =
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "재밌는 소설", "김진수", "4.2", "200", "120", "네이버시리즈", "정통 무협 회귀 판타지!!"]
+    const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
+    const authors = ["작가1", "작가2", "작가3", "작가4"]
+
+    const NovelResultCnt = novels.length;    // 작품 검색 결과 개수
+    const AuthorResultCnt = authors.length;    // 작가 검색 결과 개수
 
     return (
         <div className="search-result page">
@@ -23,8 +29,14 @@ const PageSearchResult = () => {
             </h2>
             <div className="search-result-contents">
                 <div className="contents">
-                    <ContentsSearchResult title={"작품명"} resultCnt={NovelResultCnt} />
-                    <ContentsSearchResult title="작가명" resultCnt={AuthorResultCnt} />
+                    <ContentsSearchResult title="작품명"
+                        resultCnt={NovelResultCnt}
+                        resultAry={novels}
+                    />
+                    <ContentsSearchResult title="작가명"
+                        resultCnt={AuthorResultCnt}
+                        resultAry={authors}
+                    />
                 </div>
             </div>
 
