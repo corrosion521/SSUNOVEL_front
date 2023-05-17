@@ -26,11 +26,14 @@ const SearchBox = () => {
                     backgroundSize: 'cover',
                     outline: 'none',
                     cursor: 'text',
-                    fontSize: '0.8rem'
+                    fontSize: '0.8rem',
+                    margin: "auto",
+                    padding: "revert",                    
                 }}
                 value={inputValue} // 입력 값 설정
                 onKeyDown={handleKeyDown}
                 onChange={handleChange}
+                placeholder="작품명/작가명으로 검색"
             />
         </div>
     );
