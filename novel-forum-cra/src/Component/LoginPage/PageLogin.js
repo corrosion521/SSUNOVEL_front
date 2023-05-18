@@ -22,19 +22,6 @@ const PageLogin = () => {
         // 새로고침 방지
         event.preventDefault();
 
-        // 이메일과 비밀번호를 서버로 전송
-        // try {
-        //     const response = await fetch("/api/login", {
-        //       method: "POST",
-        //       headers: { "Content-Type": "application/json" },
-        //       body: JSON.stringify({ email, password }),
-        //     });
-        //     const data = await response.json();
-        //     console.log(data);
-        //   } catch (error) {
-        //     console.error(error);
-        //   }
-
         fetch("/member/login", {
             method: 'POST',
             headers: {
@@ -46,8 +33,13 @@ const PageLogin = () => {
             }),
         })
             .then((response) => response.json())
-            .then((result) => console.log("결과: ", result));
-        // 성공시 홈페이지로 이동하게!!!
+            .then((result) => {
+                //console.log("결과: ", result.code)
+                if(result.code==="OK"){ // 로그인 성공 시
+                    navigate("/");  // 메인페이지로 이동
+                    // 로그인/회원가입 버튼을 로그아웃버튼으로 바꾸기(여기서 구현하는거 아닐수도..)
+                }
+            });
     };
 
     return (
