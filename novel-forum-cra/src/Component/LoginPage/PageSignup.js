@@ -52,7 +52,6 @@ const PageSignup = () => {
                 password: password,
                 nickname: nickname,
                 gender: gender,
-                // birthYear: birthYear, --> 서버 수정요청
                 age: birthYear,
             }),
         })
@@ -71,7 +70,7 @@ const PageSignup = () => {
                     }).then((response) => response.json())
                     .then((result) => console.log("결과: ", result))   // 로그인 여부 확인
                     
-                    navigate('/member/signup/success'); // 성공페이지로 이동
+                    navigate('../member/create/success'); // 성공페이지로 이동
                 } else if(result.code==="BAD_REQUEST") {    // 에러 메세지 출력 
                     return alert(result.message);
                 } else {
@@ -125,7 +124,7 @@ const PageSignup = () => {
                         value={nickname}
                         onChange={handelChange}
                     />
-                    <label htmlFor="birth-year">출생연도</label>
+                    <label htmlFor="birth-year">생년월일</label>
                     <input
                         id="birth-year"
                         name="birth-year"
@@ -133,6 +132,7 @@ const PageSignup = () => {
                         required
                         value={birthYear}
                         onChange={handelChange}
+                        placeholder="YYYY-MM-DD 형식으로 입력"
                     />
                     <label htmlFor="gender">성별</label>
                     <div className="select">
