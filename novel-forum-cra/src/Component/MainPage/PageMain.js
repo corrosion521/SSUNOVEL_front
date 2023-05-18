@@ -28,10 +28,6 @@ function PageMain() {
         <div className="page">
             <GnbFirst></GnbFirst>
             <GnbSecond></GnbSecond>
-            <Routes>
-                <Route path="/login" element={<PageLogin />}></Route>
-                <Route path="/signup" element={<PageSignup />}></Route>
-            </Routes>
 
             <Routes>
                 <Route path="/" element={<PageMainContent></PageMainContent>}></Route>
@@ -39,8 +35,8 @@ function PageMain() {
                 <Route path="/search" element={<PageSearchResult />}></Route>
 
                 <Route path="/member/login" element={<PageLogin />}></Route>
-                <Route path="/member/signup" element={<PageSignup />}></Route>
-                <Route path="/member/signup/success" element={<PageSignupSuccess />}></Route>
+                <Route path="/member/create" element={<PageSignup />}></Route>
+                <Route path="/member/create/success" element={<PageSignupSuccess />}></Route>
 
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
