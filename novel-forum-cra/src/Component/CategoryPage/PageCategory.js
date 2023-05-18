@@ -126,10 +126,10 @@ function PageCategory() {
                             fontWeight: 'bold',
                             color: currentPage === 50 ? 'red' : 'inherit',
                         }}
-                        key={50}
-                        onClick={() => onPageChange(50)}
+                        key={totalPages}
+                        onClick={() => onPageChange(totalPages)}
                     >
-                        50
+                        {totalPages}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}

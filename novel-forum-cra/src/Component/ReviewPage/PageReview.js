@@ -12,7 +12,7 @@ function PageReview() {
 
 
     //리뷰작성자
-    const review1 = ["김김김", "4.3", "아주아주아주아중주아주아주 재밌었습니다."];
+    const review1 = ["김김김", "4.3", "234", "아주아주아주아중주아주아주 재밌었습니다."];
 
     const reviews = [review1, review1, review1, review1];
 
