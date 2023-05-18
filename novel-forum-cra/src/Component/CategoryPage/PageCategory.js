@@ -210,7 +210,7 @@ function PageCategory() {
     return (
         <div>
 
-            <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>커뮤니티</h1>
+            <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>카테고리</h1>
             <hr style={{ width: '100%' }}></hr>
             <div style={{ display: 'flex', flexDirection: 'row', marginTop: '7%' }}>
 
