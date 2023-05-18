@@ -209,7 +209,7 @@ function PageNovel() {
                             <span>/100 자</span>
                         </p>
 
-                        <div style={{ margin: 'auto', width: '100%', display: 'flex' }}>
+                        <div style={{ margin: 'auto', width: '100%', display: 'flex', justifyContent:'space-between' }}>
                             <div style={{ marginLeft: '5%' }} >
                                 {/*3.1) */}
                                 {ARRAY.map((index) => (
@@ -227,8 +227,9 @@ function PageNovel() {
                                     color: 'white',
                                     width: '100px',
                                     height: '40px',
-                                    marginLeft: '50%',
-                                    marginBottom: '2%'
+                                    marginLeft: '5%',
+                                    marginRight: '5%',
+                                    marginBottom: '2%',
                                 }}
                                 onClick={() => onSubmitRp({ rpCount, score })}
                             >
