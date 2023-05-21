@@ -8,17 +8,34 @@ function PageReview() {
 
     const Novel1 =
         ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
-    const novels = [Novel1, Novel1, Novel1, Novel1, Novel1];
+
+    const Novel2 =
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈2", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
+
+    const Novel3 =
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈3", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
+
+    const Novel4 =
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈4", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
+
+
+    const novels = [Novel1, Novel2, Novel3, Novel4];
 
 
     //리뷰작성자
-    const review1 = ["김김김", "4.3", "234", "아주아주아주아중주아주아주 재밌었습니다."];
+    const review1 = ["김김김", "4.3", 234, "아주아주아주아중주아주아주 재밌었습니다."];
 
-    const reviews = [review1, review1, review1, review1];
+    const review2 = ["김김2", "4.3", 234, "아주아주아주아중주아주아주 재밌었습니다."];
+
+    const review3 = ["김김3", "4.3", 234, "아주아주아주아중주아주아주 재밌었습니다."];
+
+    const review4 = ["김김4", "4.3", 234, "아주아주아주아중주아주아주 재밌었습니다."];
+
+    const reviews = [review1, review2, review3, review4];
 
 
     // 전체 아이템 리스트 (500개의 아이템 생성)
-    const itemList = Array.from({ length: 500 }, (_, index) => [Novel1, review1]);
+    const itemList = Array.from({ length: 3 }, (_, index) => [novels, reviews]);
 
 
 
@@ -140,6 +157,44 @@ function PageReview() {
         );
     }
 
+
+    //카테고리 페이지
+    //장르
+    // const onClickSelectedGr = (event) => {
+    //     const targetButton = event.target;
+    //     const currentColor = targetButton.style.color;
+
+    //     if (currentColor === "black" || currentColor === "") {
+    //         targetButton.style.color = "green";
+    //         setSelectedGenreVal((prevGenreVal) => [...prevGenreVal, targetButton.value]);
+
+    //     } else {
+    //         targetButton.style.color = "black";
+    //         setSelectedGenreVal((prevGenreVal) =>
+    //             prevGenreVal.filter((val) => val !== targetButton.value)
+    //         );
+
+    //     }
+    // };
+
+    const [selectedGenreVal, setSelectedGenreVal] = useState([]);
+
+
+    useEffect(() => console.log(selectedGenreVal), [selectedGenreVal]);
+
+    //장르 하나 정하기 
+    const [selectedGenre, setSelectedGenre] = useState('');
+
+    const onClickSelectedGr = (genre) => {
+        if (selectedGenre == genre)
+            setSelectedGenre("");
+        else {
+            setSelectedGenre(genre);
+        }
+
+    };
+
+
     return (
         <div style={{ position: 'relative' }}>
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>리뷰</h1>
@@ -174,22 +229,134 @@ function PageReview() {
             </div>
 
 
+            <div style={{ display: 'flex', marginTop: '10%', gap: '10%', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
+                    <h3 style={{ fontSize: '2rem' }}>장르</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                        <button className="r1"
+                            onClick={() => onClickSelectedGr('romance')}
+                            style={{
+                                color: selectedGenre === 'romance' ? 'green' : 'black',
+                                border: "none",
+                                background: "none",
+                                fontSize: "1rem",
+                                fontWeight: "bold",
+                            }}
+                            value='로맨스'                    >로맨스</button>
+                        <button
+                            onClick={() => onClickSelectedGr('rofan')}
+                            style={{
+                                color: selectedGenre === 'rofan' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
 
+                            }}
+                            value='로판'>
+                            로판
+                        </button>
+                        <button
+                            onClick={() => onClickSelectedGr('fantasy')}
+                            style={{
+                                color: selectedGenre === 'fantasy' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
 
-            {itemList
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                .map((item) => (
-                    <div style={{ display: 'flex', marginTop: '5%' }}>
-                        <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
-                            <Novel info={item[0]}></Novel>
-                        </div>
-                        <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
-                            <Review review={item[1]}></Review>
-                        </div>
+                            }}
+                            value='판타지'
+                        >
+                            판타지
+                        </button>
+                        <button
+
+                            onClick={() => onClickSelectedGr('hyunfan')}
+                            style={{
+                                color: selectedGenre === 'hyunfan' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+
+                            }}
+                            value='현판'  >
+                            현판
+                        </button>
+                        <button
+                            onClick={() => onClickSelectedGr('muhyup')}
+                            style={{
+                                color: selectedGenre === 'muhyup' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+
+                            }}
+                            value='무협'
+                        >
+                            무협
+                        </button>
+                        <button
+                            onClick={() => onClickSelectedGr('mistery')}
+                            style={{
+                                color: selectedGenre === 'mistery' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+
+                            }}
+                            value='미스터리'
+                        >
+                            미스터리
+                        </button>
+                        <button
+                            onClick={() => onClickSelectedGr('light')}
+                            style={{
+                                color: selectedGenre === 'light' ? 'green' : 'black',
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+
+                            }}
+                            value='라이트노벨'
+                        >
+                            라이트노벨
+                        </button>
 
                     </div>
-                ))
-            }
+
+
+                </div>
+
+                <div>
+                    {itemList
+                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                        .map((item, index) => (
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+                                <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
+                                    <Novel info={item[0][index]}></Novel> {/*itemList주의해서 보기- index */}
+                                </div>
+                                <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
+                                    <Review review={item[1][index]}></Review>
+                                </div>
+
+                            </div>
+                        ))
+                    }
+                </div>
+
+
+
+
+            </div>
+
+
+
+
 
             <Pagination
                 currentPage={currentPage}

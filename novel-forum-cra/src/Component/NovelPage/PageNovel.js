@@ -77,8 +77,11 @@ function PageNovel() {
 
     //리뷰작성자
     const review1 = ["김김김", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review2 = ["김김2", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review3 = ["김김3", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review4 = ["김김4", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
 
-    const reviews = [review1, review1, review1, review1];
+    const reviews = [review1, review2, review3, review4];
 
     // 작가알림 상태와 이미지 상태
     const [writerLike, setWriterLike] = useState(false);
@@ -209,7 +212,7 @@ function PageNovel() {
                             <span>/100 자</span>
                         </p>
 
-                        <div style={{ margin: 'auto', width: '100%', display: 'flex', justifyContent:'space-between' }}>
+                        <div style={{ margin: 'auto', width: '100%', display: 'flex', flexDirection: 'column' }}>
                             <div style={{ marginLeft: '5%' }} >
                                 {/*3.1) */}
                                 {ARRAY.map((index) => (
@@ -227,9 +230,8 @@ function PageNovel() {
                                     color: 'white',
                                     width: '100px',
                                     height: '40px',
-                                    marginLeft: '5%',
-                                    marginRight: '5%',
-                                    marginBottom: '2%',
+                                    marginLeft: '50%',
+                                    marginBottom: '2%'
                                 }}
                                 onClick={() => onSubmitRp({ rpCount, score })}
                             >
@@ -243,9 +245,9 @@ function PageNovel() {
 
                         {
                             reviews.map(
-                                (reviews) =>
+                                (review) =>
                                 (<div style={{ marginBottom: '2%' }}>
-                                    <Review review={reviews} ></Review>
+                                    <Review review={review} ></Review>
                                 </div>
 
                                 )

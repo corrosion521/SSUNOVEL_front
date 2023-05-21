@@ -425,19 +425,7 @@ function PageCategory() {
                                 >
                                     라이트노벨
                                 </button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
 
-                                    }}
-                                    value='BL'
-                                >
-                                    BL
-                                </button>
                             </div>
 
 
