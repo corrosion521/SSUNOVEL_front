@@ -22,6 +22,7 @@ import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
 import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
 import PageSearchResult from "../SearchResultPage/PageSearchResult"
+import SearchedPageReview from "../ReviewPage/SearchedPageReview"
 
 function PageMain() {
     return (
@@ -44,6 +45,9 @@ function PageMain() {
 
 
                 <Route path="/review" element={<PageReview></PageReview>}></Route>
+                <Route path="/review/search" element={<SearchedPageReview></SearchedPageReview>}></Route>
+
+
                 <Route path="/recommend" element={<PageRecommend></PageRecommend>}></Route>
                 <Route path="/collection" element={<PageCollection></PageCollection>}></Route>
                 <Route path="/collection/search" element={<SearchedPageCollection></SearchedPageCollection>}></Route>

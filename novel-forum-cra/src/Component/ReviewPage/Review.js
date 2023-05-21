@@ -16,18 +16,18 @@ const Review = ({ review }) => {
 
     // 2. 공감 상태와 이미지 상태
     const [like, setLike] = useState(false);
-    const [likeimg, setLikeimg] = useState("IconLike.png");
+    const [likeimg, setLikeimg] = useState("../IconLike.png");
 
     // 2. 공감(좋아요) 함수
     const onClickLike = () => {
         if (like === false) {
             setLike(true);
-            setLikeimg("IconLikeOn.png");
+            setLikeimg("../IconLikeOn.png");
             review[2] += 1;//좋아요 1증가.
             console.log("클릭1");
         } else {
             setLike(false);
-            setLikeimg("IconLike.png");
+            setLikeimg("../IconLike.png");
             review[2] -= 1;//좋아요 1감소(원상복구)
             console.log("클릭2");
         }
@@ -44,7 +44,7 @@ const Review = ({ review }) => {
                 </div>
                 <div style={{ display: 'flex', gap: '5%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <img src="IconStarOn.png" style={{ width: '0.5rem', height: '0.5rem' }} ></img><h3 style={{ fontSize: '0.5rem', marginRight: '5px' }}>{review[1]}</h3><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{review[0]}</h3>
+                        <img src={review[1]} style={{ width: '2.2rem', height: '2.2rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{review[0]}</h3>
 
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>

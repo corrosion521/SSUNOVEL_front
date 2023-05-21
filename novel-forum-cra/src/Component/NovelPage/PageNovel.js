@@ -76,10 +76,10 @@ function PageNovel() {
 
 
     //리뷰작성자
-    const review1 = ["김김김", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
-    const review2 = ["김김2", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
-    const review3 = ["김김3", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
-    const review4 = ["김김4", "4.3", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review1 = ["김김김", "https://mblogthumb-phinf.pstatic.net/MjAyMTAyMDRfNjIg/MDAxNjEyNDA4OTk5NDQ4.6UGs399-0EXjIUwwWsYg7o66lDb-MPOVQ-zNDy1Wnnkg.m-WZz0IKKnc5OO2mjY5dOD-0VsfpXg7WVGgds6fKwnIg.JPEG.sunny_side_up12/1612312679152%EF%BC%8D2.jpg?type=w800", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review2 = ["김김2", "https://ts2.mm.bing.net/th?q=%EC%9B%83%EA%B8%B4+%EA%B3%A0%EC%96%91%EC%9D%B4+%EC%A7%A4%EB%AA%A8%EC%9D%8C", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review3 = ["김김3", "https://blog.kakaocdn.net/dn/dKZ1M0/btrI6qogsWx/lMyrgPOHXuYgvqPzfByTpk/img.jpg", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
+    const review4 = ["김김4", "https://mblogthumb-phinf.pstatic.net/MjAyMjA3MzFfNzIg/MDAxNjU5MjAyMjM4ODc4.eqpoMuq1tT37LwAlUxwWyKCbb__AB0D1GGEbs1kbO_kg.JqH8yprgOAhqRtXQmUf6rUiaKoDRWkpISvBfurQWObYg.JPEG.grw04035/IMG_8516.JPG?type=w800", 234, "아주아주아주아중주아\n주아주 재밌었습니다."];
 
     const reviews = [review1, review2, review3, review4];
 

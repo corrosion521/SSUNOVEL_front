@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ReviewSearchBox from './ReviewSearchBox';
 import Review from './Review';
 import Novel from '../NovelPage/Novel';
+
 
 function PageReview() {
 
@@ -189,6 +190,14 @@ function PageReview() {
 
     };
 
+    //검색어 받아오기
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search)
+    }
+    let query = useQuery()
+    const searchTerm = query.get('data')
+
+
     useEffect(() => console.log(selectedGenre), [selectedGenre]);
     return (
 
@@ -200,6 +209,9 @@ function PageReview() {
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <ReviewSearchBox />
+                    <div >
+                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
+                    </div>
                 </div>
 
                 <div>
@@ -226,7 +238,7 @@ function PageReview() {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', marginTop: '10%', gap: '4%', justifyContent: 'flex-start' }}>
+            <div style={{ display: 'flex', marginTop: '10%', gap: '10%', justifyContent: 'flex-start' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
                     <h3 style={{ fontSize: '2rem' }}>장르</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -329,7 +341,7 @@ function PageReview() {
 
                 </div>
 
-                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', margin: 'auto', justifyContent: 'center' }}>
+                <div>
                     {itemList
                         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                         .map((item, index) => (
@@ -337,7 +349,7 @@ function PageReview() {
                                 <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
                                     <Novel info={item[0][index]}></Novel> {/*itemList주의해서 보기- index */}
                                 </div>
-                                <div style={{ height: '170px', width: '80%', marginLeft: '20px' }}>
+                                <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
                                     <Review review={item[1][index]}></Review>
                                 </div>
 

@@ -17,6 +17,29 @@ function Collection(props) {
     };
     //console.log(props.info[1]);
 
+
+    // 2. 공감 상태와 이미지 상태
+    const [like, setLike] = useState(false);
+    const [likeimg, setLikeimg] = useState("../IconLike.png");
+
+
+    // 2. 공감(좋아요) 함수
+    const onClickLike = () => {
+        if (like === false) {
+            setLike(true);
+            setLikeimg("../IconLikeOn.png");
+            props.info[3] += 1;//좋아요 1증가.
+            console.log("클릭1");
+        } else {
+            setLike(false);
+            setLikeimg("../IconLike.png");
+            props.info[3] -= 1;//좋아요 1감소(원상복구)
+            console.log("클릭2");
+        }
+    };
+
+
+
     return (
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "100%", height: '100%' }}>
@@ -30,9 +53,9 @@ function Collection(props) {
             <h5 style={{ margin: '0', marginTop: '13px' }}>{props.info[2]}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                <img src="../IconLike.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{props.info[3]}</h3>
+                <img src={likeimg} style={{ width: '0.8rem' }} onClick={onClickLike}></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{props.info[3]}</h3>
             </div>
-            <div style={{ textAlign: 'center' }}>무협 판타지 위주로 구성한 보관함입니다.</div>
+            <div style={{ textAlign: 'center' }}>{props.info[4]}</div>
 
         </div>
 

@@ -29,8 +29,8 @@ function PageCategory() {
     // 전체 아이템 리스트 (500개의 아이템 생성)
     const itemList = Array.from({ length: 500 }, (_, index) => [Novel1]);
     const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
-    const [selectedFlpVal, setSelectedFlpVal] = useState([]);
-    const [selectedGenreVal, setSelectedGenreVal] = useState([]);
+    // const [selectedFlpVal, setSelectedFlpVal] = useState([]);
+    // const [selectedGenreVal, setSelectedGenreVal] = useState([]);
     const [selectedFnVal, setSelectedFnVal] = useState(false);
 
 
@@ -168,44 +168,74 @@ function PageCategory() {
         }
     };
 
-    //플랫폼
-    const onClickSelectedFlp = (event) => {
-        const targetButton = event.target;
-        const currentColor = targetButton.style.color;
+    // //플랫폼
+    // const onClickSelectedFlp = (event) => {
+    //     const targetButton = event.target;
+    //     const currentColor = targetButton.style.color;
 
-        if (currentColor === "black" || currentColor === "") {
-            targetButton.style.color = "green";
-            setSelectedFlpVal((prevFlpVal) => [...prevFlpVal, targetButton.value]);
+    //     if (currentColor === "black" || currentColor === "") {
+    //         targetButton.style.color = "green";
+    //         setSelectedFlpVal((prevFlpVal) => [...prevFlpVal, targetButton.value]);
 
-        } else {
-            targetButton.style.color = "black";
-            setSelectedFlpVal((prevFlpVal) =>
-                prevFlpVal.filter((val) => val !== targetButton.value)
-            );
+    //     } else {
+    //         targetButton.style.color = "black";
+    //         setSelectedFlpVal((prevFlpVal) =>
+    //             prevFlpVal.filter((val) => val !== targetButton.value)
+    //         );
 
-        }
-    };
+    //     }
+    // };
 
     //장르
-    const onClickSelectedGr = (event) => {
-        const targetButton = event.target;
-        const currentColor = targetButton.style.color;
+    // const onClickSelectedGr = (event) => {
+    //     const targetButton = event.target;
+    //     const currentColor = targetButton.style.color;
 
-        if (currentColor === "black" || currentColor === "") {
-            targetButton.style.color = "green";
-            setSelectedGenreVal((prevGenreVal) => [...prevGenreVal, targetButton.value]);
+    //     if (currentColor === "black" || currentColor === "") {
+    //         targetButton.style.color = "green";
+    //         setSelectedGenreVal((prevGenreVal) => [...prevGenreVal, targetButton.value]);
 
-        } else {
-            targetButton.style.color = "black";
-            setSelectedGenreVal((prevGenreVal) =>
-                prevGenreVal.filter((val) => val !== targetButton.value)
-            );
+    //     } else {
+    //         targetButton.style.color = "black";
+    //         setSelectedGenreVal((prevGenreVal) =>
+    //             prevGenreVal.filter((val) => val !== targetButton.value)
+    //         );
 
+    //     }
+    // };
+
+
+    //장르 하나 정하기 
+    const [selectedGenre, setSelectedGenre] = useState('');
+
+    const onClickSelectedGr = (genre) => {
+        if (selectedGenre == genre)
+            setSelectedGenre("");
+        else {
+            setSelectedGenre(genre);
         }
+
+    };
+
+    //플랫폼 하나 정하기 
+    const [selectedFlp, setSelectedFlp] = useState('');
+
+    const onClickSelectedFlp = (flp) => {
+        if (selectedFlp == flp)
+            setSelectedFlp("");
+        else {
+            setSelectedFlp(flp);
+        }
+
     };
 
 
-    useEffect(() => console.log(selectedFnVal, selectedGenreVal, selectedFlpVal), [selectedFnVal, selectedGenreVal, selectedFlpVal]);
+
+
+
+
+
+    useEffect(() => console.log(selectedFnVal, selectedFlp, selectedGenre), [selectedFnVal, selectedGenre, selectedFlp]);
 
     return (
         <div>
@@ -262,6 +292,7 @@ function PageCategory() {
                     <button
                         onClick={onClickSelectedFn}
                         style={{
+
                             border: '1px solid black',
                             background: 'none',
                             fontSize: '1rem',
@@ -277,13 +308,14 @@ function PageCategory() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                             <button
                                 className="f1"
-                                onClick={onClickSelectedFlp}
+                                onClick={() => onClickSelectedFlp('kakaopage')}
                                 style={{
+                                    color: selectedFlp === 'kakaopage' ? 'green' : 'black',
+
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
                                     fontWeight: 'bold',
-
 
                                 }}
                                 value='카카오페이지'
@@ -291,8 +323,9 @@ function PageCategory() {
                                 카카오페이지
                             </button>
                             <button
-                                onClick={onClickSelectedFlp}
-                                style={{
+                                onClick={() => onClickSelectedFlp('naverseries')} style={{
+                                    color: selectedFlp === 'naverseries' ? 'green' : 'black',
+
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -304,8 +337,9 @@ function PageCategory() {
                                 네이버시리즈
                             </button>
                             <button
-                                onClick={onClickSelectedFlp}
+                                onClick={() => onClickSelectedFlp('ridi')}
                                 style={{
+                                    color: selectedFlp === 'ridi' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -317,8 +351,9 @@ function PageCategory() {
                                 리디
                             </button>
                             <button
-                                onClick={onClickSelectedFlp}
+                                onClick={() => onClickSelectedFlp('munpia')}
                                 style={{
+                                    color: selectedFlp === 'munpia' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -334,106 +369,111 @@ function PageCategory() {
 
 
                     </div>
-                    <div style={{ display: 'flex', gap: '10%' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
-                            <h3 style={{ fontSize: '2rem' }}>장르</h3>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                                <button className="r1"
-                                    onClick={onClickSelectedGr}
-                                    style={{
+                    <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
+                        <h3 style={{ fontSize: '2rem' }}>장르</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                            <button className="r1"
+                                onClick={() => onClickSelectedGr('romance')}
+                                style={{
+                                    color: selectedGenre === 'romance' ? 'green' : 'black',
+                                    border: "none",
+                                    background: "none",
+                                    fontSize: "1rem",
+                                    fontWeight: "bold",
+                                }}
+                                value='로맨스'                    >로맨스</button>
+                            <button
+                                onClick={() => onClickSelectedGr('rofan')}
+                                style={{
+                                    color: selectedGenre === 'rofan' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                        border: "none",
-                                        background: "none",
-                                        fontSize: "1rem",
-                                        fontWeight: "bold",
-                                    }}
-                                    value='로맨스'                    >로맨스</button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                }}
+                                value='로판'>
+                                로판
+                            </button>
+                            <button
+                                onClick={() => onClickSelectedGr('fantasy')}
+                                style={{
+                                    color: selectedGenre === 'fantasy' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                    }}
-                                    value='로판'>
-                                    로판
-                                </button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                }}
+                                value='판타지'
+                            >
+                                판타지
+                            </button>
+                            <button
 
-                                    }}
-                                    value='판타지'
-                                >
-                                    판타지
-                                </button>
-                                <button
+                                onClick={() => onClickSelectedGr('hyunfan')}
+                                style={{
+                                    color: selectedGenre === 'hyunfan' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                }}
+                                value='현판'  >
+                                현판
+                            </button>
+                            <button
+                                onClick={() => onClickSelectedGr('muhyup')}
+                                style={{
+                                    color: selectedGenre === 'muhyup' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                    }}
-                                    value='현판'  >
-                                    현판
-                                </button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                }}
+                                value='무협'
+                            >
+                                무협
+                            </button>
+                            <button
+                                onClick={() => onClickSelectedGr('mistery')}
+                                style={{
+                                    color: selectedGenre === 'mistery' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                    }}
-                                    value='무협'
-                                >
-                                    무협
-                                </button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                }}
+                                value='미스터리'
+                            >
+                                미스터리
+                            </button>
+                            <button
+                                onClick={() => onClickSelectedGr('light')}
+                                style={{
+                                    color: selectedGenre === 'light' ? 'green' : 'black',
+                                    border: 'none',
+                                    background: 'none',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
 
-                                    }}
-                                    value='미스터리'
-                                >
-                                    미스터리
-                                </button>
-                                <button
-                                    onClick={onClickSelectedGr}
-                                    style={{
-                                        border: 'none',
-                                        background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-
-                                    }}
-                                    value='라이트노벨'
-                                >
-                                    라이트노벨
-                                </button>
-
-                            </div>
-
+                                }}
+                                value='라이트노벨'
+                            >
+                                라이트노벨
+                            </button>
 
                         </div>
+
 
                     </div>
 
                 </div>
+
+
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%' }}>
                     {itemList
                         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
