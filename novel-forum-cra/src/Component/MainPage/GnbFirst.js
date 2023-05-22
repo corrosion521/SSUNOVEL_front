@@ -15,7 +15,7 @@ const GnbFirst = () => {
                     <SearchBox />
                 </div>
                 <BtnNotification />
-                <Link to="/mypage" className="BtnMyPage"><BtnMyPage /></Link>
+                <Link to="/mypage/writing" className="BtnMyPage"><BtnMyPage /></Link>
                 <Link to="/member/login" className="BtnLoginSignup"><BtnLoginSignup /></Link>
             </nav>
         </div>

@@ -7,6 +7,8 @@ import Novel from "../NovelPage/Novel"
 import PageLogin from "../LoginPage/PageLogin"
 import PageSignup from "../LoginPage/PageSignup";
 import PageSignupSuccess from "../LoginPage/PageSignupSuccess";
+import PageSearchResult from "../SearchResultPage/PageSearchResult"
+import MyPageNav from "../MyPage/MyPageNav";
 
 import PageNovel from "../NovelPage/PageNovel";
 import PageCategory from "../CategoryPage/PageCategory";
@@ -21,7 +23,6 @@ import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
 import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
-import PageSearchResult from "../SearchResultPage/PageSearchResult"
 
 function PageMain() {
     return (
@@ -38,6 +39,7 @@ function PageMain() {
                 <Route path="/member/create" element={<PageSignup />}></Route>
                 <Route path="/member/create/success" element={<PageSignupSuccess />}></Route>
 
+                <Route path="/mypage/writing" element={<MyPageNav />}></Route>
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/category/search" element={<SearchedPageCategory></SearchedPageCategory>}></Route>
