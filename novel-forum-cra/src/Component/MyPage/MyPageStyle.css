@@ -4,18 +4,18 @@
     margin-top: 50px;
 }
 
-.container {
+.my-container {
     justify-content: flex-start;
     width: 80%;
 }
 
-.container__title {
+.my-container__title {
     font-size: 20px;
     justify-content: flex-start;
 
 }
 
-.container__line {
+.my-container__line {
     background-color: #000000;
     flex-shrink: 0;
     height: 0.1rem;

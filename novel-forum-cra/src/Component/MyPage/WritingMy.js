@@ -173,9 +173,9 @@ const WritingMy = () => {
     return (
         <div className="mypage">
             <MyPageNav></MyPageNav>
-            <div className="my-writing container">
-                <div className="container__title">작성글 {'('}{ }{')'}</div>
-                <div className='container__line'></div>
+            <div className="my-writing my-container">
+                <div className="my-container__title">작성글 {'('}{ }{')'}</div>
+                <div className='my-container__line'></div>
             </div>
         </div>
     );
