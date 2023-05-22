@@ -23,8 +23,8 @@ const BtnNotification = () => {
                     <ModalNotification reverseState={reverseState} />
                 </ModalPortal>
             )} */}
-            <div className="notification-modal">
-                {isModalOn && (<ModalBackground reverseState={reverseState}/>)}
+            <div className="notification-modal" style={{ position: "absolute", top: '20%' }}>
+                {isModalOn && (<ModalBackground reverseState={reverseState} />)}
                 {isModalOn && (<ModalNotification reverseState={reverseState} />)}
             </div>
         </div>

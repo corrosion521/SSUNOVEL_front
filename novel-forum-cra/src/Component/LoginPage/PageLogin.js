@@ -22,11 +22,10 @@ const PageLogin = () => {
         // 새로고침 방지
         event.preventDefault();
 
-        fetch("https://novelforum.shop/member/login", {
+        fetch("/member/login", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Origin': 'http://novelforum.shop'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: email,

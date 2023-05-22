@@ -49,13 +49,13 @@ function Collection(props) {
             {/*단, modalOpen이 true일때만 ModalCollection컴포넌트를 렌더링  
             모달창에, 보관함의 이름을 props로 보내줌.*/}
             {modalOpen && <ModalCollection info={props.info[1]} setModalOpen={setModalOpen} />}
-            <h3 style={{ margin: '0', marginTop: '13px' }}>{props.info[1]}</h3>
+            <h3 style={{ margin: '0', marginTop: '13px' }}>{props.info[1] + " [ " + props.info[4] + " ]"}</h3>
             <h5 style={{ margin: '0', marginTop: '13px' }}>{props.info[2]}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                 <img src={likeimg} style={{ width: '0.8rem' }} onClick={onClickLike}></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{props.info[3]}</h3>
             </div>
-            <div style={{ textAlign: 'center' }}>{props.info[4]}</div>
+
 
         </div>
 

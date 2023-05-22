@@ -7,19 +7,19 @@ import { useNavigate } from "react-router-dom";
 function PageCollection() {
 
     const Collection1 =
-        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "판타지모음", "김김김", 422, "무협 판타지"];
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "판타지모음", "김김김", 422, 4];
     const Collection2 =
-        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따뜻한 소", "정정", 420, "읽으면 재밌는 소설"];
+        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따뜻한 소", "정정", 420, 7];
 
     const Collection3 =
-        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따뜻한", "정", 419, "읽으면 재밌는 소설"];
+        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따뜻한", "정", 419, 9];
 
     const Collection4 =
-        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", " 소설", "정1정", 427, "읽으면 재밌는 소설"];
+        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", " 소설", "정1정", 427, 11];
     const Collection6 =
-        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따소설", "정2정정", 422, "읽으면 재밌는 소설"];
+        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "따소설", "정2정정", 422, 2];
     const Collection7 =
-        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "뜻한 소설", "정3정정", 424, "읽으면 재밌는 소설"];
+        ["https://imagescdn.gettyimagesbank.com/500/201908/jv11892682.jpg", "뜻한 소설", "정3정정", 424, 3];
     const itemList = [Collection1, Collection2, Collection3, Collection4, Collection6, Collection7,
 
         Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2, Collection2,
