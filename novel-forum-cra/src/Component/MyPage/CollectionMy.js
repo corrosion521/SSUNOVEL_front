@@ -2,6 +2,8 @@
 import MyPageNav from "./MyPageNav";
 
 const CollectionMy = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+    
 
     return(
         <div className="mypage">
