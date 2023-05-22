@@ -28,7 +28,7 @@ import PageModifyWriting from "../CommunityPage/PageModifyWriting"
 import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
 import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
-
+import SearchedPageReview from "../ReviewPage/SearchedPageReview"
 
 function PageMain() {
     return (
