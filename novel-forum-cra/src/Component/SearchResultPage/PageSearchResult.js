@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import ContentsSearchResult from "./ContentsSearchResult";
 
 const PageSearchResult = () => {

@@ -84,7 +84,7 @@ const PageSignup = () => {
             <div className="signup container">
                 <div className="container__title">회원가입</div>
                 <div className="container__line"></div>
-                <form onSubmit={handelSubmit}>
+                <form onSubmit={handelSubmit} method="POST">
                     <label htmlFor="email">이메일 주소</label>
                     <div className="input-email">
                         <input

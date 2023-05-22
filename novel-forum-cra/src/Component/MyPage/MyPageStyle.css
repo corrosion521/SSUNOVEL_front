@@ -1,0 +1,24 @@
+.mypage {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.my-container {
+    justify-content: flex-start;
+    width: 80%;
+}
+
+.my-container__title {
+    font-size: 20px;
+    justify-content: flex-start;
+    margin: 0rem 0rem 1rem 0rem;
+}
+
+.my-container__line {
+    background-color: #000000;
+    flex-shrink: 0;
+    height: 0.1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
