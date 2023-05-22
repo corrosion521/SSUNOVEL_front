@@ -137,7 +137,7 @@ const WritingMy = () => {
                     ))}
 
                     {/* Always display the 50th page button . 50page가 아닌경우 50page보여주기*/}
-                    <button
+                    {/* <button
                         style={{
                             border: 'none',
                             background: 'none',
@@ -149,7 +149,7 @@ const WritingMy = () => {
                         onClick={() => onPageChange(50)}
                     >
                         50
-                    </button>
+                    </button> */}
 
                     {/* Display the next button . 다음버튼*/}
                     {currentPage < totalPages && (
@@ -174,8 +174,20 @@ const WritingMy = () => {
         <div className="mypage">
             <MyPageNav></MyPageNav>
             <div className="my-writing my-container">
-                <div className="my-container__title">작성글 {'('}{ }{')'}</div>
+                <div className="my-container__title">작성글 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
+                {itemList
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                .map((item) => (
+                    <Onewrt item={item} key={item[0]} />
+                ))}
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+                pageNumbers={pageNumbers}
+            />
             </div>
         </div>
     );
