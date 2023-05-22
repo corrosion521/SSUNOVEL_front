@@ -1,9 +1,27 @@
 .mypage-nav {
-    font-size: 17px;
+    font-size: 15px;
     display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.nickname {
+    font-size: 28px;
+    font-weight: bold;
 }
 
 nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.deactive-style {
     color: #686868;
-    
+}
+
+.active-style {
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
 }
