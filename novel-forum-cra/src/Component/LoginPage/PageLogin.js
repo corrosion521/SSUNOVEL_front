@@ -34,9 +34,11 @@ const PageLogin = () => {
         })
             .then((response) => response.json())
             .then((result) => {
-                //console.log("결과: ", result.code)
+                console.log("결과: ", result.code)
                 if (result.code === "OK") { // 로그인 성공 시
                     navigate("/");  // 메인페이지로 이동
+
+
                     // 로그인/회원가입 버튼을 로그아웃버튼으로 바꾸기(여기서 구현하는거 아닐수도..)
                 } else {    // 실패 시 에러 메세지
                     alert.apply(result.message);

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Collection from "./Collection";
 import CollectionSearchBox from "./CollectionSearchBox";
 import { useNavigate } from "react-router-dom";
-
+import cookie from "react-cookies"
 
 function PageCollection() {
+
 
     const Collection1 =
         ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "판타지모음", "김김김", 422, 4];

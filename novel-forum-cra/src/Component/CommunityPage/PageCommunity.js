@@ -248,12 +248,18 @@ function PageCommunity() {
                     <Onewrt item={item} key={item[0]} />
                 ))}
 
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-                pageNumbers={pageNumbers}
-            />
+
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                    pageNumbers={pageNumbers}
+                />
+            </div>
+
+
+
         </div>
     );
 }
