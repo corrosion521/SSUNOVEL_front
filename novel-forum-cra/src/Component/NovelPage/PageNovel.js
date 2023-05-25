@@ -18,6 +18,7 @@ import { FaStar } from 'react-icons/fa'
 2) 리뷰 부분
 5. api 연동(작가의 다른 작품)
 1) 작가의 다른 작품 중 해당 본 작품은 제거 (filter이용)
+6. api 연동(리뷰)
 *--------------------------------------------np--------------------------------------------------------------------------------------------
 */
 
@@ -111,6 +112,7 @@ function PageNovel() {
 
     //3.1)
     const [score, setScore] = useState([false, false, false, false, false]);
+    const [finalsScore, setFinalScore] = useState(1.0);
 
     //3.1)
     const starScore = (index) => {
@@ -120,6 +122,8 @@ function PageNovel() {
             star[i] = i <= index ? true : false;
         }
         setScore(star);
+
+
     }
 
 
@@ -145,11 +149,34 @@ function PageNovel() {
     //3. 2) 리뷰 작성함수
     const onSubmitRp = ({ rpCount, score }) => {
         const stars = score.filter((item) => item).length;
-        console.log(rpCount, stars);
-        // API 호출 및 데이터 저장 코드 작성
-        // 완료된 후 페이지 새로고침
-        window.location.reload();
+
+
+
+        // const floatScore = parseFloat(stars.toFixed(1)); // 소수 첫째자리로 반올림하여 문자열로 변환
+
+
+
+        const requestBody = `{
+            "rating": ${stars},
+            "content": "${rpCount}"
+        }`;
+
+        console.log("~", data[0]);
+        fetch(`/novel/review/${data[0]}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: requestBody,
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                setResultNovel(result.result);
+                setResultNovelReviews(result.result.reviewInfos);
+                console.log("LL", result.result)
+            });
     }
+
 
 
     //4.1 , 4.2
@@ -173,7 +200,8 @@ function PageNovel() {
                 //4.1
                 setResultNovel(result.result);
                 //4.2
-                setResultNovelReviews(result.reviewInfos);
+                setResultNovelReviews(result.result.reviewInfos);
+                console.log("LL", result.result)
 
             });
     }, []);
@@ -235,11 +263,11 @@ function PageNovel() {
                         <hr></hr>
 
                     </div>
-                    {/* <div style={{ border: '2px solid black', width: '100%', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
+                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '10%', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
                         <br></br>
-                        {/* 총회차 : {data[4]} <br></br>
-                        가격 : 회차 당 {data[5]}원 
-                    </div> */}
+                        총 회차 : {resultNovel.total_episode}화 <br></br><br></br>
+                        가격 : 회차 당 {resultNovel.price}원
+                    </div>
                     <div style={{
                         display: resultNovel.is_kakao != null ? 'flex' : 'none',
                         alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
@@ -286,10 +314,10 @@ function PageNovel() {
                             <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
                             <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                        {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                             <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
                             <h3 style={{ fontSize: '1rem' }}>공감</h3>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         <hr></hr>
@@ -353,7 +381,7 @@ function PageNovel() {
                             resultNovelReviews != null ?
                                 resultNovelReviews.map(
                                     (review) =>
-                                    (<div style={{ marginBottom: '2%' }}>
+                                    (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
                                         <Review review={review} ></Review>
                                     </div>
 
@@ -397,7 +425,7 @@ function PageNovel() {
                     </div>
 
                 </div>
-            </div>
+            </div >
         </div >
     )
 }
