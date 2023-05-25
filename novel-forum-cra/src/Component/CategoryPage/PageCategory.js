@@ -46,11 +46,14 @@ function PageCategory() {
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 16; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([10]);
 
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -75,6 +78,10 @@ function PageCategory() {
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -164,7 +171,7 @@ function PageCategory() {
 
     //완결
 
-    const [selectedFnVal, setSelectedFnVal] = useState(1);
+    const [selectedFnVal, setSelectedFnVal] = useState(0);
     const onClickSelectedFn = () => {
         if (selectedFnVal == 1)
             setSelectedFnVal(0);
@@ -207,12 +214,13 @@ function PageCategory() {
 
     //2.
     //fetch 요청이 완료된 후에 setResultMainNovel을 사용하여 resultMainNovel 상태를 업데이트하고, 이를 기반으로 랭킹 소설 목록을 렌더링하도록 수정하였습니다.
-    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
 
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
     //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
     useEffect(() => {
+
         console.log(selectedFlp)
         fetch("/novel/category", {
             method: 'POST',
@@ -222,23 +230,26 @@ function PageCategory() {
             body: JSON.stringify({
                 isFinished: selectedFnVal,
                 platform: selectedFlp,
-                genre: "현판",
+                genre: selectedGenre,
                 orderBy: "download_cnt",
-                pageNum: 0,
+                pageNum: currentPage - 1,
             }),
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
+                console.log("결과:", result.result.count)
                 //useState이용하여 
-                // setResultCategoryNovel(result.result["rankingNovel"]);
+                setResultCategoryNovel(result.result.dto);
+                // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
 
             });
-    }, [selectedFnVal, selectedGenre, selectedFlp]);
+    }, [selectedFnVal, selectedGenre, selectedFlp, currentPage]);
+
 
 
     return (
-        <div>
+        <div >
 
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>카테고리</h1>
             <hr style={{ width: '100%' }}></hr>
@@ -475,12 +486,11 @@ function PageCategory() {
 
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%' }}>
-                    {itemList
-                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    {resultCategoryNovel
                         .map((item) => (
                             <div style={{ display: 'flex', marginTop: '5%' }}>
-                                <div style={{ fontSize: '0.5em', height: '300px', width: '180px' }}>
-                                    <Novel info={item[0]}></Novel>
+                                <div style={{ fontSize: '0.5em', height: '600px', width: '250px' }}>
+                                    <Novel info={item}></Novel>
                                 </div>
 
 
@@ -492,7 +502,7 @@ function PageCategory() {
 
 
 
-            <div style={{ marginTop: '10%' }}>
+            <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
