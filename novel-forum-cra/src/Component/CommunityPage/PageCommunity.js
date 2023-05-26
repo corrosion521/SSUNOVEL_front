@@ -3,8 +3,96 @@ import { useNavigate } from 'react-router-dom';
 import CommunitySearchBox from './CommunitySearchBox';
 
 function PageCommunity() {
+
+    /*
+    유형 : 커뮤니티 페이지
+    기능 : 
+    1. ..
+    2. 페이지 목록 가져오기
+    
+    
+    */
+    function nowToday() {
+        let today = new Date();
+        let year = today.getFullYear(); // 년도
+        let month = (today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1);  // 월
+        let date = (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());  // 날짜
+
+        let hours = (today.getHours() < 10 ? '0' + today.getHours() : today.getHours());
+        let minutes = (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes());
+        let seconds = (today.getSeconds() < 10 ? '0' + today.getSeconds() : today.getSeconds());
+        // console.log(year + '' + month + '' + date + '' + hours + '' + minutes + '' + seconds);
+        return month + '/' + date + '\n' + hours + ':' + minutes;
+
+    }
+    let now = nowToday()
+    console.log(now)
+
+
+
+    const navigate = useNavigate();
+
+    const gotowrt = (item) => {
+        console.log("실제로는", now);
+        //navigate(`./writing?data=${item.postId}&data2=${now}`);
+
+        const data = item.postId;
+        const data2 = encodeURIComponent(now);
+        const url = `./writing?data=${data}&data2=${data2}`;
+
+        navigate(url);
+    };
+
+
+    //글 하나의 컴포넌트
+    const Onewrt = ({ item }) => {
+
+        console.log(nowToday())
+
+        return (
+            <div
+                style={{
+                    borderBottom: '2px dotted gray',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    width: '100%',
+                    height: '80px',
+                    fontSize: '1rem',
+                    textAlign: 'center'
+                }}
+            >
+                <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
+                    {item.postId}
+                </div>
+
+                <div
+                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
+                    onClick={() => gotowrt(item)}
+                >
+                    {item.title}
+                </div>
+
+                <div style={{ margin: '0', width: '15%', margin: 'auto' }}>
+                    {item.nickName}
+                </div>
+
+                <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
+                    {now}
+                </div>
+            </div>
+        );
+    };
+
+
+
+    //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([10]);
+
 
     // 전체 아이템 리스트 (500개의 아이템 생성)
     const itemList = Array.from({ length: 500 }, (_, index) => [
@@ -15,8 +103,7 @@ function PageCommunity() {
         "어렸을 때 읽었던 소설인데 마법사랑 전사랑 궁수랑 도적이랑 나오는 소설좀 찾아주세요"
     ]);
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -37,48 +124,7 @@ function PageCommunity() {
         }
     }
 
-    const navigate = useNavigate();
 
-    const gotowrt = (item) => {
-        navigate(`./writing?data=${item}`);
-        console.log("!!");
-    };
-
-    //글 하나의 컴포넌트
-    const Onewrt = ({ item }) => {
-        return (
-            <div
-                style={{
-                    borderBottom: '2px dotted gray',
-                    backgroundColor: 'white',
-                    display: 'flex',
-                    width: '100%',
-                    height: '80px',
-                    fontSize: '1rem',
-                    textAlign: 'center'
-                }}
-            >
-                <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item[0]}
-                </div>
-
-                <div
-                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
-                    onClick={() => gotowrt(item)}
-                >
-                    {item[1]}
-                </div>
-
-                <div style={{ margin: '0', width: '15%', margin: 'auto' }}>
-                    {item[2]}
-                </div>
-
-                <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item[3]}
-                </div>
-            </div>
-        );
-    };
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
@@ -143,10 +189,10 @@ function PageCommunity() {
                             fontWeight: 'bold',
                             color: currentPage === 50 ? 'red' : 'inherit',
                         }}
-                        key={50}
-                        onClick={() => onPageChange(50)}
+                        key={totalPages}
+                        onClick={() => onPageChange(totalPages)}
                     >
-                        50
+                        {currentPage !== totalPages && totalPages}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -167,6 +213,29 @@ function PageCommunity() {
             </nav>
         );
     }
+
+    //2.
+    const [writings, setWritings] = useState([])
+    useEffect(() => {
+
+
+        fetch("/community", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result.result.length)
+                setWritings(result.result)
+                // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+            });
+    }, []);
+
+
 
     return (
         <div style={{ position: 'relative' }}>
@@ -242,10 +311,10 @@ function PageCommunity() {
                 </div>
             </div>
 
-            {itemList
+            {writings
                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                 .map((item) => (
-                    <Onewrt item={item} key={item[0]} />
+                    <Onewrt item={item} key={item} />
                 ))}
 
 

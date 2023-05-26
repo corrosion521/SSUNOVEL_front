@@ -1,53 +1,73 @@
 import React from "react"
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
-//댓글 하나 컴포넌트
-const Onerp = ({ item }) => {
-    console.log(item)
-    return (
-        <div
-            style={{
-                borderBottom: '2px dotted gray',
-                backgroundColor: 'white',
-                display: 'flex',
-                width: '100%',
-                height: '120px',
-                fontSize: '1rem',
-                textAlign: 'center'
-            }}
-        >
-
-            <div style={{ width: '10%', margin: 'auto', fontWeight: 'bold', marginLeft: '0' }}>
-                {item[0]}
-            </div>
-
-            <div
-                style={{ width: '50%', margin: 'auto', marginLeft: '0', textAlign: 'left' }}
-            >
-                {item[1]}
-            </div>
-
-            <div style={{ margin: '0', width: '15%', margin: 'auto', marginRight: 0, fontSize: '0.9em' }}>
-                {item[2]
-                }
-            </div>
+/*
+유형 : 글 게시물 페이지
+기능 : 
+1. 
+2. [api 연동] 세부 게시물
 
 
-        </div>
-    );
-};
+*/
+
+
+
 
 //컴포넌트
 function PageWriting() {
+    //2. 
+    //글 제목
+    const [title, setTitle] = useState("")
+    //내용 
+    const [content, setContent] = useState("")
+    //닉네임
+    const [nickName, setNickName] = useState("")
+    //댓글 하나 컴포넌트
+    const Onerp = ({ item }) => {
 
+        return (
+            <div
+                style={{
+                    borderBottom: '2px dotted gray',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    width: '100%',
+                    height: '120px',
+                    fontSize: '1rem',
+                    textAlign: 'center'
+                }}
+            >
+
+                <div style={{ width: '10%', margin: 'auto', fontWeight: 'bold', marginLeft: '0' }}>
+                    {title}
+                </div>
+
+                <div
+                    style={{ width: '50%', margin: 'auto', marginLeft: '0', textAlign: 'left' }}
+                >
+                    {content}
+                </div>
+
+                <div style={{ margin: '0', width: '15%', margin: 'auto', marginRight: 0, fontSize: '0.9em' }}>
+                    {item[2]
+                    }
+                </div>
+
+
+            </div>
+        );
+    };
     const useQuery = () => {
         return new URLSearchParams(useLocation().search)
     }
     let query = useQuery();
-    const dataString = query.get('data');
-    const data = dataString ? dataString.split(',') : [];
+    const data = query.get('data');
+    console.log("data", data)
+    //const data2 = query.get('data2');
+    //const decodeddata2 = decodeURIComponent(data2);
+    //console.log("data2", decodeddata2)
 
     //댓글 글자수용 useState
     let [inputCount, setInputCount] = useState(0);
@@ -108,19 +128,44 @@ function PageWriting() {
         window.location.reload();
     }
 
+
+
+
+    useEffect(() => {
+
+
+        fetch(`/community/${data}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                setTitle(result.result.title)
+                setContent(result.result.content)
+                setNickName(result.result.nickname)
+                console.log("음", result.result.title)
+
+            });
+    }, []);
+
+
     return (
         <div style={{ position: 'relative' }}>
-            <h1 style={{ fontSize: '2rem', textAlign: 'start' }}>  <h3>{data[1]}</h3></h1>
+            <h1 style={{ fontSize: '2rem', textAlign: 'start' }}>  <h3>{title}</h3></h1>
             <hr style={{ width: '100%' }}></hr>
 
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <div style={{ marginRight: '0' }}>{data[2]}</div>
+                <div style={{ marginRight: '0' }}>{nickName}</div>
                 <hr style={{ margin: '0 10px' }}></hr>
-                {data[3]}
+                ..
             </div>
             <div style={{ marginTop: '10%', height: '400px' }}>
-                {data[4]}
+                {content}
             </div>
             <div style={{ position: 'absolute', right: 0, display: 'flex', gap: '5%' }}>
                 <button
@@ -197,6 +242,10 @@ function PageWriting() {
             <Onerp item={item[0]}></Onerp>
         </div>
     )
+
+
+
+
 }
 
 export default PageWriting;

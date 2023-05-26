@@ -4,7 +4,17 @@ import ReviewSearchBox from './ReviewSearchBox';
 import Review from './Review';
 import Novel from '../NovelPage/Novel';
 
+
+
 function PageReview() {
+
+    /*-------------------------------------------------------------------------------------------------------------------------------------
+    * 유형 : 리뷰 페이지
+    * 기능 :
+     1. ....
+     2. 리뷰 가져오기 
+    *
+    -------------------------------------------------------------------------------------------------------------------------------------*/
 
     const Novel1 =
         ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
@@ -40,13 +50,16 @@ function PageReview() {
     const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
 
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([10]);
 
     // 페이지 번호 배열 생성
     //최대 페이지넘버 10개 보이게 동적 조정중. (보이는 페이지 번호에 대한 리스트)
@@ -190,6 +203,36 @@ function PageReview() {
     };
 
     useEffect(() => console.log(selectedGenre), [selectedGenre]);
+
+    //2. 카테고리 따른 리뷰 
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    useEffect(() => {
+
+        fetch("/novel/category", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                isFined: "",
+                platform: "None",
+                genre: selectedGenre,
+                orderBy: "download_cnt",
+                pageNum: currentPage - 1,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                //useState이용하여 
+                setResultCategoryNovel(result.result.dto);
+                // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
+
+            });
+    }, [selectedGenre, currentPage]);
+
     return (
 
         <div style={{ position: 'relative' }}>

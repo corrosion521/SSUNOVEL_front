@@ -146,7 +146,7 @@ function PageCategory() {
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {totalPages}
+                        {currentPage !== totalPages && totalPages}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -189,7 +189,7 @@ function PageCategory() {
 
     const onClickSelectedGr = (genre) => {
         if (selectedGenre == genre)
-            setSelectedGenre("");
+            setSelectedGenre("None");
         else {
             setSelectedGenre(genre);
         }
@@ -260,7 +260,7 @@ function PageCategory() {
 
                 <div style={{ marginRight: 'auto', marginBottom: '3%' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
-                    <CategorySearchBox />
+
 
                 </div>
                 <div  >
