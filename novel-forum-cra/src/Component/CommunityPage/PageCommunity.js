@@ -228,7 +228,7 @@ function PageCommunity() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result.result.length)
+                console.log("결과:", result)
                 setWritings(result.result)
                 // 전체 페이지 수 계산
                 setTotalPages(Math.ceil(result.result.length / itemsPerPage));

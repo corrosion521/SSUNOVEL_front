@@ -191,7 +191,7 @@ function PageReview() {
 
 
     //장르 하나 정하기 
-    const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('로맨스');
 
     const onClickSelectedGr = (genre) => {
         if (selectedGenre == genre)
@@ -205,30 +205,31 @@ function PageReview() {
     useEffect(() => console.log(selectedGenre), [selectedGenre]);
 
     //2. 카테고리 따른 리뷰 
-    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
-
+    const [resultCategoryReview, setResultCategoryReview] = useState(["."]);
+    const [flag, setFlag] = useState(false);//리뷰 아무 것도 없는 것 생각
     useEffect(() => {
 
-        fetch("/novel/category", {
-            method: 'POST',
+        fetch(`/novel/review?genre=${selectedGenre}&page=${currentPage - 1}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                isFined: "",
-                platform: "None",
-                genre: selectedGenre,
-                orderBy: "download_cnt",
-                pageNum: currentPage - 1,
-            }),
+
         })
             .then((response) => response.json())
             .then((result) => {
                 console.log("결과:", result)
-                //useState이용하여 
-                setResultCategoryNovel(result.result.dto);
-                // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
+                // //useState이용하여 
+                if (result.message == "성공") {
+                    setFlag(true);
+                    console.log("비교", result.result, itemList)
+                    setResultCategoryReview(result.result);
+                }
+                else {
+                    setFlag(false)
+                }
+                // // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
 
             });
     }, [selectedGenre, currentPage]);
@@ -274,9 +275,9 @@ function PageReview() {
                     <h3 style={{ fontSize: '2rem' }}>장르</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                         <button className="r1"
-                            onClick={() => onClickSelectedGr('romance')}
+                            onClick={() => onClickSelectedGr('로맨스')}
                             style={{
-                                color: selectedGenre === 'romance' ? 'green' : 'black',
+                                color: selectedGenre === '로맨스' ? 'green' : 'black',
                                 border: "none",
                                 background: "none",
                                 fontSize: "1rem",
@@ -284,9 +285,9 @@ function PageReview() {
                             }}
                             value='로맨스'                    >로맨스</button>
                         <button
-                            onClick={() => onClickSelectedGr('rofan')}
+                            onClick={() => onClickSelectedGr('로판')}
                             style={{
-                                color: selectedGenre === 'rofan' ? 'green' : 'black',
+                                color: selectedGenre === '로판' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -297,9 +298,9 @@ function PageReview() {
                             로판
                         </button>
                         <button
-                            onClick={() => onClickSelectedGr('fantasy')}
+                            onClick={() => onClickSelectedGr('판타지')}
                             style={{
-                                color: selectedGenre === 'fantasy' ? 'green' : 'black',
+                                color: selectedGenre === '판타지' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -312,9 +313,9 @@ function PageReview() {
                         </button>
                         <button
 
-                            onClick={() => onClickSelectedGr('hyunfan')}
+                            onClick={() => onClickSelectedGr('현판')}
                             style={{
-                                color: selectedGenre === 'hyunfan' ? 'green' : 'black',
+                                color: selectedGenre === '현판' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -325,9 +326,9 @@ function PageReview() {
                             현판
                         </button>
                         <button
-                            onClick={() => onClickSelectedGr('muhyup')}
+                            onClick={() => onClickSelectedGr('무협')}
                             style={{
-                                color: selectedGenre === 'muhyup' ? 'green' : 'black',
+                                color: selectedGenre === '무협' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -339,9 +340,9 @@ function PageReview() {
                             무협
                         </button>
                         <button
-                            onClick={() => onClickSelectedGr('mistery')}
+                            onClick={() => onClickSelectedGr('미스터리')}
                             style={{
-                                color: selectedGenre === 'mistery' ? 'green' : 'black',
+                                color: selectedGenre === '미스터리' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -353,9 +354,9 @@ function PageReview() {
                             미스터리
                         </button>
                         <button
-                            onClick={() => onClickSelectedGr('light')}
+                            onClick={() => onClickSelectedGr('라이트노벨')}
                             style={{
-                                color: selectedGenre === 'light' ? 'green' : 'black',
+                                color: selectedGenre === '라이트노벨' ? 'green' : 'black',
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '1rem',
@@ -371,23 +372,25 @@ function PageReview() {
 
 
                 </div>
-
                 <div style={{ width: '70%', display: 'flex', flexDirection: 'column', margin: 'auto', justifyContent: 'center' }}>
-                    {itemList
-                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                        .map((item, index) => (
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
-                                <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
-                                    <Novel info={item[0][index]}></Novel> {/*itemList주의해서 보기- index */}
+                    {flag == true ? (
+                        resultCategoryReview
+                            // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                            .map((item, index) => (
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+                                    <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
+                                        <Novel info={item}></Novel>
+                                    </div>
+                                    <div style={{ height: '170px', width: '80%', marginLeft: '20px' }}>
+                                        <Review review={item}></Review>
+                                    </div>
                                 </div>
-                                <div style={{ height: '170px', width: '80%', marginLeft: '20px' }}>
-                                    <Review review={item[1][index]}></Review>
-                                </div>
-
-                            </div>
-                        ))
-                    }
+                            ))
+                    ) : (
+                        <div>리뷰가 없습니다.</div>
+                    )}
                 </div>
+
 
 
 

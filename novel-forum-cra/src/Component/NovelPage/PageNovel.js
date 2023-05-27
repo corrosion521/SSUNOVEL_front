@@ -175,6 +175,11 @@ function PageNovel() {
                 setResultNovelReviews(result.result.reviewInfos);
                 console.log("LL", result.result)
             });
+
+
+        window.location.reload();
+
+
     }
 
 
@@ -201,6 +206,11 @@ function PageNovel() {
                 setResultNovel(result.result);
                 //4.2
                 setResultNovelReviews(result.result.reviewInfos);
+                //이미 좋아요 했다면 
+
+                //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
+                // if(result.result.alreadyLike == )
+                setLike("")
                 console.log("LL", result.result)
 
             });
@@ -234,7 +244,7 @@ function PageNovel() {
                 const filteredDto = result.result.dto.filter(item => item.novelId != data[0]);
 
                 setResultAnotherNovel(filteredDto);
-                console.log(result.result.dto)
+                console.log("noveldata", result.result.dto)
             });
     }
 
@@ -400,7 +410,7 @@ function PageNovel() {
 
                             resultAnotherNovel.map(
                                 (novels) =>
-                                (<div style={{ width: '100px', height: '200px', fontSize: '15px' }}>
+                                (<div style={{ width: '100px', height: '300px', fontSize: '15px' }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 

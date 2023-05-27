@@ -112,12 +112,30 @@ function PageWriting() {
     //삭제 함수
     const DeleteWriting = ({ data }) => {
         console.log(data[0])//나중에 이 글 번호가지고 api호출함. 글 번호로 글삭제
+
+        fetch(`/community/${data[0]}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                if (result.result == "잘못된 유저 아이디입니다.")
+                    alert("본인의 게시물만 삭제할 수 있습니다")
+
+            });
+
+
         navigate("../community")//뒷페이지 이동.
     }
     //수정 함수
     const ModifyWriting = ({ data }) => {
-        console.log(data[0])//얘도 나중에 이 글 번호가지고 api호출함. 글 번호 + 입력 데이터로 글 수정.
-        navigate("./modify")// 이동.
+        console.log("이게맞나?", data[0])//얘도 나중에 이 글 번호가지고 api호출함. 글 번호 + 입력 데이터로 글 수정.
+        navigate(`./modify/?data=${data[0]}`)// 이동.
     }
 
     //댓글 작성함수

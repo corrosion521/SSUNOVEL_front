@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 function Novel({ info }) {
     {/*props.info로 데이터 리스트 받아옴(소설정보). api연동 전에도 이 정도 해둬야함. */ }
-
+    {/*review_rating이 아니라 reivew임 이것만 좀 이상함 이름 */ }
 
     const navigate = useNavigate();
-
+    console.log(info)
     const onClickNovelImage = (event) => {
         const data = [info.novelId, info.authorName]
         navigate(`/novel?data=${data}`);
@@ -28,7 +28,11 @@ function Novel({ info }) {
                 <h3 style={{ margin: '0', marginTop: '1%', fontSize: '1em' }}>{info.title}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                    <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{info.reivew_rating != null ? info.reivew_rating : info.rating}</h3>
+                    <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>
+                        {info.reivew_rating != null ? (Math.round(info.reivew_rating * 10) / 10).toFixed(1) : (info.rating != null ? (Math.round(info.rating * 10) / 10).toFixed(1) : '')}
+                    </h3>
+
+
 
                 </div>
             </div>

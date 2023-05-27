@@ -10,14 +10,33 @@ function PageWriteWriting() {
     let query = useQuery();
     const dataString = query.get("data");
     const data = dataString ? dataString.split(",") : [];
-
+    console.log(data)
     const navigate = useNavigate();
 
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
 
     const WriteWriting = () => {
-        console.log(title, content);//API적용 여기에 + 사용자ID?
+
+
+
+        fetch("/community", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                content: content,
+            }),
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+
+            });
+
         navigate('../community')
     };
 

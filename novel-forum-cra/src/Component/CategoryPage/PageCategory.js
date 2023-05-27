@@ -201,7 +201,7 @@ function PageCategory() {
 
     const onClickSelectedFlp = (flp) => {
         if (selectedFlp == flp)
-            setSelectedFlp("");
+            setSelectedFlp("None");
         else {
             setSelectedFlp(flp);
         }
