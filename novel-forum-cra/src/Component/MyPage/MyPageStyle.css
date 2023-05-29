@@ -1,3 +1,4 @@
+/* 공통 */
 .mypage {
     display: flex;
     justify-content: space-between;
@@ -5,12 +6,14 @@
 }
 
 .my-container {
+    font-size: 17px;
     justify-content: flex-start;
     width: 80%;
 }
 
 .my-container__title {
     font-size: 20px;
+    font-weight: bold;
     justify-content: flex-start;
     margin: 0rem 0rem 1rem 0rem;
 }
@@ -23,32 +26,18 @@
     width: 100%;
 }
 
-.create-collection-btn {
-    font-size: 17px;
-    font-weight: bold;
-    background: none;
-    border: none;
+/* FavoritesMy */
+.my-favorites nav {
+    display:flex; 
+    flex-direction:row;
+    gap:15px; 
+    align-items:center;
 }
 
-.modal-contents {
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-}
-
-.add-novel-btn {
-    align-items: center;
-    background-color: #000000;
-    border: solid 0.05rem #000000;
-    box-sizing: border-box;
-    color: #ffffff;
-    cursor: pointer;
-    display: flex;
-    font-family: Inter, 'Source Sans Pro';
-    font-size: 1rem;
-    font-weight: 400;
-    height: 2rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-    width: fit-content;
+.line1 {
+    background-color: #a3a3a3;
+    flex-shrink: 0;
+    height: 0.05rem;
+    margin: 1rem 0;
+    width: 100%;
 }

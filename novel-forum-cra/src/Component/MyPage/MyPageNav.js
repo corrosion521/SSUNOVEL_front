@@ -1,13 +1,12 @@
 // 마이페이지_메뉴
 import React from "react"
-import { NavLink, Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import './MyPageNav.css'
-
+import './MyPageStyle.css'
 
 const MyPageNav = () => {
     const nickname = "닉네임";
     return (
-        // <div>
         <div className="mypage-nav">
             <div className="nickname">
                 {nickname}
@@ -52,7 +51,6 @@ const MyPageNav = () => {
                 </NavLink>
             </nav>
         </div>
-        // </div>
     );
 }
 

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MyPageNav from './MyPageNav';
-import './MyPageStyle.css';
 
 const WritingMy = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -102,23 +101,6 @@ const WritingMy = () => {
                         </button>
                     )}
 
-                    {/* Display the 1st page button . 1page가 아닌경우 1page보여주기*/}
-                    {currentPage !== 1 && (
-                        <button
-                            style={{
-                                border: 'none',
-                                background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
-                                color: currentPage === 1 ? 'red' : 'inherit',
-                            }}
-                            key={1}
-                            onClick={() => onPageChange(1)}
-                        >
-                            1
-                        </button>
-                    )}
-
                     {/* Render the page numbers . */}
                     {pageNumbers.map((pageNumber) => (
                         <button
@@ -135,21 +117,6 @@ const WritingMy = () => {
                             {pageNumber}
                         </button>
                     ))}
-
-                    {/* Always display the 50th page button . 50page가 아닌경우 50page보여주기*/}
-                    {/* <button
-                        style={{
-                            border: 'none',
-                            background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
-                        }}
-                        key={50}
-                        onClick={() => onPageChange(50)}
-                    >
-                        50
-                    </button> */}
 
                     {/* Display the next button . 다음버튼*/}
                     {currentPage < totalPages && (
@@ -177,17 +144,18 @@ const WritingMy = () => {
                 <div className="my-container__title">작성글 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
                 {itemList
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                .map((item) => (
-                    <Onewrt item={item} key={item[0]} />
-                ))}
-
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-                pageNumbers={pageNumbers}
-            />
+                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    .map((item) => (
+                        <Onewrt item={item} key={item[0]} />
+                    ))}
+                <div style={{ display: 'flex', justifyContent: 'center', }}>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />
+                </div>
             </div>
         </div>
     );

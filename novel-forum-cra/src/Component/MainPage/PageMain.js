@@ -11,7 +11,9 @@ import PageSearchResult from "../SearchResultPage/PageSearchResult"
 import WritingMy from "../MyPage/WritingMy";
 import ReviewMy from "../MyPage/ReviewMy";
 import FavoritesMy from "../MyPage/FavoritesMy";
-import CollectionMy from "../MyPage/CollectionMy";
+import FavoriteNovels from "../MyPage/FavoriteNovels";
+import FavoriteCollections from "../MyPage/FavoriteCollections";
+import CollectionMy from "../MyPage/CollectionMy/CollectionMy";
 import FavAuthorMy from "../MyPage/FavAuthorMy";
 import EditMy from "../MyPage/EditMy";
 

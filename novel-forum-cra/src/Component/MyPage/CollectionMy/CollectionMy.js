@@ -1,8 +1,9 @@
 // 마이페이지_나의보관함
 
 import React, { useState } from "react";
-import Collection from "../CollectionPage/Collection";
-import MyPageNav from "./MyPageNav";
+import './CollectionMy.css';
+import Collection from "../../CollectionPage/Collection";
+import MyPageNav from "../MyPageNav";
 import ModalCollectionMy from "./ModalCollectionMy";
 
 const CollectionMy = () => {
@@ -32,9 +33,7 @@ const CollectionMy = () => {
                                 <div style={{ width: '180px', height: '450px' }}>
                                     <Collection info={collections} key={collections} />
                                 </div>
-
                             )
-
                         )
                     }
                 </div>
