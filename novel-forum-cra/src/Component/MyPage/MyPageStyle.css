@@ -28,10 +28,10 @@
 
 /* FavoritesMy */
 .my-favorites nav {
-    display:flex; 
-    flex-direction:row;
-    gap:15px; 
-    align-items:center;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
 }
 
 .line1 {
@@ -40,4 +40,18 @@
     height: 0.05rem;
     margin: 1rem 0;
     width: 100%;
+}
+
+.contents-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.more-btn {
+    font-size: 13px;
+    color: black;
+    padding: 1%;
 }

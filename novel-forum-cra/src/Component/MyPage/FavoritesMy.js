@@ -61,14 +61,14 @@ const FavoritesMy = () => {
                         marginBottom: "1rem",
                     }}
                 >
-                    <p className="title">작품 {'('}{novelCnt}{')'}</p>
+                    <p>작품 {'('}{novelCnt}{')'}</p>
                     {/* 즐겨찾기 5개 초과 -> 더보기 버튼 추가 */}
                     {
                         novelCnt > 5 &&
-                        <button
-                            type="button" onClick={navigate("/mypage/favorites/novel")}
-                            style={{ background: "none", border: "none", cursor: "pointer", }}
-                        >더보기 {'>'}</button>
+                        <NavLink to="/mypage/favorites/novel"
+                            className="more-btn"
+                        >더보기 {'>'}
+                        </NavLink>
                     }
                 </div>
                 <div
@@ -81,7 +81,7 @@ const FavoritesMy = () => {
                             .map(
                                 (novel) =>
                                 (
-                                    <div style={{ fontSize:'0.5rem', width: '120px', height: '200px' }}>
+                                    <div style={{ fontSize: '0.5rem', width: '120px', height: '200px' }}>
                                         <Novel info={novel} key={novel} />
                                     </div>
                                 )
@@ -103,10 +103,10 @@ const FavoritesMy = () => {
                     {/* 즐겨찾기 5개 초과 -> 더보기 버튼 추가 */}
                     {
                         collectionCnt > 5 &&
-                        <button
-                            type="button" onClick={navigate("/mypage/favorites/collection")}
-                            style={{ background: "none", border: "none", cursor: "pointer", }}
-                        >더보기 {'>'}</button>
+                        <NavLink to="/mypage/favorites/collection"
+                            className="more-btn"
+                        >더보기 {'>'}
+                        </NavLink>
                     }
                 </div>
                 <div
@@ -118,10 +118,9 @@ const FavoritesMy = () => {
                             .map(
                                 (collections) =>
                                 (
-                                    <div style={{ fontSize:'0.5rem', width: '120px', height: '300px' }}>
+                                    <div style={{ fontSize: '0.5rem', width: '120px', height: '300px' }}>
                                         <Collection info={collections} key={collections} />
                                     </div>
-
                                 )
 
                             )
