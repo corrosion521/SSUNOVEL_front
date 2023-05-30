@@ -51,7 +51,7 @@ const ContentsSearchResult = ({ title, resultCnt, resultAry }) => {
                     .map(
                         (novel) =>
                         (
-                            <div style={{ width: '180px', height: '350px' }}>
+                            <div style={{ width: '17%', height: '300px', fontSize:'0.8rem' }}>
                                 <Novel info={novel} key={novel} />
                             </div>
                         )
@@ -99,7 +99,7 @@ const ContentsSearchResult = ({ title, resultCnt, resultAry }) => {
             {contentsHeader()}
             <div
                 className="contents-list"
-                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'space-around' }}
+                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap:'3%', rowGap: '15px', justifyContent: 'flex-start', }}
             >
                 {printContents()}
             </div>

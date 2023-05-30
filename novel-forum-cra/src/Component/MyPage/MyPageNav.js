@@ -25,7 +25,7 @@ const MyPageNav = () => {
                     }}
                 >작성리뷰
                 </NavLink>
-                <NavLink to="/mypage/favorites"
+                <NavLink to="/mypage/favorites/"
                     className={({ isActive }) => {
                         return isActive ? 'active-style' : 'deactive-style';
                     }}

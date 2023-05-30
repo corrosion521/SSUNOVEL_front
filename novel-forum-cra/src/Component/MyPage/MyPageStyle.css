@@ -42,7 +42,8 @@
     width: 100%;
 }
 
-.contents-header {
+/* FavoritesTotal */
+.my-contents-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,4 +55,13 @@
     font-size: 13px;
     color: black;
     padding: 1%;
+}
+
+.my-contents-list {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap; 
+    column-gap: 3%;
+    row-gap: 15px; 
+    justify-content: flex-start;
 }

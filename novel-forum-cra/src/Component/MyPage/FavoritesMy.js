@@ -1,9 +1,10 @@
 // 마이페이지_즐겨찾기
 import React from "react"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink, useNavigate, Routes, Route } from "react-router-dom"
 import MyPageNav from "./MyPageNav";
-import Novel from "../NovelPage/Novel";
-import Collection from "../CollectionPage/Collection";
+import FavoriteTotal from "./FavoriteTotal";
+import FavoriteNovels from "./FavoriteNovels";
+import FavoritesCollections from "./FavoriteCollections";
 
 const FavoritesMy = () => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const FavoritesMy = () => {
                 <div className="my-container__title">즐겨찾기</div>
                 <div className='my-container__line'></div>
                 <nav>
-                    <NavLink to="/mypage/favorites"
+                    <NavLink to="/mypage/favorites/"
                         className={({ isActive }) => {
                             return isActive ? 'active-style' : 'deactive-style';
                         }}
@@ -51,83 +52,13 @@ const FavoritesMy = () => {
                     </NavLink>
                 </nav>
                 <div className="line1"></div>
-                <div
-                    className="contents-header"
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        height: "1.5rem",
-                        marginBottom: "1rem",
-                    }}
-                >
-                    <p>작품 {'('}{novelCnt}{')'}</p>
-                    {/* 즐겨찾기 5개 초과 -> 더보기 버튼 추가 */}
-                    {
-                        novelCnt > 5 &&
-                        <NavLink to="/mypage/favorites/novel"
-                            className="more-btn"
-                        >더보기 {'>'}
-                        </NavLink>
-                    }
-                </div>
-                <div
-                    className="contents-list"
-                    style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'space-around' }}
-                >
-                    {
-                        novels
-                            .slice(0, 5) // 5개만 출력
-                            .map(
-                                (novel) =>
-                                (
-                                    <div style={{ fontSize: '0.5rem', width: '120px', height: '200px' }}>
-                                        <Novel info={novel} key={novel} />
-                                    </div>
-                                )
-                            )
-                    }
-                </div>
-                <div className="line1"></div>
-                <div
-                    className="contents-header"
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        height: "1.5rem",
-                        marginBottom: "1rem",
-                    }}
-                >
-                    <p className="title">보관함 {'('}{collectionCnt}{')'}</p>
-                    {/* 즐겨찾기 5개 초과 -> 더보기 버튼 추가 */}
-                    {
-                        collectionCnt > 5 &&
-                        <NavLink to="/mypage/favorites/collection"
-                            className="more-btn"
-                        >더보기 {'>'}
-                        </NavLink>
-                    }
-                </div>
-                <div
-                    className="contents-list"
-                    style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'space-around' }}
-                >
-                    {
-                        collections
-                            .map(
-                                (collections) =>
-                                (
-                                    <div style={{ fontSize: '0.5rem', width: '120px', height: '300px' }}>
-                                        <Collection info={collections} key={collections} />
-                                    </div>
-                                )
-
-                            )
-                            .slice(0, 5) // 5개만 출력
-                    }
-                </div>
-
+                <Routes>
+                    <Route 
+                    exact path="/" 
+                    element={<FavoriteTotal novels={novels} collections={collections} />}></Route>
+                    <Route path="/novel" element={<FavoriteNovels novels={novels} />}></Route>                
+                    <Route path="/collection" element={<FavoritesCollections collections={collections} />}></Route>                
+                </Routes>
             </div>
         </div>
     )

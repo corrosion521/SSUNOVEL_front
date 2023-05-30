@@ -11,8 +11,6 @@ import PageSearchResult from "../SearchResultPage/PageSearchResult"
 import WritingMy from "../MyPage/WritingMy";
 import ReviewMy from "../MyPage/ReviewMy";
 import FavoritesMy from "../MyPage/FavoritesMy";
-import FavoriteNovels from "../MyPage/FavoriteNovels";
-import FavoriteCollections from "../MyPage/FavoriteCollections";
 import CollectionMy from "../MyPage/CollectionMy/CollectionMy";
 import FavAuthorMy from "../MyPage/FavAuthorMy";
 import EditMy from "../MyPage/EditMy";
@@ -49,7 +47,7 @@ function PageMain() {
 
                 <Route path="/mypage/writing" element={<WritingMy/>}></Route>
                 <Route path="/mypage/review" element={<ReviewMy/>}></Route>
-                <Route path="/mypage/favorites" element={<FavoritesMy/>}></Route>
+                <Route path="/mypage/favorites/*" element={<FavoritesMy/>}></Route>
                 <Route path="/mypage/collection" element={<CollectionMy/>}></Route>
                 <Route path="/mypage/fav-author" element={<FavAuthorMy/>}></Route>
                 <Route path="/mypage/edit" element={<EditMy/>}></Route>

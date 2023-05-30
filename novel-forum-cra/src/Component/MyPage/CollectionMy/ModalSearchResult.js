@@ -150,7 +150,7 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
                         values={selectNovels}
                         onChange={setSelectNovels}>
                         <div
-                            style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '700px', height: '470px', }}
+                            style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft:'3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
                         >
                             {itemList
                                 .map(

@@ -25,12 +25,12 @@ const CollectionMy = () => {
                 <button type="button" className="create-collection-btn" onClick={showModal}>보관함 생성 {'>'}</button>
                 {modalOpen && <ModalCollectionMy setModalOpen={setModalOpen} />}
                 <div style={{ marginTop: '3%' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '100px', justifyContent: 'space-evenly' }}>
+                <div className="my-contents-list" >
                     {
                         collections.map(
                             (collections) =>
                             (
-                                <div style={{ width: '180px', height: '450px' }}>
+                                <div style={{ width: '17%', height: '300px', fontSize:'0.6rem' }}>
                                     <Collection info={collections} key={collections} />
                                 </div>
                             )

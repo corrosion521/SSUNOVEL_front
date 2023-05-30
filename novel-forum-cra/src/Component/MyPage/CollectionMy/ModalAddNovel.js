@@ -29,7 +29,7 @@ const ModalAddNovel = ({ setAddModalOpen }) => {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
 
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '700px', height: '470px', }} >
+                        <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft:'3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }} >
                             {novels
                                 .map(
                                     (novel) =>
