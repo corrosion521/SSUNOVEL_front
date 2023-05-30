@@ -1,25 +1,32 @@
-// 마이페이지_작성리뷰
+// 마이페이지_나의보관함
 
-import MyPageNav from "./MyPageNav";
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Review from "../ReviewPage/Review";
-import Novel from '../NovelPage/Novel';
+import React, { useState } from "react";
+import './CollectionMy.css';
+import Collection from "../../CollectionPage/Collection";
+import MyPageNav from "../MyPageNav";
+import ModalCollectionMy from "./ModalCollectionMy";
 
-const ReviewMy = () => {
-    const Novel1 =
-        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "이말년시리즈", "이말년", "3.2", "222", "123", "네이버시리즈", "정통 무협 회귀 판타지!!"]
+const CollectionMy = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+    
+    const showModal = () => {
+        setModalOpen(true);
+    }
 
-    //리뷰작성자
-    const review1 = ["김김김", "4.3", "234", "아주아주아주아중주아주아주 재밌었습니다."];
-
-
-    // 전체 아이템 리스트 (10개의 아이템 생성)
-    const itemList = Array.from({ length: 10 }, (_, index) => [Novel1, review1]);
+    const Collection1 =
+        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "판타지모음", "김김김", "422"];
+    const collections = [Collection1, Collection1, Collection1, Collection1, Collection1, Collection1,
+        Collection1, Collection1, Collection1, Collection1, Collection1, Collection1,
+        Collection1, Collection1, Collection1, Collection1, Collection1, Collection1, ];
+    
+    // 전체 아이템 리스트
+    // const itemList = Array.from({ length: 10 }, (_, index) => [Collection1]);
+    const itemList = collections;
+    
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
 
 
     // 전체 페이지 수 계산
@@ -44,21 +51,19 @@ const ReviewMy = () => {
         }
     }
 
-    const navigate = useNavigate();
-
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
         return (
             //nav태그 사용
-            <nav style={{ display: 'flex', justifyContent: 'center' }}>
+            <nav style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '30px', }}>
                 <ul className="pagination">
                     {/* Display the previous button */}
                     {currentPage > 1 && (// 현재 페이지가 1보다 큰지를 확인하는 조건문입니다. 현재 페이지가 1보다 크다면, 즉 이전 페이지가 존재한다면 이전 버튼을 표시합니다.
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
+                                background: 'none', fontSize: '0.8rem',
                                 fontWeight: 'bold',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
@@ -73,7 +78,7 @@ const ReviewMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
                                 color: pageNumber === currentPage ? 'red' : 'inherit',
                             }}
@@ -90,7 +95,7 @@ const ReviewMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
@@ -103,26 +108,30 @@ const ReviewMy = () => {
         );
     }
 
-    return (
+
+    return(
         <div className="mypage">
             <MyPageNav></MyPageNav>
-            <div className="my-review my-container">
-                <div className="my-container__title">작성리뷰 {'('}{itemList.length}{')'}</div>
+            <div className="my-collection my-container">
+                <div className="my-container__title">나의 보관함 {'('}{ collections.length }{')'}</div>
                 <div className='my-container__line'></div>
-                {itemList
-                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                    .map((item) => (
-                        <div style={{ display: 'flex', marginTop: '5%' }}>
-                            <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
-                                <Novel info={item[0]}></Novel>
-                            </div>
-                            <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
-                                <Review review={item[1]}></Review>
-                            </div>
-
-                        </div>
-                    ))
-                }
+                <button type="button" className="create-collection-btn" onClick={showModal}>보관함 생성 {'>'}</button>
+                {modalOpen && <ModalCollectionMy setModalOpen={setModalOpen} />}
+                <div style={{ marginTop: '3%' }}>
+                <div className="my-contents-list" >
+                    {
+                        itemList.map(
+                            (collections) =>
+                            (
+                                <div style={{ width: '17%', height: '300px', fontSize:'0.6rem' }}>
+                                    <Collection info={collections} key={collections} />
+                                </div>
+                            )
+                        )
+                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    }
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop:'15px',}}>
                 {
                     itemList.length > itemsPerPage &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
@@ -135,8 +144,10 @@ const ReviewMy = () => {
                     </div>
                 }
             </div>
+            </div>
+            </div>
         </div>
     )
 }
 
-export default ReviewMy;
+export default CollectionMy;

@@ -10,13 +10,14 @@
     font-weight: bold;
 }
 
-nav {
+.mypage-nav nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
 .deactive-style {
+    font-size: 15px;
     color: #686868;
 }
 

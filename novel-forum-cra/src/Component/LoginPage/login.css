@@ -34,7 +34,7 @@
     width: 100%;
 }
 
-input {
+.login-signup input {
     border: solid 0.05rem #a3a3a3;
     box-sizing: border-box;
     color: black;
@@ -46,13 +46,6 @@ input {
     padding: 0.8rem 1.1rem;
     white-space: nowrap;
     width: 100%;
-}
-
-input::placeholder {
-    color: #a3a3a3;
-    font-family: Inter, 'Source Sans Pro';
-    font-size: 1rem;
-    font-weight: 300;
 }
 
 .search-pw {

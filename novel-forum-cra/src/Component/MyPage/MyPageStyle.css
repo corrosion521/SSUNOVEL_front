@@ -1,3 +1,4 @@
+/* 공통 */
 .mypage {
     display: flex;
     justify-content: space-between;
@@ -5,12 +6,14 @@
 }
 
 .my-container {
+    font-size: 17px;
     justify-content: flex-start;
     width: 80%;
 }
 
 .my-container__title {
     font-size: 20px;
+    font-weight: bold;
     justify-content: flex-start;
     margin: 0rem 0rem 1rem 0rem;
 }
@@ -21,4 +24,45 @@
     height: 0.1rem;
     margin-bottom: 1rem;
     width: 100%;
+}
+
+/* FavoritesMy */
+.my-favorites nav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.line1 {
+    background-color: #a3a3a3;
+    flex-shrink: 0;
+    height: 0.05rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+/* FavoritesTotal */
+.my-contents-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.more-btn {
+    font-size: 13px;
+    color: black;
+    padding: 1%;
+}
+
+.my-contents-list {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap; 
+    column-gap: 3%;
+    row-gap: 15px;
+    margin-left: 3%; 
+    justify-content: flex-start;
 }

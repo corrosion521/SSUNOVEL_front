@@ -11,7 +11,7 @@ import PageSearchResult from "../SearchResultPage/PageSearchResult"
 import WritingMy from "../MyPage/WritingMy";
 import ReviewMy from "../MyPage/ReviewMy";
 import FavoritesMy from "../MyPage/FavoritesMy";
-import CollectionMy from "../MyPage/CollectionMy";
+import CollectionMy from "../MyPage/CollectionMy/CollectionMy";
 import FavAuthorMy from "../MyPage/FavAuthorMy";
 import EditMy from "../MyPage/EditMy";
 
@@ -46,12 +46,12 @@ function PageMain() {
                 <Route path="/member/create/success" element={<PageSignupSuccess />}></Route>
 
 
-                <Route path="/mypage/writing" element={<WritingMy />}></Route>
-                <Route path="/mypage/review" element={<ReviewMy />}></Route>
-                <Route path="/mypage/favorites" element={<FavoritesMy />}></Route>
-                <Route path="/mypage/collection" element={<CollectionMy />}></Route>
-                <Route path="/mypage/fav-author" element={<FavAuthorMy />}></Route>
-                <Route path="/mypage/edit" element={<EditMy />}></Route>
+                <Route path="/mypage/writing" element={<WritingMy/>}></Route>
+                <Route path="/mypage/review" element={<ReviewMy/>}></Route>
+                <Route path="/mypage/favorites/*" element={<FavoritesMy/>}></Route>
+                <Route path="/mypage/collection" element={<CollectionMy/>}></Route>
+                <Route path="/mypage/fav-author" element={<FavAuthorMy/>}></Route>
+                <Route path="/mypage/edit" element={<EditMy/>}></Route>
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/category/search" element={<SearchedPageCategory></SearchedPageCategory>}></Route>
