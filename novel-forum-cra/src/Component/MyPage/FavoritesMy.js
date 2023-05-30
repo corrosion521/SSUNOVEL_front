@@ -1,17 +1,15 @@
 // 마이페이지_즐겨찾기
 import React from "react"
-import { NavLink, useNavigate, Routes, Route } from "react-router-dom"
+import { NavLink, Routes, Route } from "react-router-dom"
 import MyPageNav from "./MyPageNav";
 import FavoriteTotal from "./FavoriteTotal";
 import FavoriteNovels from "./FavoriteNovels";
 import FavoritesCollections from "./FavoriteCollections";
 
 const FavoritesMy = () => {
-    const navigate = useNavigate();
-
     const Novel1 =
         ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "재밌는 소설", "김진수", "4.2", "200", "120", "네이버시리즈", "정통 무협 회귀 판타지!!"];
-    const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
+    const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
     // const novels = [Novel1, Novel1, Novel1];
 
     const Collection1 =

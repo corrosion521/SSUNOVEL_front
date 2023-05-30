@@ -1,7 +1,7 @@
 // 검색 결과 모달
 
 import Novel from "../../NovelPage/Novel";
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import Checkbox from "./Checkbox";
 import CheckboxGroup from "./CheckboxGroup";
 
@@ -40,13 +40,11 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
 
 
 
-    const selectComplete = () => {        
+    const selectComplete = () => {
         setNovels(selectNovels);
         // console.log(novels);
         console.log(selectNovels);
         closeModal();
-        // console.log(novels);
-
     }
 
 
@@ -150,7 +148,7 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
                         values={selectNovels}
                         onChange={setSelectNovels}>
                         <div
-                            style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft:'3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
+                            style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
                         >
                             {itemList
                                 .map(
@@ -171,14 +169,17 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
                         </div>
                     </CheckboxGroup>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'center', }}>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                        pageNumbers={pageNumbers}
-                    />
-                </div>
+                {
+                    itemList.length > itemsPerPage &&
+                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                            pageNumbers={pageNumbers}
+                        />
+                    </div>
+                }
             </div>
         </div>
     );

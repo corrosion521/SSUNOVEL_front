@@ -148,14 +148,17 @@ const WritingMy = () => {
                     .map((item) => (
                         <Onewrt item={item} key={item[0]} />
                     ))}
-                <div style={{ display: 'flex', justifyContent: 'center', }}>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                        pageNumbers={pageNumbers}
-                    />
-                </div>
+                {
+                    itemList.length > itemsPerPage &&
+                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                            pageNumbers={pageNumbers}
+                        />
+                    </div>
+                }
             </div>
         </div>
     );
