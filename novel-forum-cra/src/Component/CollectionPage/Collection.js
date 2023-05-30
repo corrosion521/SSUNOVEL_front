@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from 'react'
 import ModalCollection from './ModalCollection'
-
 
 
 function Collection(props) {
@@ -38,7 +37,11 @@ function Collection(props) {
         }
     };
 
-
+    useEffect(() => {
+        // 쿠키 값을 가져와서 출력
+        const cookieValue = document.cookie;
+        console.log(cookieValue);
+    }, []);
 
     return (
 

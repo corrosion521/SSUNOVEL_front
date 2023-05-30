@@ -31,6 +31,7 @@ import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
 import SearchedPageReview from "../ReviewPage/SearchedPageReview"
 
 function PageMain() {
+
     return (
         <div className="page">
             <GnbFirst></GnbFirst>

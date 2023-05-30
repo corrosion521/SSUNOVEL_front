@@ -34,7 +34,7 @@ const PageLogin = () => {
         })
             .then((response) => response.json())
             .then((result) => {
-                //console.log("결과: ", result.code)
+                console.log("결과: ", result.code)
                 if (result.code === "OK") { // 로그인 성공 시
                     navigate("/");  // 메인페이지로 이동
                     console.log(result);

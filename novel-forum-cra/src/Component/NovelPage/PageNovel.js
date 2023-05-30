@@ -1,6 +1,6 @@
 import React from "react";
 import Novel from "./Novel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 import Review from "../ReviewPage/Review"
@@ -13,7 +13,12 @@ import { FaStar } from 'react-icons/fa'
 3. 리뷰 작성
 1) 별점 기능 
 2) 내용 작성(리뷰 글자수, 리뷰 작성)
-
+4. api 연동(소설 세부 페이지)
+1) 소설 상세정보- 제목 등
+2) 리뷰 부분
+5. api 연동(작가의 다른 작품)
+1) 작가의 다른 작품 중 해당 본 작품은 제거 (filter이용)
+6. api 연동(리뷰)
 *--------------------------------------------np--------------------------------------------------------------------------------------------
 */
 
@@ -107,6 +112,7 @@ function PageNovel() {
 
     //3.1)
     const [score, setScore] = useState([false, false, false, false, false]);
+    const [finalsScore, setFinalScore] = useState(1.0);
 
     //3.1)
     const starScore = (index) => {
@@ -116,6 +122,8 @@ function PageNovel() {
             star[i] = i <= index ? true : false;
         }
         setScore(star);
+
+
     }
 
 
@@ -141,89 +149,225 @@ function PageNovel() {
     //3. 2) 리뷰 작성함수
     const onSubmitRp = ({ rpCount, score }) => {
         const stars = score.filter((item) => item).length;
-        console.log(rpCount, stars);
-        // API 호출 및 데이터 저장 코드 작성
-        // 완료된 후 페이지 새로고침
+
+
+
+        // const floatScore = parseFloat(stars.toFixed(1)); // 소수 첫째자리로 반올림하여 문자열로 변환
+
+
+
+        const requestBody = `{
+            "rating": ${stars},
+            "content": "${rpCount}"
+        }`;
+
+        console.log("~", data[0]);
+        fetch(`/novel/review/${data[0]}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: requestBody,
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                setResultNovel(result.result);
+                setResultNovelReviews(result.result.reviewInfos);
+                console.log("LL", result.result)
+            });
+
+
         window.location.reload();
+
+
     }
+
+
+
+    //4.1 , 4.2
+    //fetch 요청이 완료된 후에 setResultMainNovel을 사용하여 resultMainNovel 상태를 업데이트하고, 이를 기반으로 랭킹 소설 목록을 렌더링하도록 수정하였습니다.
+    const [resultNovel, setResultNovel] = useState([]);
+    const [resultNovelReviews, setResultNovelReviews] = useState([]);
+
+
+    // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
+    //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
+    useEffect(() => {
+        fetch(`/novel/${data[0]}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                //useState이용하여 
+                //4.1
+                setResultNovel(result.result);
+                //4.2
+                setResultNovelReviews(result.result.reviewInfos);
+                //이미 좋아요 했다면 
+
+                //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
+                // if(result.result.alreadyLike == )
+                setLike("")
+                console.log("LL", result.result)
+
+            });
+    }, []);
+
+
+    //5
+
+    //fetch 요청이 완료된 후에 setResultMainNovel을 사용하여 resultMainNovel 상태를 업데이트하고, 이를 기반으로 랭킹 소설 목록을 렌더링하도록 수정하였습니다.
+
+
+
+    const [resultAnotherNovel, setResultAnotherNovel] = useState([]);
+
+
+    const fetchNovelData = () => {
+        console.log(resultNovel.authorName)
+        fetch(`/novel/search/author?search=${data[1]}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+            .then((response) => response.json())
+            .then((result) => {
+
+                // 제거할 요소를 걸러내는 필터 함수를 정의합니다.
+                // 5. 1)
+                // console.log(data[0], result.result.dto[4]);
+                const filteredDto = result.result.dto.filter(item => item.novelId != data[0]);
+
+                setResultAnotherNovel(filteredDto);
+                console.log("noveldata", result.result.dto)
+            });
+    }
+
+    // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
+    //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
+    useEffect(() => {
+        fetchNovelData();
+
+    }, [resultNovel]);
+
 
 
 
     return (
         <div>
             <div style={{ display: 'flex', width: '100%', gap: '7%' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1%' }}>
-                    <div style={{ width: '400px', height: '600px' }}>
-                        <Novel info={data}></Novel>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', width: '65%' }}>
+                    <div style={{ width: '100%', height: '100%', marginLeft: 'auto', marginRight: 'auto', fontSize: '1.6rem' }}>
+                        <Novel info={resultNovel}></Novel>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img onClick={onClickWriterLike} src={writerLikeimg} style={{ width: '27px', height: '27px', marginRight: '5px' }} ></img>
                         <h3 style={{ fontSize: '0.7rem' }}>관심작가</h3>
                     </div>
-                    <div>
+                    <div style={{ marginTop: '4%' }}>
                         <hr></hr>
 
                     </div>
-                    <div style={{ border: '2px solid black', width: '300px', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
+                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '10%', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
                         <br></br>
-                        총회차 : {data[4]} <br></br>
-                        가격 : 회차 당 {data[5]}원
+                        총 회차 : {resultNovel.total_episode}화 <br></br><br></br>
+                        가격 : 회차 당 {resultNovel.price}원
                     </div>
                     <div style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                        , borderRadius: '25px', width: '150px', height: '40px', margin: '10% auto', marginTop: '20px'
+                        display: resultNovel.is_kakao != null ? 'flex' : 'none',
+                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
                     }}>
-                        {data[6]}
+                        {
+                            resultNovel.is_kakao != null ? "카카오페이지" : "..."
+                        }
                     </div>
+
+                    <div style={{
+                        display: resultNovel.is_munpia != null ? 'flex' : 'none',
+                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                    }}>
+                        {
+                            resultNovel.is_munpia != null ? "문피아" : "..."
+                        }
+                    </div>
+
+                    <div style={{
+                        display: resultNovel.is_naver != null ? 'flex' : 'none',
+                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                    }}>
+                        {
+                            resultNovel.is_naver != null ? "네이버시리즈" : "..."
+                        }
+                    </div>
+
+                    <div style={{
+                        display: resultNovel.is_ridi != null ? 'flex' : 'none',
+                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
+                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                    }}>
+                        {
+                            resultNovel.is_ridi != null ? "리디" : "..."
+                        }
+                    </div>
+
 
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px' }}>
                             <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
                             <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                        {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                             <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
                             <h3 style={{ fontSize: '1rem' }}>공감</h3>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         <hr></hr>
 
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {data[7]}
+                        {resultNovel.content}
                     </div>
 
                 </div>
                 <hr style={{ height: '1400px' }}></hr>
                 <div style={{ width: '100%' }}>
-                    <h3 style={{ fontSize: '1.3rem' }}>리뷰</h3>
+                    <h3 style={{ fontSize: '1.3rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>최신순</button>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>인기순</button>
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '2px solid red', height: '200px', marginBottom: '5%' }}>
-                        <textarea onChange={onInputHandler} maxLength="100" style={{ height: '600px', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '2px solid red', height: '220px', marginBottom: '5%' }}>
+                        <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
 
                         </textarea>
                         <p style={{ fontSize: '0.7rem', marginLeft: '80%' }}>
                             <span>{inputCount}</span>
                             <span>/100 자</span>
                         </p>
+                        <div style={{ marginLeft: '5%' }} >
+                            {/*3.1) */}
+                            {ARRAY.map((index) => (
+                                <FaStar
+                                    onClick={() => starScore(index)}
+                                    key={index}
+                                    size="27"
+                                    color={score[index] ? "yellow" : "gray"}
+                                ></FaStar>
+                            ))}
+                        </div>
 
-                        <div style={{ margin: 'auto', width: '100%', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ marginLeft: '5%' }} >
-                                {/*3.1) */}
-                                {ARRAY.map((index) => (
-                                    <FaStar
-                                        onClick={() => starScore(index)}
-                                        key={index}
-                                        size="27"
-                                        color={score[index] ? "yellow" : "gray"}
-                                    ></FaStar>
-                                ))}
-                            </div>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginRight: '12%' }}>
+
                             <button
                                 className="HomepageLogo"
                                 style={{
@@ -244,15 +388,16 @@ function PageNovel() {
                     <div style={{ height: '380px', overflow: 'scroll', overflowX: "hidden" }}>
 
                         {
-                            reviews.map(
-                                (review) =>
-                                (<div style={{ marginBottom: '2%' }}>
-                                    <Review review={review} ></Review>
-                                </div>
+                            resultNovelReviews != null ?
+                                resultNovelReviews.map(
+                                    (review) =>
+                                    (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
+                                        <Review review={review} ></Review>
+                                    </div>
 
-                                )
+                                    )
 
-                            )
+                                ) : "리뷰가 없습니다"
 
                         }
 
@@ -262,9 +407,10 @@ function PageNovel() {
                     <h3>작가의 다른 작품</h3>
                     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
                         {
-                            novels.map(
+
+                            resultAnotherNovel.map(
                                 (novels) =>
-                                (<div style={{ width: '100px', height: '200px', fontSize: '15px' }}>
+                                (<div style={{ width: '100px', height: '300px', fontSize: '15px' }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 
@@ -273,7 +419,7 @@ function PageNovel() {
                             )
                         }
                     </div>
-                    <h3>비슷한 작품 추천</h3>
+                    <h3 style={{ marginTop: '10%' }}>비슷한 작품 추천</h3>
                     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
                         {
                             novels.map(
@@ -289,7 +435,7 @@ function PageNovel() {
                     </div>
 
                 </div>
-            </div>
+            </div >
         </div >
     )
 }

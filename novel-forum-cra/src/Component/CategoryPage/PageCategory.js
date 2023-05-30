@@ -6,6 +6,17 @@ import { useEffect } from "react";
 import CategorySearchBox from "./CategorySearchBox";
 import { useLocation } from "react-router-dom";
 
+/**----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 유형 : 카테고리 페이지
+ 설계 : 
+ 1. ....
+ 2. api 연동 [카테고리]
+ 
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ */
+
+
 function PageCategory() {
     const Novel1 = [
         "https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2",
@@ -29,18 +40,20 @@ function PageCategory() {
     // 전체 아이템 리스트 (500개의 아이템 생성)
     const itemList = Array.from({ length: 500 }, (_, index) => [Novel1]);
     const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
-    // const [selectedFlpVal, setSelectedFlpVal] = useState([]);
-    // const [selectedGenreVal, setSelectedGenreVal] = useState([]);
-    const [selectedFnVal, setSelectedFnVal] = useState(false);
+
+
 
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 16; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([10]);
 
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -65,6 +78,10 @@ function PageCategory() {
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -129,7 +146,7 @@ function PageCategory() {
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {totalPages}
+                        {currentPage !== totalPages && totalPages}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -153,64 +170,26 @@ function PageCategory() {
 
 
     //완결
-    const onClickSelectedFn = (event) => {
-        const targetButton = event.target;
-        const currentColor = targetButton.style.color;
 
-        if (currentColor === "black" || currentColor === "") {
-            targetButton.style.color = "green";
-            setSelectedFnVal(true);
-
-        } else {
-            targetButton.style.color = "black";
-            setSelectedFnVal(false);
-
+    const [selectedFnVal, setSelectedFnVal] = useState(0);
+    const onClickSelectedFn = () => {
+        if (selectedFnVal == 1)
+            setSelectedFnVal(0);
+        else {
+            setSelectedFnVal(1);
         }
+
+
     };
 
-    // //플랫폼
-    // const onClickSelectedFlp = (event) => {
-    //     const targetButton = event.target;
-    //     const currentColor = targetButton.style.color;
-
-    //     if (currentColor === "black" || currentColor === "") {
-    //         targetButton.style.color = "green";
-    //         setSelectedFlpVal((prevFlpVal) => [...prevFlpVal, targetButton.value]);
-
-    //     } else {
-    //         targetButton.style.color = "black";
-    //         setSelectedFlpVal((prevFlpVal) =>
-    //             prevFlpVal.filter((val) => val !== targetButton.value)
-    //         );
-
-    //     }
-    // };
-
-    //장르
-    // const onClickSelectedGr = (event) => {
-    //     const targetButton = event.target;
-    //     const currentColor = targetButton.style.color;
-
-    //     if (currentColor === "black" || currentColor === "") {
-    //         targetButton.style.color = "green";
-    //         setSelectedGenreVal((prevGenreVal) => [...prevGenreVal, targetButton.value]);
-
-    //     } else {
-    //         targetButton.style.color = "black";
-    //         setSelectedGenreVal((prevGenreVal) =>
-    //             prevGenreVal.filter((val) => val !== targetButton.value)
-    //         );
-
-    //     }
-    // };
 
 
     //장르 하나 정하기 
-    const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('로맨스');
 
     const onClickSelectedGr = (genre) => {
         if (selectedGenre == genre)
-            setSelectedGenre("");
+            setSelectedGenre("None");
         else {
             setSelectedGenre(genre);
         }
@@ -218,11 +197,11 @@ function PageCategory() {
     };
 
     //플랫폼 하나 정하기 
-    const [selectedFlp, setSelectedFlp] = useState('');
+    const [selectedFlp, setSelectedFlp] = useState('is_kakao');
 
     const onClickSelectedFlp = (flp) => {
         if (selectedFlp == flp)
-            setSelectedFlp("");
+            setSelectedFlp("None");
         else {
             setSelectedFlp(flp);
         }
@@ -230,15 +209,47 @@ function PageCategory() {
     };
 
 
-
-
-
-
-
     useEffect(() => console.log(selectedFnVal, selectedFlp, selectedGenre), [selectedFnVal, selectedGenre, selectedFlp]);
 
+
+    //2.
+    //fetch 요청이 완료된 후에 setResultMainNovel을 사용하여 resultMainNovel 상태를 업데이트하고, 이를 기반으로 랭킹 소설 목록을 렌더링하도록 수정하였습니다.
+
+
+
+    // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
+    //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
+    useEffect(() => {
+
+        console.log(selectedFlp)
+        fetch("/novel/category", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                isFinished: selectedFnVal,
+                platform: selectedFlp,
+                genre: selectedGenre,
+                orderBy: "download_cnt",
+                pageNum: currentPage - 1,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result.result.count)
+                //useState이용하여 
+                setResultCategoryNovel(result.result.dto);
+                // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
+
+            });
+    }, [selectedFnVal, selectedGenre, selectedFlp, currentPage]);
+
+
+
     return (
-        <div>
+        <div >
 
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>카테고리</h1>
             <hr style={{ width: '100%' }}></hr>
@@ -249,7 +260,7 @@ function PageCategory() {
 
                 <div style={{ marginRight: 'auto', marginBottom: '3%' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
-                    <CategorySearchBox />
+
 
                 </div>
                 <div  >
@@ -290,9 +301,9 @@ function PageCategory() {
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '30%', gap: '5vh' }}>
                     <button
-                        onClick={onClickSelectedFn}
+                        onClick={() => onClickSelectedFn()}
                         style={{
-
+                            color: selectedFnVal === 1 ? 'green' : 'black',
                             border: '1px solid black',
                             background: 'none',
                             fontSize: '1rem',
@@ -308,9 +319,9 @@ function PageCategory() {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                             <button
                                 className="f1"
-                                onClick={() => onClickSelectedFlp('kakaopage')}
+                                onClick={() => onClickSelectedFlp('is_kakao')}
                                 style={{
-                                    color: selectedFlp === 'kakaopage' ? 'green' : 'black',
+                                    color: selectedFlp === 'is_kakao' ? 'green' : 'black',
 
                                     border: 'none',
                                     background: 'none',
@@ -318,13 +329,13 @@ function PageCategory() {
                                     fontWeight: 'bold',
 
                                 }}
-                                value='카카오페이지'
+                                value='is_kakao'
                             >
                                 카카오페이지
                             </button>
                             <button
-                                onClick={() => onClickSelectedFlp('naverseries')} style={{
-                                    color: selectedFlp === 'naverseries' ? 'green' : 'black',
+                                onClick={() => onClickSelectedFlp('is_naver')} style={{
+                                    color: selectedFlp === 'is_naver' ? 'green' : 'black',
 
                                     border: 'none',
                                     background: 'none',
@@ -337,9 +348,9 @@ function PageCategory() {
                                 네이버시리즈
                             </button>
                             <button
-                                onClick={() => onClickSelectedFlp('ridi')}
+                                onClick={() => onClickSelectedFlp('is_ridi')}
                                 style={{
-                                    color: selectedFlp === 'ridi' ? 'green' : 'black',
+                                    color: selectedFlp === 'is_ridi' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -351,9 +362,9 @@ function PageCategory() {
                                 리디
                             </button>
                             <button
-                                onClick={() => onClickSelectedFlp('munpia')}
+                                onClick={() => onClickSelectedFlp('is_munpia')}
                                 style={{
-                                    color: selectedFlp === 'munpia' ? 'green' : 'black',
+                                    color: selectedFlp === 'is_munpia' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -373,9 +384,9 @@ function PageCategory() {
                         <h3 style={{ fontSize: '2rem' }}>장르</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                             <button className="r1"
-                                onClick={() => onClickSelectedGr('romance')}
+                                onClick={() => onClickSelectedGr('로맨스')}
                                 style={{
-                                    color: selectedGenre === 'romance' ? 'green' : 'black',
+                                    color: selectedGenre === '로맨스' ? 'green' : 'black',
                                     border: "none",
                                     background: "none",
                                     fontSize: "1rem",
@@ -383,9 +394,9 @@ function PageCategory() {
                                 }}
                                 value='로맨스'                    >로맨스</button>
                             <button
-                                onClick={() => onClickSelectedGr('rofan')}
+                                onClick={() => onClickSelectedGr('로판')}
                                 style={{
-                                    color: selectedGenre === 'rofan' ? 'green' : 'black',
+                                    color: selectedGenre === '로판' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -396,9 +407,9 @@ function PageCategory() {
                                 로판
                             </button>
                             <button
-                                onClick={() => onClickSelectedGr('fantasy')}
+                                onClick={() => onClickSelectedGr('판타지')}
                                 style={{
-                                    color: selectedGenre === 'fantasy' ? 'green' : 'black',
+                                    color: selectedGenre === '판타지' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -411,9 +422,9 @@ function PageCategory() {
                             </button>
                             <button
 
-                                onClick={() => onClickSelectedGr('hyunfan')}
+                                onClick={() => onClickSelectedGr('현판')}
                                 style={{
-                                    color: selectedGenre === 'hyunfan' ? 'green' : 'black',
+                                    color: selectedGenre === '현판' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -424,9 +435,9 @@ function PageCategory() {
                                 현판
                             </button>
                             <button
-                                onClick={() => onClickSelectedGr('muhyup')}
+                                onClick={() => onClickSelectedGr('무협')}
                                 style={{
-                                    color: selectedGenre === 'muhyup' ? 'green' : 'black',
+                                    color: selectedGenre === '무협' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -438,9 +449,9 @@ function PageCategory() {
                                 무협
                             </button>
                             <button
-                                onClick={() => onClickSelectedGr('mistery')}
+                                onClick={() => onClickSelectedGr('미스터리')}
                                 style={{
-                                    color: selectedGenre === 'mistery' ? 'green' : 'black',
+                                    color: selectedGenre === '미스터리' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -452,9 +463,9 @@ function PageCategory() {
                                 미스터리
                             </button>
                             <button
-                                onClick={() => onClickSelectedGr('light')}
+                                onClick={() => onClickSelectedGr('라이트노벨')}
                                 style={{
-                                    color: selectedGenre === 'light' ? 'green' : 'black',
+                                    color: selectedGenre === '라이트노벨' ? 'green' : 'black',
                                     border: 'none',
                                     background: 'none',
                                     fontSize: '1rem',
@@ -475,12 +486,11 @@ function PageCategory() {
 
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%' }}>
-                    {itemList
-                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    {resultCategoryNovel
                         .map((item) => (
                             <div style={{ display: 'flex', marginTop: '5%' }}>
-                                <div style={{ fontSize: '0.5em', height: '300px', width: '180px' }}>
-                                    <Novel info={item[0]}></Novel>
+                                <div style={{ fontSize: '0.5em', height: '600px', width: '250px' }}>
+                                    <Novel info={item}></Novel>
                                 </div>
 
 
@@ -492,7 +502,7 @@ function PageCategory() {
 
 
 
-            <div style={{ marginTop: '10%' }}>
+            <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
