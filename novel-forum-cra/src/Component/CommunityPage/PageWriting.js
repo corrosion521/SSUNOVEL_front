@@ -24,6 +24,8 @@ function PageWriting() {
     const [content, setContent] = useState("")
     //닉네임
     const [nickName, setNickName] = useState("")
+
+
     //댓글 하나 컴포넌트
     const Onerp = ({ item }) => {
 
@@ -41,13 +43,13 @@ function PageWriting() {
             >
 
                 <div style={{ width: '10%', margin: 'auto', fontWeight: 'bold', marginLeft: '0' }}>
-                    {title}
+                    {"?"}
                 </div>
 
                 <div
                     style={{ width: '50%', margin: 'auto', marginLeft: '0', textAlign: 'left' }}
                 >
-                    {content}
+                    {rpCount}
                 </div>
 
                 <div style={{ margin: '0', width: '15%', margin: 'auto', marginRight: 0, fontSize: '0.9em' }}>
@@ -75,7 +77,10 @@ function PageWriting() {
     //댓글 전송용 useState
     let [rpCount, setRpCount] = useState("");
 
-
+    //전체 댓글 
+    const [commentLists, setCommentLists] = useState([]);
+    //전체 댓글 
+    const [date, setDate] = useState([]);
     const onInputHandler = (e) => {
         const currentLength = e.target.value.length;
 
@@ -103,8 +108,8 @@ function PageWriting() {
 
     //임시 댓글
     // 전체 댓글 리스트 (500개의 아이템 생성)
-    const item = Array.from({ length: 100 }, (_, index) => ["아무개", index + 1 + "잘모르겠네", "04-09 12:11"]
-    );
+    // const item = Array.from({ length: 100 }, (_, index) => ["아무개", index + 1 + "잘모르겠네", "04-09 12:11"]
+    // );
 
     // 삭제, 수정시 페이지 이동
     const navigate = useNavigate();
@@ -143,6 +148,26 @@ function PageWriting() {
         console.log(rpCount);
         // API 호출 및 데이터 저장 코드 작성
         // 완료된 후 페이지 새로고침
+        fetch(`/community/comment/${data[0]}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: content
+            }),
+
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+
+
+            });
+
+
+
         window.location.reload();
     }
 
@@ -161,10 +186,12 @@ function PageWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
+                console.log("댓글결과:", result.result)
+                setCommentLists(result.result.commentLists)
                 setTitle(result.result.title)
                 setContent(result.result.content)
                 setNickName(result.result.nickname)
+                setDate(result.result.writeAt)
                 console.log("음", result.result.title)
 
             });
@@ -180,7 +207,7 @@ function PageWriting() {
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <div style={{ marginRight: '0' }}>{nickName}</div>
                 <hr style={{ margin: '0 10px' }}></hr>
-                ..
+                {date}
             </div>
             <div style={{ marginTop: '10%', height: '400px' }}>
                 {content}
@@ -248,7 +275,7 @@ function PageWriting() {
                 작성
             </button>
             {
-                item.map(
+                commentLists.map(
                     (item) =>
                     (
                         <Onerp item={item} key={item} />
@@ -257,7 +284,7 @@ function PageWriting() {
 
                 )
             }
-            <Onerp item={item[0]}></Onerp>
+
         </div>
     )
 

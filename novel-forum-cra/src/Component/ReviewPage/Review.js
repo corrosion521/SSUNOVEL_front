@@ -14,7 +14,7 @@ import { useState } from "react";
 
 
 const Review = ({ review }) => {
-    console.log("review:", review.review_id)
+    console.log("review:", review)
 
     // 2. 공감 상태와 이미지 상태
     const [like, setLike] = useState(false);

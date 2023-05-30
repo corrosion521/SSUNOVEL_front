@@ -218,11 +218,11 @@ function PageReview() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
+                console.log("/review?genre에 대한 결과", result)
                 // //useState이용하여 
                 if (result.message == "성공") {
                     setFlag(true);
-                    console.log("비교", result.result, itemList)
+
                     setResultCategoryReview(result.result);
                 }
                 else {
