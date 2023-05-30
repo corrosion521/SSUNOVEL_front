@@ -44,6 +44,7 @@ const Review = ({ review }) => {
                         alert("좋아요는 한 번만 누를 수 있습니다.")
                         setLikeimg("IconLike.png");
                         setLikeCnt(review.like_cnt != null ? review.like_cnt : review.like_count)
+                        setLike(false)
                     }
 
                 });
