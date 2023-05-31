@@ -201,7 +201,7 @@ function PageNovel() {
         })
             .then((response) => response.json())
             .then((result) => {
-                //useState이용하여 
+                //useState이용하여 ``
                 //4.1
                 setResultNovel(result.result);
                 //4.2
@@ -217,7 +217,7 @@ function PageNovel() {
     }, []);
 
 
-    //5
+    //5`
 
     //fetch 요청이 완료된 후에 setResultMainNovel을 사용하여 resultMainNovel 상태를 업데이트하고, 이를 기반으로 랭킹 소설 목록을 렌더링하도록 수정하였습니다.
 

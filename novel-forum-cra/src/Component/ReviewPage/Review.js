@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 /*
 유형 : 리뷰 컴포넌트
@@ -17,16 +17,19 @@ const Review = ({ review }) => {
     console.log("review:", review)
 
     // 2. 공감 상태와 이미지 상태
-    const [like, setLike] = useState(false);
+    const [like, setLike] = useState(review.already_like === 1 ? true : false);
     const [likeCnt, setLikeCnt] = useState(review.like_cnt != null ? review.like_cnt : review.like_count)
-    const [likeimg, setLikeimg] = useState("IconLike.png");
+    const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "iconLikeOn.png" : "IconLike.png");
+
+
+
 
     // 2. 공감(좋아요) 함수
     const onClickLike = () => {
         if (like === false) { // 
             setLike(true);
             setLikeimg("IconLikeOn.png");
-            setLikeCnt(review.like_cnt != null ? review.like_cnt + 1 : review.like_count + 1)
+            setLikeCnt(review.like_cnt != null ? likeCnt + 1 : review.like_cnt + 1)
 
             //실질적 반영 
             //[!!] 리뷰 페이지에서는 review_id를 아직 안줘서 에러남. 월요일 이후 고칠 것. 
@@ -43,7 +46,7 @@ const Review = ({ review }) => {
                     if (result.code == "BAD_REQUEST") {
                         alert("좋아요는 한 번만 누를 수 있습니다.")
                         setLikeimg("IconLike.png");
-                        setLikeCnt(review.like_cnt != null ? review.like_cnt : review.like_count)
+                        //setLikeCnt(review.like_cnt != null ? review.like_cnt : review.like_count)
                         setLike(false)
                     }
 
@@ -54,7 +57,7 @@ const Review = ({ review }) => {
 
             setLike(false);
             setLikeimg("IconLike.png");
-            setLikeCnt(review.like_cnt != null ? review.like_cnt : review.like_count)
+            setLikeCnt(review.like_cnt != null ? likeCnt - 1 : review.like_cnt)
 
 
             //실질적 반영 
@@ -81,6 +84,7 @@ const Review = ({ review }) => {
 
         }
     };
+
 
 
     return (
