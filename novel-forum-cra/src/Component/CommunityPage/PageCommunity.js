@@ -77,7 +77,7 @@ function PageCommunity() {
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {now}
+                    {item.writeAt}
                 </div>
             </div>
         );

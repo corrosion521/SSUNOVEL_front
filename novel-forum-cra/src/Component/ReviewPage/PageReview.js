@@ -224,6 +224,7 @@ function PageReview() {
                     setFlag(true);
 
                     setResultCategoryReview(result.result);
+                    console.log("소설로", result.result)
                 }
                 else {
                     setFlag(false)

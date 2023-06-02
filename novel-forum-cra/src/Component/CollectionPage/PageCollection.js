@@ -3,6 +3,7 @@ import Collection from "./Collection";
 import CollectionSearchBox from "./CollectionSearchBox";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies"
+import { useEffect } from "react";
 
 function PageCollection() {
 
@@ -38,15 +39,17 @@ function PageCollection() {
 
 
 
-
-
+    const [collections, setCollections] = useState([]);
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 16; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([10]);
 
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -66,8 +69,15 @@ function PageCollection() {
             pageNumbers.push(i);
         }
     }
+
+
+
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -103,7 +113,6 @@ function PageCollection() {
                         </button>
                     )}
 
-
                     {/* Render the page numbers . */}
                     {pageNumbers.map((pageNumber) => (
                         <button
@@ -120,20 +129,21 @@ function PageCollection() {
                             {pageNumber}
                         </button>
                     ))}
-                    {/* Always display the 50th page button . 50page가 아닌경우 50page보여주기
+
+                    {/* Always display the 50th page button . 50page가 아닌경우 50page보여주기*/}
                     <button
                         style={{
                             border: 'none',
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === totalPages ? 'red' : 'inherit',
+                            color: currentPage === 50 ? 'red' : 'inherit',
                         }}
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {totalPages}
-                    </button> */}
+                        {currentPage !== totalPages && totalPages}
+                    </button>
 
                     {/* Display the next button . 다음버튼*/}
                     {currentPage < totalPages && (
@@ -154,6 +164,25 @@ function PageCollection() {
         );
     }
 
+    useEffect(() => {
+
+        fetch(`/box/all?page=${currentPage}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result.result)
+                // //useState이용하여 
+                setCollections(result.result);
+                // // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+
+            });
+    }, []);
 
 
 
@@ -176,12 +205,12 @@ function PageCollection() {
             <div style={{ marginTop: '3%' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '100px', justifyContent: 'center' }}>
                     {
-                        itemList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                        collections.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                             .map(
                                 (collections) =>
                                 (
                                     <div style={{ width: '180px', height: '450px' }}>
-                                        <Collection info={collections} key={collections} />
+                                        <Collection data={collections} key={collections} />
                                     </div>
 
                                 )

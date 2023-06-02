@@ -50,10 +50,40 @@ function PageNovel() {
             setStar(true);
             setStarimg("IconStarOn.png");
             console.log("클릭1");
+            fetch(`/favorite/novel/${data[0]}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+
+                    console.log("즐겨찾기 결과", result.result)
+                    if (result.message === "이미 등록된 즐겨찾기")
+                        alert("이미 즐겨찾기 하셨습니다")
+                });
+
+
         } else {
             setStar(false);
             setStarimg("IconStarOff.png");
             console.log("클릭2");
+            fetch(`/favorite/novel/${data[0]}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+
+                    console.log("즐겨찾기 결과", result.result)
+                    if (result.message === "이미 등록된 즐겨찾기")
+                        alert("이미 즐겨찾기 하셨습니다")
+                });
         }
     };
 
@@ -211,7 +241,17 @@ function PageNovel() {
                 //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
                 // if(result.result.alreadyLike == )
                 setLike("")
-                console.log("LL", result.result)
+                console.log("LL", result.result.alreadyLike)
+                if (result.result.alreadyLike == 1) {
+                    console.log("들어는감")
+                    setStar("true")
+                    setStarimg("../IconStarOn.png")
+                }
+                else {
+                    setStar("false")
+                    setStarimg("../IconStarOff.png")
+                }
+
 
             });
     }, []);

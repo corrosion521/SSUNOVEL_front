@@ -13,7 +13,9 @@ const ReviewSearchBox = () => {
     const handleKeyDown = (event) => {
         if (event.keyCode === 13) {
             {/*data싣자 */ }
+            console.log(inputValue)
             navigate(`../review/search?data=${inputValue}`);
+            window.location.reload();
         }
     };
 

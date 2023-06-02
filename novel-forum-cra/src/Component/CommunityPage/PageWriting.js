@@ -28,7 +28,10 @@ function PageWriting() {
 
     //댓글 하나 컴포넌트
     const Onerp = ({ item }) => {
+        console.log(item.commentId)
 
+        //(삭제할) 댓글 번호
+        const numRp = item.commentId
         return (
             <div
                 style={{
@@ -43,22 +46,52 @@ function PageWriting() {
             >
 
                 <div style={{ width: '10%', margin: 'auto', fontWeight: 'bold', marginLeft: '0' }}>
-                    {"?"}
+                    {item.nickname}
                 </div>
 
                 <div
                     style={{ width: '50%', margin: 'auto', marginLeft: '0', textAlign: 'left' }}
                 >
-                    {rpCount}
+                    {item.content}
                 </div>
 
                 <div style={{ margin: '0', width: '15%', margin: 'auto', marginRight: 0, fontSize: '0.9em' }}>
-                    {item[2]
-                    }
+                    {item.writeAt}
                 </div>
 
 
-            </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    {/* <button
+                        onClick={() => onModifyRp({ numRp })}
+                        className="HomepageLogo"
+                        style={{
+                            color: 'white',
+                            width: '60px',
+                            height: '50px',
+                            fontSize: '0.7em'
+
+                        }}
+                    >
+                        수정
+                    </button> */}
+                    <button
+                        onClick={() => onDeleteRp({ numRp })}
+                        className="HomepageLogo"
+                        style={{
+                            backgroundColor: 'red',
+                            color: 'white',
+                            width: '60px',
+                            height: '50px',
+                            fontSize: '0.7em'
+
+                        }}
+                    >
+                        삭제
+                    </button>
+                </div>
+
+            </div >
         );
     };
     const useQuery = () => {
@@ -145,16 +178,16 @@ function PageWriting() {
 
     //댓글 작성함수
     const onSubmitRp = ({ rpCount }) => {
-        console.log(rpCount);
+        console.log("댓글작성", rpCount);
         // API 호출 및 데이터 저장 코드 작성
         // 완료된 후 페이지 새로고침
-        fetch(`/community/comment/${data[0]}`, {
+        fetch(`/community/comment/${data}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                content: content
+                content: rpCount
             }),
 
 
@@ -171,7 +204,62 @@ function PageWriting() {
         window.location.reload();
     }
 
+    //댓글 삭제함수
+    const onDeleteRp = ({ numRp }) => {
+        // API 호출 및 데이터 저장 코드 작성
+        // 완료된 후 페이지 새로고침
+        fetch(`/community/comment/${data}/${numRp}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
 
+
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+
+                if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
+                    alert("댓글 삭제권한이 없습니다.")
+
+
+            });
+
+        window.location.reload();
+
+
+    }
+
+
+    //댓글 수정함수
+    const onModifyRp = ({ numRp }) => {
+
+        // API 호출 및 데이터 저장 코드 작성
+        // 완료된 후 페이지 새로고침
+        fetch(`/community/comment/${numRp}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: rpCount
+            }),
+
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+
+
+            });
+
+
+
+        window.location.reload();
+    }
 
 
     useEffect(() => {
@@ -195,6 +283,8 @@ function PageWriting() {
                 console.log("음", result.result.title)
 
             });
+
+
     }, []);
 
 
