@@ -198,16 +198,82 @@ const ModalCollection = ({ setModalOpen, data }) => {
     const [like, setLike] = useState(false);
     const [likeimg, setLikeimg] = useState("../IconLike.png");
 
-    // 공감(좋아요) 함수
+    // // 공감(좋아요) 함수
+    // const onClickLike = () => {
+    //     if (like === false) {
+    //         setLike(true);
+    //         setLikeimg("../IconLikeOn.png");
+    //         console.log("클릭1");
+
+
+    //     } else {
+    //         setLike(false);
+    //         setLikeimg("../IconLike.png");
+    //         console.log("클릭2");
+    //     }
+    // };
+    // 2. 공감(좋아요) 함수
+
+    const [likeCnt, setLikeCnt] = useState(data.likeCnt != null ? data.likeCnt : "에러")
+
+
     const onClickLike = () => {
-        if (like === false) {
+        if (like === false) { // 
             setLike(true);
             setLikeimg("../IconLikeOn.png");
+            setLikeCnt(data.likeCnt != null ? likeCnt + 1 : data.likeCnt + 1)
+
+            //실질적 반영 
+            //[!!] 리뷰 페이지에서는 review_id를 아직 안줘서 에러남. 월요일 이후 고칠 것. 
+            fetch(`/like/box/${data.boxId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log("결과:", result)
+                    if (result.code == "BAD_REQUEST") {
+                        alert("좋아요는 한 번만 누를 수 있습니다.")
+                        setLikeimg("../IconLike.png");
+                        setLike(false)
+                    }
+
+                });
+
             console.log("클릭1");
+
         } else {
+
             setLike(false);
             setLikeimg("../IconLike.png");
+            setLikeCnt(data.likeCnt != null ? likeCnt - 1 : data.like_cnt)
+
+
+            //실질적 반영 
+            fetch(`/like/box/${data.boxId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log("결과:", result)
+                    // if (result.code == "BAD_REQUEST") {
+                    //     alert("좋아요는 한 번만 누를 수 있습니다.")
+                    //     setLikeimg("IconLike.png");
+                    //     setLikeCnt(review.like_cnt)
+                    // }
+
+                });
+
+
             console.log("클릭2");
+
         }
     };
 
@@ -228,6 +294,14 @@ const ModalCollection = ({ setModalOpen, data }) => {
                 console.log("결과:", result)
                 // //useState이용하여 
                 setNovels(result.result.boxItemInfo);
+                if (result.result.isFavorite == true) {// 좋아요 이미 했는지
+                    setStar(true)
+                    setStarimg("../IconStarOn.png")
+                }
+                if (result.result.isLike == true) {// 좋아요 이미 했는지
+                    setLike(true)
+                    setLikeimg("../IconLikeOn.png")
+                }
                 // // // 전체 페이지 수 계산
                 // setTotalPages(Math.ceil(result.result.length / itemsPerPage));
 
@@ -245,8 +319,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                            {/* <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>공감</h3> */}
+                            <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                            <h3 style={{ fontSize: '1rem' }}>공감</h3>
                         </div>
                     </div>
                     <img onClick={closeModal} src="../IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>

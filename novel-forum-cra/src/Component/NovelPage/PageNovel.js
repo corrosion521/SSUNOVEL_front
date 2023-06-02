@@ -432,7 +432,7 @@ function PageNovel() {
                                 resultNovelReviews.map(
                                     (review) =>
                                     (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
-                                        <Review review={review} ></Review>
+                                        <Review review={review} lflag={1}></Review>
                                     </div>
 
                                     )

@@ -235,6 +235,8 @@ function PageReview() {
             });
     }, [selectedGenre, currentPage]);
 
+
+
     return (
 
         <div style={{ position: 'relative' }}>
@@ -383,7 +385,7 @@ function PageReview() {
                                         <Novel info={item}></Novel>
                                     </div>
                                     <div style={{ height: '170px', width: '80%', marginLeft: '20px' }}>
-                                        <Review review={item}></Review>
+                                        <Review review={item} lflag={0}></Review>
                                     </div>
                                 </div>
                             ))

@@ -13,7 +13,7 @@ import { useState } from "react";
 
 
 
-const Review = ({ review }) => {
+const Review = ({ review, lflag }) => {//flag =0 : 좋아요 기능 클릭 x
     console.log("review:", review)
 
     // 2. 공감 상태와 이미지 상태
@@ -102,7 +102,19 @@ const Review = ({ review }) => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                         {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                        <img src={likeimg} style={{ width: '0.8em' }} onClick={onClickLike} ></img><h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{likeCnt}</h3>
+
+                        {lflag === 1 && ( // lflag가 1인 경우에만 좋아요 버튼 렌더링
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                                <img src={likeimg} style={{ width: '0.8em' }} onClick={onClickLike}></img>
+                                <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{likeCnt}</h3>
+                            </div>
+                        )}
+                        {lflag === 0 && ( // lflag가 1인 경우에만 좋아요 버튼 렌더링
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                                <img src={likeimg} style={{ width: '0.8em' }} ></img>
+                                <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{likeCnt}</h3>
+                            </div>
+                        )}
                     </div>
                 </div>
 
