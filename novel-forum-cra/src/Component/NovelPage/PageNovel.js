@@ -241,7 +241,7 @@ function PageNovel() {
                 //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
                 // if(result.result.alreadyLike == )
                 setLike("")
-                console.log("LL", result.result.alreadyLike)
+                console.log("LL", data[0])
                 if (result.result.alreadyLike == 1) {
                     console.log("들어는감")
                     setStar("true")
@@ -432,7 +432,7 @@ function PageNovel() {
                                 resultNovelReviews.map(
                                     (review) =>
                                     (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
-                                        <Review review={review} lflag={1}></Review>
+                                        <Review review={review} novelId={data[0]} lflag={1}></Review>
                                     </div>
 
                                     )

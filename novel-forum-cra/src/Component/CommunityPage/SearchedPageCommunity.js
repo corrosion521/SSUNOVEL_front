@@ -94,7 +94,6 @@ function SearchedPageCommunity() {
     };
 
 
-
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
@@ -103,15 +102,6 @@ function SearchedPageCommunity() {
     //전체 페이지 수 동적임
     const [totalPages, setTotalPages] = useState([10]);
 
-
-    // 전체 아이템 리스트 (500개의 아이템 생성)
-    const itemList = Array.from({ length: 500 }, (_, index) => [
-        index + 1,
-        "소설 제목좀 찾아주세요!!",
-        "정지오",
-        "04-09 12:11",
-        "어렸을 때 읽었던 소설인데 마법사랑 전사랑 궁수랑 도적이랑 나오는 소설좀 찾아주세요"
-    ]);
 
 
 
@@ -138,6 +128,10 @@ function SearchedPageCommunity() {
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>

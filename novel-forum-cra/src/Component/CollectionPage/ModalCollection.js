@@ -143,6 +143,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
     }
 
 
+
     // 즐겨찾기 상태와 이미지 상태
     const [star, setStar] = useState(false);
     const [starimg, setStarimg] = useState("../IconStarOff.png");
@@ -303,7 +304,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
                     setLikeimg("../IconLikeOn.png")
                 }
                 // // // 전체 페이지 수 계산
-                // setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+                setTotalPages(Math.ceil(result.result.boxItemInfo.length / itemsPerPage));
 
             });
     }, []);
