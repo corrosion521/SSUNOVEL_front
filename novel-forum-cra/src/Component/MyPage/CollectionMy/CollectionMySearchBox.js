@@ -2,7 +2,7 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import ModalSearchResult from "./ModalSearchResult";
 
-const CollectionMySearchBox = ({ setNovels }) => {
+const CollectionMySearchBox = ({ novels, setNovels }) => {
     // const navigate = useNavigate();
     const [inputValue, setInputValue] = useState(""); // 입력 값 상태
     const [searchTerm, setSearchTerm] = useState("");   // 검색어
@@ -45,7 +45,7 @@ const CollectionMySearchBox = ({ setNovels }) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
-            {searchModalOpen && <ModalSearchResult setSearchModalOpen={setSearchModalOpen} searchTerm={searchTerm} setNovels={setNovels} />}
+            {searchModalOpen && <ModalSearchResult setSearchModalOpen={setSearchModalOpen} searchTerm={searchTerm} novels={novels} setNovels={setNovels} />}
         </div>
     );
 };

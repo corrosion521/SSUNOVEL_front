@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Checkbox from "./Checkbox";
 import CheckboxGroup from "./CheckboxGroup";
 
-const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
+const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }) => {
 
     // api로 가져온 데이터 내에서 검색 기능 구현
     const Novel1 = [
@@ -36,14 +36,32 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
     }
 
     // Checkbox
-    const [selectNovels, setSelectNovels] = useState([]);
+    const [checkedIds, setCheckedIds] = useState([]);
+    const [checkedNovels, setCheckedNovels] = useState([]);
 
+    // 1️⃣ onChange함수를 사용하여 이벤트 감지, 필요한 값 받아오기
+    const onCheckedElement = (checked, id, item) => {
+        if (checked) {
+            setCheckedIds([...checkedIds, id]);
+            setCheckedNovels([...checkedNovels, item]);
+        } else if (!checked) {
+            setCheckedIds(checkedIds.filter(el => el !== id));
+            setCheckedNovels(checkedNovels.filter(el => el !== item));
+        }
+    };
+    // 2️⃣ x를 누르면 리스팅 목록에서 카테고리가 삭제되며 체크도 해제 된다
+    const onRemove = item => {
+        setCheckedNovels(checkedNovels.filter(el => el !== item));
+    };
 
 
     const selectComplete = () => {
-        setNovels(selectNovels);
-        // console.log(novels);
-        console.log(selectNovels);
+        console.log(novels);
+        if(checkedNovels.length>0){
+        setNovels([...novels, checkedNovels]);
+        }
+        console.log(novels);
+        console.log(checkedNovels);
         closeModal();
     }
 
@@ -144,30 +162,58 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, setNovels }) => {
                     <button type="button" className="select complete-btn" onClick={selectComplete}>선택완료</button>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', }}>
-                    <CheckboxGroup
-                        values={selectNovels}
-                        onChange={setSelectNovels}>
+                    {/* <CheckboxGroup
+                        values={checkedNovels}
+                        onChange={setCheckedNovels}>
                         <div
                             style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
-                        >
-                            {itemList
+                        > */}
+                    {/* {itemList
                                 .map(
                                     (novel) =>
                                     (
-                                        <div style={{ display: 'flex', marginTop: '5%' }}>
-                                            <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
-                                                {/* 소설 하나씩 value로 보내줌 */}
-                                                <Checkbox value={[novel]}>
-                                                    <Novel info={novel} key={novel} />
-                                                </Checkbox>
-                                            </div>
-                                        </div>
+                                        // <div style={{ display: 'flex', marginTop: '5%' }}>
+                                        //     <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
+                                        //         {/* 소설 하나씩 value로 보내줌 */}
+                    {/* //         <Checkbox value={[novel]}>
+                                        //             <Novel info={novel} key={novel} />
+                                        //         </Checkbox>
+                                        //     </div>
+                                        // </div>
                                     )
                                 )
                                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                            }
-                        </div>
-                    </CheckboxGroup>
+                            } */}
+                    {/* </div>
+                    </CheckboxGroup> */}
+                    <div
+                        style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
+                    >
+                        {itemList.map(item => {
+                            return (
+                                <div style={{ display: 'flex', marginTop: '5%' }}>
+                                    <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
+                                        {/* 소설 하나씩 value로 보내줌 */}
+                                        <input
+                                            type="checkbox"
+                                            // 이때 value값으로 data를 지정해준다.
+                                            value={item}
+                                            // onChange이벤트가 발생하면 check여부와 value(data)값을 전달하여 배열에 data를 넣어준다.
+                                            onChange={e => {
+                                                onCheckedElement(e.target.checked, item[1], e.target.value);
+                                                // onCheckedElement(e.target.checked, e.target.value);
+                                            }}
+                                            // 3️⃣ 체크표시 & 해제를 시키는 로직. 배열에 data가 있으면 true, 없으면 false
+                                            checked={checkedIds.includes(item[1]) ? true : false}
+                                        />
+                                        <Novel info={item} key={item} />
+                                    </div>
+                                </div>
+                            );
+                        })
+                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) //페이지 슬라이싱
+                    }
+                    </div>
                 </div>
                 {
                     itemList.length > itemsPerPage &&
