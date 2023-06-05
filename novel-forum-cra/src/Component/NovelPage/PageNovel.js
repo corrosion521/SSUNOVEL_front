@@ -97,6 +97,7 @@ function PageNovel() {
             setLike(true);
             setLikeimg("IconLikeOn.png");
             console.log("클릭1");
+
         } else {
             setLike(false);
             setLikeimg("IconLike.png");
@@ -128,10 +129,39 @@ function PageNovel() {
             setWriterLike(true);
             setWriterLikeimg("IconAlarmOn.png");
             console.log("클릭1");
+            fetch(`/favorite/author/${authorId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+
+                    console.log("즐겨찾기 결과", result.result)
+                    if (result.message === "이미 등록된 즐겨찾기")
+                        alert("이미 즐겨찾기 하셨습니다")
+                });
         } else {
             setWriterLike(false);
             setWriterLikeimg("IconAlarm.png");
             console.log("클릭2");
+
+            fetch(`/favorite/author/${authorId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+
+                    console.log("즐겨찾기 결과", result.result)
+                    if (result.message === "이미 등록된 즐겨찾기")
+                        alert("이미 즐겨찾기 하셨습니다")
+                });
         }
     };
 
@@ -219,6 +249,7 @@ function PageNovel() {
     const [resultNovel, setResultNovel] = useState([]);
     const [resultNovelReviews, setResultNovelReviews] = useState([]);
 
+    const [authorId, setAuthorId] = useState("")
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
     //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
@@ -241,7 +272,9 @@ function PageNovel() {
                 //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
                 // if(result.result.alreadyLike == )
                 setLike("")
-                console.log("LL", data[0])
+                console.log("LL", result)
+                setAuthorId(result.result.authorId)
+
                 if (result.result.alreadyLike == 1) {
                     console.log("들어는감")
                     setStar("true")
@@ -250,6 +283,15 @@ function PageNovel() {
                 else {
                     setStar("false")
                     setStarimg("../IconStarOff.png")
+                }
+
+                if (result.result.alreadyAuthorLike == 1) {
+                    setWriterLike("true")
+                    setWriterLikeimg("../IconAlarmOn.png")
+                }
+                else {
+                    setWriterLike("false")
+                    setWriterLikeimg("../IconAlarm.png")
                 }
 
 

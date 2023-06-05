@@ -43,6 +43,13 @@ function PageCommunity() {
         navigate(url);
     };
 
+    const onClickLatest = () => {
+        setOrder("latest")
+    }
+
+    const onClickOutdate = () => {
+        setOrder("outDate")
+    }
 
     //글 하나의 컴포넌트
     const Onewrt = ({ item }) => {
@@ -215,11 +222,15 @@ function PageCommunity() {
     }
 
     //2.
+
+    //게시글 정렬 state
+    const [order, setOrder] = useState('latest');
+
     const [writings, setWritings] = useState([])
     useEffect(() => {
 
 
-        fetch("/community", {
+        fetch(`/community?page=${currentPage - 1}&orderByDate=${order}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -233,7 +244,7 @@ function PageCommunity() {
                 // 전체 페이지 수 계산
                 setTotalPages(Math.ceil(result.result.length / itemsPerPage));
             });
-    }, []);
+    }, [currentPage, order]);
 
 
 
@@ -248,17 +259,23 @@ function PageCommunity() {
                 </div>
                 <div>
                     <button
+                        onClick={onClickLatest}
                         style={{
+                            color: order === 'latest' ? 'green' : 'black',
                             border: 'none',
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
+
                         }}
+
                     >
                         최신순
                     </button>
                     <button
+                        onClick={onClickOutdate}
                         style={{
+                            color: order === 'outDate' ? 'green' : 'black',
                             border: 'none',
                             background: 'none',
                             fontSize: '1rem',
@@ -268,7 +285,7 @@ function PageCommunity() {
                         오래된순
                     </button>
                 </div>
-            </div>
+            </div >
             <button
                 onClick={() => navigate('./write')}
                 className="HomepageLogo"
@@ -311,11 +328,13 @@ function PageCommunity() {
                 </div>
             </div>
 
-            {writings
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                .map((item) => (
-                    <Onewrt item={item} key={item} />
-                ))}
+            {
+                writings
+                    // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    .map((item) => (
+                        <Onewrt item={item} key={item} />
+                    ))
+            }
 
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -329,7 +348,7 @@ function PageCommunity() {
 
 
 
-        </div>
+        </div >
     );
 }
 

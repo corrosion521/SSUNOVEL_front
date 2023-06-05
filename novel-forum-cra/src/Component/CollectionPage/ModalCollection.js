@@ -28,7 +28,6 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
 
 
-
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -141,7 +140,6 @@ const ModalCollection = ({ setModalOpen, data }) => {
             </nav>
         );
     }
-
 
 
     // 즐겨찾기 상태와 이미지 상태
@@ -283,7 +281,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
     useEffect(() => {
 
-        fetch(`/box/info/${data.boxId}?page=${page}`, {
+        fetch(`/box/info/${data.boxId}?page=${currentPage}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -304,10 +302,10 @@ const ModalCollection = ({ setModalOpen, data }) => {
                     setLikeimg("../IconLikeOn.png")
                 }
                 // // // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.boxItemInfo.length / itemsPerPage));
-
+                //setTotalPages(Math.ceil(result.result.itemCnt / itemsPerPage));
+                setTotalPages(Math.ceil(data.itemCnt / itemsPerPage));
             });
-    }, []);
+    }, [currentPage]);
 
     return (
         <div className="modalbackground" >
@@ -334,7 +332,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
                 <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '5%', height: '80%' }}>
                     {
                         novels
-                            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//얘낸 한방에 보내줌. 한페이지에
+                            //.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//얘낸 한방에 보내줌. 한페이지에
                             .map
                             (
                                 (novels) =>

@@ -101,7 +101,7 @@ function Collection({ data }) {
             <h5 style={{ margin: '0', marginTop: '13px' }}>{data.memberName}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{likeCnt}</h3>
+                <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{data.likeCnt}</h3>
             </div>
 
 

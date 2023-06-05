@@ -23,33 +23,33 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
     const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "../iconLikeOn.png" : "../IconLike.png");
 
 
-    //댓글 삭제함수
-    // const onDeleteRp = ({ numRp }) => {
-    //     // API 호출 및 데이터 저장 코드 작성
-    //     // 완료된 후 페이지 새로고침
-    //     fetch(`/community/comment/${data}/${numRp}`, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
+    // 댓글 삭제함수
+    const onDeleteRp = () => {
+        // API 호출 및 데이터 저장 코드 작성
+        // 완료된 후 페이지 새로고침
+        fetch(`/novel/review/${novelId}/${review.review_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
 
 
 
-    //     })
-    //         .then((response) => response.json())
-    //         .then((result) => {
-    //             console.log("결과:", result)
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
 
-    //             if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
-    //                 alert("댓글 삭제권한이 없습니다.")
-
-
-    //         });
-
-    //     window.location.reload();
+                if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
+                    alert("댓글 삭제권한이 없습니다.")
 
 
-    // }
+            });
+
+        window.location.reload();
+
+
+    }
 
     // 모달창 노출 여부 state
     const [modalOpen, setModalOpen] = useState(false);
@@ -184,33 +184,42 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
                             )}
                         </div>
                         <div style={{ display: 'flex', position: 'absolute', right: '2%', top: '5%' }}>
-                            <button
-                                onClick={showModal}
-                                className="HomepageLogo"
-                                style={{
-                                    color: 'white',
-                                    width: '40px',
-                                    height: '30px',
-                                    fontSize: '0.5em'
+                            {lflag === 1 && (
+                                <button
+                                    onClick={showModal}
+                                    className="HomepageLogo"
+                                    style={{
+                                        color: 'white',
+                                        width: '40px',
+                                        height: '30px',
+                                        fontSize: '0.5em'
 
-                                }}
-                            >
-                                수정
-                            </button>
-                            <button
-                                // onClick={() => onDeleteRp({ numRp })}
-                                className="HomepageLogo"
-                                style={{
-                                    backgroundColor: 'red',
-                                    color: 'white',
-                                    width: '40px',
-                                    height: '30px',
-                                    fontSize: '0.5em'
+                                    }}
+                                >
+                                    수정
+                                </button>
+                            )
 
-                                }}
-                            >
-                                삭제
-                            </button>
+                            }
+                            {lflag === 1 && (
+                                <button
+                                    onClick={() => onDeleteRp()}
+                                    className="HomepageLogo"
+                                    style={{
+                                        backgroundColor: 'red',
+                                        color: 'white',
+                                        width: '40px',
+                                        height: '30px',
+                                        fontSize: '0.5em'
+
+                                    }}
+                                >
+                                    삭제
+                                </button>
+                            )
+
+                            }
+
                         </div>
 
                     </div>

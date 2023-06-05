@@ -177,8 +177,8 @@ function PageCollection() {
                 </div>
 
                 <div >
-                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
-                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
+                    {/* <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
+                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button> */}
                 </div>
             </div>
             <div style={{ marginTop: '3%' }}>

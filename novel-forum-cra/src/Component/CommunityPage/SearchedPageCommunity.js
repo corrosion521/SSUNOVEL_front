@@ -53,6 +53,13 @@ function SearchedPageCommunity() {
         navigate(url);
     };
 
+    const onClickLatest = () => {
+        setOrder("latest")
+    }
+
+    const onClickOutdate = () => {
+        setOrder("outDate")
+    }
 
     //글 하나의 컴포넌트
     const Onewrt = ({ item }) => {
@@ -87,7 +94,7 @@ function SearchedPageCommunity() {
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {now}
+                    {item.writeAt}
                 </div>
             </div>
         );
@@ -219,6 +226,11 @@ function SearchedPageCommunity() {
     }
 
     //2.
+
+    //게시글 정렬 state
+    const [order, setOrder] = useState('latest');
+
+
     const [writings, setWritings] = useState([])
     useEffect(() => {
 
@@ -251,23 +263,26 @@ function SearchedPageCommunity() {
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <CommunitySearchBox />
-                    <div >
-                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
-                    </div>
                 </div>
                 <div>
-                    <button
+                    {/* <button
+                        onClick={onClickLatest}
                         style={{
+                            color: order === 'latest' ? 'green' : 'black',
                             border: 'none',
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
+
                         }}
+
                     >
                         최신순
                     </button>
                     <button
+                        onClick={onClickOutdate}
                         style={{
+                            color: order === 'outDate' ? 'green' : 'black',
                             border: 'none',
                             background: 'none',
                             fontSize: '1rem',
@@ -275,11 +290,11 @@ function SearchedPageCommunity() {
                         }}
                     >
                         오래된순
-                    </button>
+                    </button> */}
                 </div>
-            </div>
-            <button
-                onClick={() => navigate('../write')}
+            </div >
+            {/* <button
+                onClick={() => navigate('./write')}
                 className="HomepageLogo"
                 style={{
                     color: 'white',
@@ -291,7 +306,7 @@ function SearchedPageCommunity() {
                 }}
             >
                 작성
-            </button>
+            </button> */}
 
             <div
                 style={{
@@ -320,11 +335,13 @@ function SearchedPageCommunity() {
                 </div>
             </div>
 
-            {writings
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                .map((item) => (
-                    <Onewrt item={item} key={item} />
-                ))}
+            {
+                writings
+                    // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                    .map((item) => (
+                        <Onewrt item={item} key={item} />
+                    ))
+            }
 
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -338,7 +355,7 @@ function SearchedPageCommunity() {
 
 
 
-        </div>
+        </div >
     );
 }
 

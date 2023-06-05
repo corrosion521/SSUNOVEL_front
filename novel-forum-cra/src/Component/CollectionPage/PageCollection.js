@@ -39,6 +39,23 @@ function PageCollection() {
 
 
 
+    //게시글 정렬 state
+    const [order, setOrder] = useState('TIME_DESC');
+
+    const onClickLatest = () => {
+        setOrder("TIME_DESC")
+    }
+
+    const onClickOutdate = () => {
+        console.log("..")
+        setOrder("TIME_ASC")
+    }
+    const onClickLike = () => {
+        setOrder("LIKE_DESC")
+    }
+
+
+
     const [collections, setCollections] = useState([]);
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -166,7 +183,7 @@ function PageCollection() {
 
     useEffect(() => {
 
-        fetch(`/box/all?page=${currentPage}`, {
+        fetch(`/box/all?page=${currentPage}&filtering=${order}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -182,8 +199,7 @@ function PageCollection() {
                 setTotalPages(Math.ceil(result.result.length / itemsPerPage));
 
             });
-    }, []);
-
+    }, [order]);
 
 
 
@@ -198,8 +214,9 @@ function PageCollection() {
                     <CollectionSearchBox></CollectionSearchBox>
                 </div>
                 <div >
-                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
-                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
+                    <button onClick={onClickLatest} style={{ color: order === 'TIME_DESC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
+                    <button onClick={onClickOutdate} style={{ color: order === 'TIME_ASC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>오래된순</button>
+                    <button onClick={onClickLike} style={{ color: order === 'LIKE_DESC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
                 </div>
             </div>
             <div style={{ marginTop: '3%' }}>
