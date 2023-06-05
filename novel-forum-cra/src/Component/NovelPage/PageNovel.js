@@ -241,7 +241,13 @@ function PageNovel() {
                 // 제거할 요소를 걸러내는 필터 함수를 정의합니다.
                 // 5. 1)
                 // console.log(data[0], result.result.dto[4]);
-                const filteredDto = result.result.dto.filter(item => item.novelId != data[0]);
+                // * 필터 함수 수정 : 작가명 정확히 같지 않으면 제거 ('비가' 작가의 다른 작품에 '비가초', '비가람' 작가도 들어가는 현상 방지)
+                const filteredDto = result.result.dto.filter((item) =>
+
+                    item.novelId != data[0]
+                    && (item.authorName.includes(',') ? item.authorName.includes(data[1]) : item.authorName === data[1])
+                );
+                // const filteredDto = result.result.dto.filter(item => item.novelId != data[0]);
 
                 setResultAnotherNovel(filteredDto);
                 console.log("noveldata", result.result.dto)

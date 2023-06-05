@@ -8,6 +8,7 @@ const SearchBox = () => {
     const handleKeyDown = (event) => {
         if (event.keyCode === 13) {
             navigate(`../search?data=${inputValue}`);
+            setInputValue("");  // 검색창 지우기
         }
     };
 
