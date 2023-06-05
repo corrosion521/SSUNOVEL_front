@@ -111,20 +111,24 @@ const ModalAddNovel = ({ setAddModalOpen }) => {
             <div className="modalframe" style={{ position: 'fixed' }}>
                 <div className="modal-contents">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', }}>
-                        <CollectionMySearchBox setNovels={setNovels} />
+                        <CollectionMySearchBox novels={novels} setNovels={setNovels} />
                         <button type="button" className="select complete-btn" onClick={selectComplete}>선택완료</button>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }} >
-                            {novels
+                            {
+                            novels
                                 .map(
                                     (novel) =>
                                     (
+                                        novel.length>0 &&
                                         <div style={{ display: 'flex', marginTop: '5%' }}>
                                             <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
                                                 <Novel info={novel} key={novel} />
                                             </div>
                                         </div>
+                                    
+                                        
                                     )
                                 )
                                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15

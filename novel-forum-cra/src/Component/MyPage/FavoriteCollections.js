@@ -101,6 +101,7 @@ const FavoritesCollections = ({ collections }) => {
                                 </div>
                             )
                         )
+                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                 }
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', }}>

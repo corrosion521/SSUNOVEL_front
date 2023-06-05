@@ -1,70 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Novel from "../NovelPage/Novel";
 
-const ContentsSearchResult = ({ title, resultCnt, resultAry }) => {
-    // console.log(title, resultCnt)
-
-    const navigate = useNavigate();
-
-    // const [cnt, setCnt] = useState(resultCnt);
-    // let testList = [];
-
-    // // 검색결과 매개변수로 받아와서 하나씩 리스트에 담아서 출력
-    // const pushList = () => {
-    //     let resultList = [];
-    //     while (cnt != 0) {
-    //         console.log(cnt);
-    //         resultList.concat(<li key={cnt}>
-    //             {/* 검색 결과 하나씩 출력 */}
-    //         </li>);
-    //         setCnt(cnt - 1);
-    //     }
-    // }
-
-    // const pushListTest = () => {
-
-    //     console.log(testList);
-    //     if (resultCnt <= 5) {
-    //         for (let i = 0; i < resultCnt; i++) {
-    //             testList.push(<li key={i}>
-    //                 {/* 검색 결과 하나씩 출력 */}
-    //                 {resultAry[i]}
-    //             </li>);
-    //         }
-    //     } else {
-    //         for (let i = 0; i < 5; i++) {
-    //             testList.concat(<li key={i}>
-    //                 {resultAry[i]}
-    //             </li>);
-    //         }
-    //     }
-    //     console.log(testList)
-    //     // return testList;
-    // }
-
-    const printContents = () => {
+const ContentsSearchResult = ({ title, resultCnt, resultAry, setSelectedBtn }) => {
+    // 더보기 버튼 클릭시 수행
+    const handleClick = () => {
         if (title === "작품명") {
-            return (
-                resultAry
-                    .slice(0, 5) // 5개만 출력
-                    .map(
-                        (novel) =>
-                        (
-                            <div style={{ width: '17%', height: '300px', fontSize:'0.8rem' }}>
-                                <Novel info={novel} key={novel} />
-                            </div>
-                        )
-                    )
-            );
-        } else {
-            return (
-                resultAry
-                    .slice(0, 5)
-                    .map(
-                        (author) => (<div>{author}</div>)
-                    )
-            )
+            setSelectedBtn("작품");
+        }
+        else {
+            setSelectedBtn("작가");
         }
     }
 
@@ -85,7 +28,8 @@ const ContentsSearchResult = ({ title, resultCnt, resultAry }) => {
                 {
                     resultCnt > 5 &&
                     <button
-                        type="button" onClick={navigate("/search/plus")}
+                        type="button"
+                        onClick={handleClick}
                         style={{ background: "none", border: "none", cursor: "pointer", }}
                     >더보기 {'>'}</button>
                 }
@@ -93,13 +37,43 @@ const ContentsSearchResult = ({ title, resultCnt, resultAry }) => {
         );
     }
 
+    const printContents = () => {
+        if (title === "작품명") {
+            return (
+                resultAry
+                    .slice(0, 5) // 5개만 출력
+                    .map(
+                        (novel) =>
+                        (
+                            <div style={{ width: '17%', height: '300px', fontSize: '0.8rem', }}>
+                                <Novel info={novel} key={novel} />
+                            </div>
+                        )
+                    )
+            );
+        } else {
+            console.log(resultAry);
+            return (
+                resultAry
+                    .slice(0, 5)
+                    .map(
+                        (author) =>
+                        (
+                            <div style={{ width: '17%', height: '300px', fontSize: '0.8rem' }}>
+                                <Novel info={author} key={author} />
+                            </div>
+                        )
+                    )
+            )
+        }
+    }
+
     return (
-        <div className="contents-frame"
-            style={{ border: "solid 0.05rem #a3a3a3", padding: "1rem", }}>
+        <div className="contents-frame">
             {contentsHeader()}
             <div
                 className="contents-list"
-                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap:'3%', rowGap: '15px', justifyContent: 'flex-start', }}
+                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '15px', justifyContent: 'flex-start', marginLeft: '3%', }}
             >
                 {printContents()}
             </div>

@@ -1,43 +1,66 @@
-import { useNavigate, useLocation, NavLink } from "react-router-dom";
-import ContentsSearchResult from "./ContentsSearchResult";
+import { useNavigate, useLocation, NavLink, Routes, Route } from "react-router-dom";
+import SearchTotal from "./SearchTotal";
+import SearchNovel from "./SearchNovel";
+import { useState } from "react";
+import SearchAuthor from "./SearchAuthor";
+import './searchResult.css';
 
 const PageSearchResult = () => {
-    // const navigate=useNavigate();
+    const [selectedBtn, setSelectedBtn] = useState("전체");
 
-    const useQuery = () => {
+    function useQuery() {
         return new URLSearchParams(useLocation().search);
     }
     let query = useQuery();
     const searchTerm = query.get('data');
 
-    // api로 가져온 데이터 내에서 검색 기능 구현
-    const Novel1 =
-        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "재밌는 소설", "김진수", "4.2", "200", "120", "네이버시리즈", "정통 무협 회귀 판타지!!"];
-    const novels = [Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
-    // const novels = [Novel1, Novel1, Novel1];
-    const authors = ["작가1", "작가2", "작가3", "작가4"];
-
-    const NovelResultCnt = novels.length;    // 작품 검색 결과 개수
-    const AuthorResultCnt = authors.length;    // 작가 검색 결과 개수
+    const [totalCnt, setTotalCnt] = useState(0);
+    const [novelCnt, setNovelCnt] = useState(0);
+    const [authorCnt, setAuthorCnt] = useState(0);
 
     return (
         <div className="search-result">
-            <div className="search-result-title" style={{margin:"1rem"}}>
+            <div className="search-result-title" style={{ margin: "1rem 0" }}>
                 <strong className="search-text">
                     '{searchTerm}'
                 </strong>
                 에 대한 검색결과 입니다.
             </div>
+            <div>
+                <button
+                    className={selectedBtn === "전체" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("전체")}
+                >
+                    전체{'('}{totalCnt}{')'}
+                </button>
+                <button
+                    className={selectedBtn === "작품" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("작품")}
+                >
+                    작품명{'('}{novelCnt}{')'}
+                </button>
+                <button
+                    className={selectedBtn === "작가" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("작가")}
+                >
+                    작가명{'('}{authorCnt}{')'}
+                </button>
+            </div>
+            <div className="line1"></div>
             <div className="search-result-contents">
                 <div className="contents">
-                    <ContentsSearchResult title="작품명"
-                        resultCnt={NovelResultCnt}
-                        resultAry={novels}
-                    />
-                    <ContentsSearchResult title="작가명"
-                        resultCnt={AuthorResultCnt}
-                        resultAry={authors}
-                    />
+                    {selectedBtn === "전체" &&
+                        <SearchTotal setSelectedBtn={setSelectedBtn} setTotalCnt={setTotalCnt} setNovelCnt1={setNovelCnt} setAuthorCnt1={setAuthorCnt} />
+                    }
+                    {selectedBtn === "작품" &&
+                        <SearchNovel />
+                    }
+                    {selectedBtn === "작가" &&
+                        <SearchAuthor />
+                    }
                 </div>
             </div>
 

@@ -29,6 +29,7 @@ import PageWriteWriting from "../CommunityPage/PageWriteWriting"
 import SearchedPageCommunity from "../CommunityPage/SearchedPageCommunity"
 import SearchedPageCategory from "../CategoryPage/SearchedPageCategory"
 import SearchedPageReview from "../ReviewPage/SearchedPageReview"
+import SearchNovel from "../SearchResultPage/SearchNovel"
 
 function PageMain() {
 
