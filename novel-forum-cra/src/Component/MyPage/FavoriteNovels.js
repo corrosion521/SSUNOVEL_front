@@ -92,7 +92,7 @@ const FavoriteNovels = ({ novels }) => {
     return (
         <div>
             <div className="my-contents-list" >
-                {
+                {itemList.length > 0 ? (
                     itemList
                         .map(
                             (novel) =>
@@ -103,10 +103,12 @@ const FavoriteNovels = ({ novels }) => {
                             )
                         )
                         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                }
+                ) : (
+                    <div style={{color:'#686868', marginLeft:0, }}>즐겨찾기한 작품이 없습니다.</div>
+                )}
 
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop:'15px',}}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', }}>
                 {
                     itemList.length > itemsPerPage &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>

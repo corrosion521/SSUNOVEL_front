@@ -1,7 +1,7 @@
 // 마이페이지_작성리뷰
 
 import MyPageNav from "./MyPageNav";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Review from "../ReviewPage/Review";
 import Novel from '../NovelPage/Novel';
@@ -15,7 +15,38 @@ const ReviewMy = () => {
 
 
     // 전체 아이템 리스트 (10개의 아이템 생성)
-    const itemList = Array.from({ length: 10 }, (_, index) => [Novel1, review1]);
+    // const itemList = Array.from({ length: 10 }, (_, index) => [Novel1, review1]);
+    const [itemList, setItemList] = useState([]);
+    const [flag, setFlag] = useState(false);    // 작성리뷰 아무 것도 없는 것 생각
+    useEffect(() => {
+
+        fetch(`/member/mypage/review`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                // //useState이용하여 
+                if (result.message == "성공") {
+                    if (result.result.reviewCnt > 0) {
+                        setFlag(true);
+                        setItemList(result.result.memberReviewInfoList);
+                        console.log("result.result:", result.result);
+                        console.log("result.result.memberReviewInfoList:", result.result.memberReviewInfoList);
+                    }
+                    else {
+                        setFlag(flag);
+                    }
+                }
+                else {
+                    setFlag(false)
+                }
+            });
+    }, []);
+
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -109,20 +140,22 @@ const ReviewMy = () => {
             <div className="my-review my-container">
                 <div className="my-container__title">작성리뷰 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
-                {itemList
+                {flag == true ? (itemList
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     .map((item) => (
                         <div style={{ display: 'flex', marginTop: '5%' }}>
                             <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
-                                <Novel info={item[0]}></Novel>
+                                <Novel info={item}></Novel>
                             </div>
                             <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
-                                <Review review={item[1]}></Review>
+                                <Review review={item}></Review>
                             </div>
 
                         </div>
                     ))
-                }
+                ) : (
+                    <div className="noresult">작성한 리뷰가 없습니다.</div>
+                )}
                 {
                     itemList.length > itemsPerPage &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>

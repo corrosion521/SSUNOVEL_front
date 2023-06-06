@@ -7,15 +7,32 @@ const WritingMy = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
 
-    // 전체 아이템 리스트 (15개의 아이템 생성)
-    const itemList = Array.from({ length: 15 }, (_, index) => [
-        index + 1,
-        "소설 제목좀 찾아주세요!!",
-        "정지오",
-        "04-09 12:11",
-        "어렸을 때 읽었던 소설인데 마법사랑 전사랑 궁수랑 도적이랑 나오는 소설좀 찾아주세요"
-    ]);
+    // 전체 작성글 리스트
+    // const itemList = Array.from({ length: 15 }, (_, index) => [
+    //     index + 1,
+    //     "소설 제목좀 찾아주세요!!",
+    //     "정지오",
+    //     "04-09 12:11",
+    //     "어렸을 때 읽었던 소설인데 마법사랑 전사랑 궁수랑 도적이랑 나오는 소설좀 찾아주세요"
+    // ]);
+    const [itemList, setItemList] = useState([]);
+    const [flag, setFlag] = useState(false);    //작성글 아무 것도 없는 것 생각
+    useEffect(() => {
+        fetch(`/member/mypage/post`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result.result);
+                console.log("결과:", result);
+                // setItemList(result.result);
+            });
+    }, []);
 
+   
     // 전체 페이지 수 계산
     const totalPages = Math.ceil(itemList.length / itemsPerPage);
 
@@ -60,22 +77,22 @@ const WritingMy = () => {
                 }}
             >
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item[0]}
+                    {item.postId}
                 </div>
 
                 <div
                     style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
                     onClick={() => gotowrt(item)}
                 >
-                    {item[1]}
+                    {item.title}
                 </div>
 
                 <div style={{ margin: '0', width: '15%', margin: 'auto' }}>
-                    {item[2]}
+                    {item.nickName}
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item[3]}
+                    {item.writeAt}
                 </div>
             </div>
         );
@@ -143,13 +160,13 @@ const WritingMy = () => {
             <div className="my-writing my-container">
                 <div className="my-container__title">작성글 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
-                {itemList
+                {/* {itemList
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     .map((item) => (
                         <Onewrt item={item} key={item[0]} />
                     ))}
                 {
-                    itemList.length > itemsPerPage &&
+                    totalPages>1 &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <Pagination
                             currentPage={currentPage}
@@ -158,7 +175,7 @@ const WritingMy = () => {
                             pageNumbers={pageNumbers}
                         />
                     </div>
-                }
+                } */}
             </div>
         </div>
     );

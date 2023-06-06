@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Novel from "../NovelPage/Novel";
 import Collection from "../CollectionPage/Collection";
 
-const FavoriteTotal = ({novels, collections}) => {
+const FavoriteTotal = ({ novels, collections }) => {
     const novelCnt = novels.length;    // 작품 즐겨찾기 개수
     const collectionCnt = collections.length;    // 보관함 즐겨찾기 개수
 
@@ -20,20 +20,22 @@ const FavoriteTotal = ({novels, collections}) => {
                     </NavLink>
                 }
             </div>
-            <div className="my-contents-list" >
-                {
-                    novels
-                        .slice(0, 5) // 5개만 출력
-                        .map(
-                            (novel) =>
-                            (
-                                <div style={{ fontSize: '0.6rem', width: '17%', height: '230px' }}>
-                                    <Novel info={novel} key={novel} />
-                                </div>
-                            )
-                        )
-                }
-            </div>
+                {novelCnt > 0 ? (
+                    <div className="my-contents-list" >
+                        {novels
+                            .slice(0, 5) // 5개만 출력
+                            .map(
+                                (novel) =>
+                                (
+                                    <div style={{ fontSize: '0.6rem', width: '17%', height: '230px' }}>
+                                        <Novel info={novel} key={novel} />
+                                    </div>
+                                )
+                            )}
+                    </div>
+                    ) : (
+                    <div style={{ color: '#686868', marginLeft: 0, }}>즐겨찾기한 작품이 없습니다.</div>
+                )}
             <div className="line1"></div>
             <div className="my-contents-header" >
                 <p className="title">보관함 {'('}{collectionCnt}{')'}</p>
@@ -46,21 +48,24 @@ const FavoriteTotal = ({novels, collections}) => {
                     </NavLink>
                 }
             </div>
-            <div className="my-contents-list" >
-                {
-                    collections
+            {collectionCnt > 0 ?
+                (<div className="my-contents-list" >
+                    {collections
                         .map(
                             (collections) =>
                             (
                                 <div style={{ fontSize: '0.6rem', width: '17%', height: '300px' }}>
-                                    <Collection info={collections} key={collections} />
+                                    <Collection data={collections} />
                                 </div>
                             )
 
                         )
                         .slice(0, 5) // 5개만 출력
-                }
-            </div>
+                    }
+                </div>
+                ) : (
+                    <div style={{ color: '#686868', }}>즐겨찾기한 보관함이 없습니다.</div>
+                )}
         </div>
     );
 }
