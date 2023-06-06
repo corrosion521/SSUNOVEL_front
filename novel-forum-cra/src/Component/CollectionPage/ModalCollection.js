@@ -144,14 +144,14 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
     // 즐겨찾기 상태와 이미지 상태
     const [star, setStar] = useState(false);
-    const [starimg, setStarimg] = useState("../IconStarOff.png");
+    const [starimg, setStarimg] = useState("/IconStarOff.png");
     const [page, setPage] = useState(1)
 
     // 즐겨찾기 함수
     const onClickStar = () => {
         if (star === false) {
             setStar(true);
-            setStarimg("../IconStarOn.png");
+            setStarimg("/IconStarOn.png");
             console.log("클릭1");
 
             fetch(`/favorite/box/${data.boxId}`, {
@@ -173,7 +173,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
         } else {
             setStar(false);
-            setStarimg("../IconStarOff.png");
+            setStarimg("/IconStarOff.png");
             console.log("클릭2");
 
             fetch(`/favorite/box/${data.boxId}`, {
@@ -195,7 +195,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
     // 공감 상태와 이미지 상태
     const [like, setLike] = useState(false);
-    const [likeimg, setLikeimg] = useState("../IconLike.png");
+    const [likeimg, setLikeimg] = useState("/IconLike.png");
 
     // // 공감(좋아요) 함수
     // const onClickLike = () => {
@@ -219,7 +219,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
     const onClickLike = () => {
         if (like === false) { // 
             setLike(true);
-            setLikeimg("../IconLikeOn.png");
+            setLikeimg("/IconLikeOn.png");
             setLikeCnt(data.likeCnt != null ? likeCnt + 1 : data.likeCnt + 1)
 
             //실질적 반영 
@@ -236,7 +236,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
                     console.log("결과:", result)
                     if (result.code == "BAD_REQUEST") {
                         alert("좋아요는 한 번만 누를 수 있습니다.")
-                        setLikeimg("../IconLike.png");
+                        setLikeimg("/IconLike.png");
                         setLike(false)
                     }
 
@@ -247,7 +247,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
         } else {
 
             setLike(false);
-            setLikeimg("../IconLike.png");
+            setLikeimg("/IconLike.png");
             setLikeCnt(data.likeCnt != null ? likeCnt - 1 : data.like_cnt)
 
 
@@ -295,11 +295,11 @@ const ModalCollection = ({ setModalOpen, data }) => {
                 setNovels(result.result.boxItemInfo);
                 if (result.result.isFavorite == true) {// 좋아요 이미 했는지
                     setStar(true)
-                    setStarimg("../IconStarOn.png")
+                    setStarimg("/IconStarOn.png")
                 }
                 if (result.result.isLike == true) {// 좋아요 이미 했는지
                     setLike(true)
-                    setLikeimg("../IconLikeOn.png")
+                    setLikeimg("/IconLikeOn.png")
                 }
                 // // // 전체 페이지 수 계산
                 //setTotalPages(Math.ceil(result.result.itemCnt / itemsPerPage));
@@ -322,7 +322,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             <h3 style={{ fontSize: '1rem' }}>공감</h3>
                         </div>
                     </div>
-                    <img onClick={closeModal} src="../IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
+                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
 
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>

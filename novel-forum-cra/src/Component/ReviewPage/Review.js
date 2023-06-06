@@ -20,7 +20,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
     // 2. 공감 상태와 이미지 상태
     const [like, setLike] = useState(review.already_like === 1 ? true : false);
     const [likeCnt, setLikeCnt] = useState(review.like_cnt != null ? review.like_cnt : review.like_count)
-    const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "../iconLikeOn.png" : "../IconLike.png");
+    const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "/iconLikeOn.png" : "/IconLike.png");
 
 
     // 댓글 삭제함수
@@ -92,7 +92,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
     const onClickLike = () => {
         if (like === false) { // 
             setLike(true);
-            setLikeimg("../IconLikeOn.png");
+            setLikeimg("/IconLikeOn.png");
             setLikeCnt(review.like_cnt != null ? likeCnt + 1 : review.like_cnt + 1)
 
             //실질적 반영 
@@ -109,7 +109,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
                     console.log("결과:", result)
                     if (result.code == "BAD_REQUEST") {
                         alert("좋아요는 한 번만 누를 수 있습니다.")
-                        setLikeimg("../IconLike.png");
+                        setLikeimg("/IconLike.png");
                         //setLikeCnt(review.like_cnt != null ? review.like_cnt : review.like_count)
                         setLike(false)
                     }
@@ -120,7 +120,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
         } else {
 
             setLike(false);
-            setLikeimg("../IconLike.png");
+            setLikeimg("/IconLike.png");
             setLikeCnt(review.like_cnt != null ? likeCnt - 1 : review.like_cnt)
 
 
@@ -164,7 +164,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
 
                     <div style={{ display: 'flex', gap: '5%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                            <img src="../IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{review.nickname}</h3>
+                            <img src="/IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{review.nickname}</h3>
 
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>

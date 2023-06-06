@@ -278,20 +278,20 @@ function PageNovel() {
                 if (result.result.alreadyLike == 1) {
                     console.log("들어는감")
                     setStar("true")
-                    setStarimg("../IconStarOn.png")
+                    setStarimg("/IconStarOn.png")
                 }
                 else {
                     setStar("false")
-                    setStarimg("../IconStarOff.png")
+                    setStarimg("/IconStarOff.png")
                 }
 
                 if (result.result.alreadyAuthorLike == 1) {
                     setWriterLike("true")
-                    setWriterLikeimg("../IconAlarmOn.png")
+                    setWriterLikeimg("/IconAlarmOn.png")
                 }
                 else {
                     setWriterLike("false")
-                    setWriterLikeimg("../IconAlarm.png")
+                    setWriterLikeimg("/IconAlarm.png")
                 }
 
 

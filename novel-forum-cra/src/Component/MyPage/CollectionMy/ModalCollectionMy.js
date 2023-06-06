@@ -34,7 +34,7 @@ const ModalCollectionMy = ({ setModalOpen }) => {
         <div className="modalbackground">
             <div className="modalframe">
                 <div style={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
-                    <img onClick={closeModal} src="../IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
+                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
                 </div>
                 <div className="modal-contents">
                     <button type="button" className="add-novel-btn" onClick={showModal}>작품추가</button>

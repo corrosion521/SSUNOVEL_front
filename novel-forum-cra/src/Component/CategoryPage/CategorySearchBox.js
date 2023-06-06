@@ -23,7 +23,7 @@ const CategorySearchBox = () => {
 
     return (
         <div className="SearchBox" style={{ display: 'flex' }}>
-            <img src="../BtnSearchBox.png" style={{ padding: '7px' }}></img>
+            <img src="/BtnSearchBox.png" style={{ padding: '7px' }}></img>
             <input
                 type="text"
                 maxLength={40}
