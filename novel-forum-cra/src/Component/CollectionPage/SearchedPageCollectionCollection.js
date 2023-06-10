@@ -178,8 +178,10 @@ const SearchedPageCollectionCollection = () => {
                 {collectionFlag == true ? (
                     collections
                         .map((item) => (
-                            <div style={{ width: '17%', height: '300px', fontSize: '0.8rem', }}>
+                            <div style={{ width: '17%', height: '350px', fontSize: '0.8rem', }}>
+
                                 <Collection data={item} key={item}></Collection>
+
                             </div>
                         ))
                 )

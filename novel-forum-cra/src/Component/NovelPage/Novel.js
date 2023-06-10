@@ -25,7 +25,8 @@ function Novel({ info }) {
 
 
             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: '10%' }}>
-                <h3 style={{ margin: '0', marginTop: '1%', fontSize: '1em' }}>{info.title || info.novelName}</h3>
+                {/*minHeight이용한 고정 크기 확보 */}
+                <h3 style={{ minHeight: '3em', margin: '0', marginTop: '1%', fontSize: '1em' }}>{info.title || info.novelName}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                     <h3 style={{ fontSize: '0.8em', marginRight: '5px' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>

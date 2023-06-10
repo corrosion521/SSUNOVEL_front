@@ -174,12 +174,12 @@ const SearchedPageCollectionMember = () => {
         <div className="contents-frame">
             <div
                 className="contents-list"
-                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '30px', justifyContent: 'flex-start', marginLeft: '3%', }}
+                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '120px', justifyContent: 'flex-start', marginLeft: '3%', }}
             >
                 {authorFlag == true ? (
                     authors
                         .map((item) => (
-                            <div style={{ width: '17%', height: '300px', fontSize: '0.8rem', }}>
+                            <div style={{ width: '17%', height: '350px', fontSize: '0.8rem', }}>
                                 <Collection data={item} key={item}></Collection>
                             </div>
                         ))

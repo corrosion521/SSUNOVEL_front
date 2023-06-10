@@ -44,10 +44,13 @@ function PageReview() {
     const itemList = Array.from({ length: 3 }, (_, index) => [novels, reviews]);
 
 
-
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([]);
 
 
 
@@ -56,10 +59,6 @@ function PageReview() {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
-
-    //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([10]);
 
     // 페이지 번호 배열 생성
     //최대 페이지넘버 10개 보이게 동적 조정중. (보이는 페이지 번호에 대한 리스트)
@@ -75,11 +74,14 @@ function PageReview() {
         }
     }
 
-    const navigate = useNavigate();
 
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -111,7 +113,7 @@ function PageReview() {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -139,12 +141,12 @@ function PageReview() {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
-                        key={50}
-                        onClick={() => onPageChange(50)}
+                        key={totalPages}
+                        onClick={() => onPageChange(totalPages)}
                     >
-                        50
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -165,6 +167,8 @@ function PageReview() {
             </nav>
         );
     }
+
+
 
 
     //장르
@@ -225,12 +229,15 @@ function PageReview() {
 
                     setResultCategoryReview(result.result);
                     console.log("소설로", result.result)
+                    setTotalPages(Math.ceil(result.result.length / itemsPerPage));
                 }
                 else {
                     setFlag(false)
+                    setTotalPages(0);
                 }
                 // // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+
+
 
             });
     }, [selectedGenre, currentPage]);
@@ -403,13 +410,15 @@ function PageReview() {
 
 
 
+            {
+                totalPages <= 1 ? null : <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                    pageNumbers={pageNumbers}
+                />
+            }
 
-            <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-                pageNumbers={pageNumbers}
-            />
         </div >
     );
 }

@@ -98,17 +98,8 @@ function PageCommunity() {
     const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
 
     //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([10]);
+    const [totalPages, setTotalPages] = useState([]);
 
-
-    // 전체 아이템 리스트 (500개의 아이템 생성)
-    const itemList = Array.from({ length: 500 }, (_, index) => [
-        index + 1,
-        "소설 제목좀 찾아주세요!!",
-        "정지오",
-        "04-09 12:11",
-        "어렸을 때 읽었던 소설인데 마법사랑 전사랑 궁수랑 도적이랑 나오는 소설좀 찾아주세요"
-    ]);
 
 
 
@@ -135,6 +126,10 @@ function PageCommunity() {
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -166,7 +161,7 @@ function PageCommunity() {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -194,12 +189,12 @@ function PageCommunity() {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {currentPage !== totalPages && totalPages}
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -220,6 +215,13 @@ function PageCommunity() {
             </nav>
         );
     }
+
+
+
+
+
+
+
 
     //2.
 
@@ -338,12 +340,14 @@ function PageCommunity() {
 
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
+                {
+                    totalPages <= 1 ? null : <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />
+                }
             </div>
 
 

@@ -24,7 +24,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
     const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
 
     //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([10]);
+    const [totalPages, setTotalPages] = useState([]);
+
 
 
 
@@ -86,7 +87,7 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -114,12 +115,12 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {currentPage !== totalPages && totalPages}
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -140,6 +141,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
             </nav>
         );
     }
+
+
 
 
     // 즐겨찾기 상태와 이미지 상태
@@ -329,14 +332,14 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
                 </div>
 
-                <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '5%', height: '80%' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', flexWrap: 'wrap', gap: '5%', height: '80%' }}>
                     {
                         novels
                             //.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//얘낸 한방에 보내줌. 한페이지에
                             .map
                             (
                                 (novels) =>
-                                (<div style={{ width: '140px', height: '270px' }}>
+                                (<div style={{ width: '100px', height: '200px', fontSize: '12px' }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 
@@ -346,12 +349,15 @@ const ModalCollection = ({ setModalOpen, data }) => {
                     }
                 </div>
                 <div style={{ marginTop: '3%', display: 'flex', justifyContent: 'center' }}>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                        pageNumbers={pageNumbers}
-                    />
+                    {
+                        totalPages <= 1 ? null : <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                            pageNumbers={pageNumbers}
+                        />
+                    }
+
                 </div>
 
             </div>

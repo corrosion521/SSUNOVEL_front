@@ -113,7 +113,7 @@ function PageCategory() {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -141,12 +141,12 @@ function PageCategory() {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {currentPage !== totalPages && totalPages}
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -245,6 +245,32 @@ function PageCategory() {
 
             });
     }, [selectedFnVal, selectedGenre, selectedFlp, currentPage]);
+
+
+    //2.
+
+    //게시글 정렬 state
+    const [order, setOrder] = useState('latest');
+
+    const [writings, setWritings] = useState([])
+    useEffect(() => {
+
+
+        fetch(`/community?page=${currentPage - 1}&orderByDate=${order}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                setWritings(result.result)
+                // 전체 페이지 수 계산
+                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+            });
+    }, [currentPage, order]);
 
 
 
@@ -485,11 +511,11 @@ function PageCategory() {
                 </div>
 
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px' }}>
                     {resultCategoryNovel
                         .map((item) => (
                             <div style={{ display: 'flex', marginTop: '5%' }}>
-                                <div style={{ fontSize: '0.5em', height: '600px', width: '250px' }}>
+                                <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
                                     <Novel info={item}></Novel>
                                 </div>
 
@@ -503,12 +529,14 @@ function PageCategory() {
 
 
             <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
+                {
+                    totalPages <= 1 ? null : <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />
+                }
             </div>
 
 

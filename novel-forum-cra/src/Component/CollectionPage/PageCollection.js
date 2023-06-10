@@ -63,7 +63,7 @@ function PageCollection() {
     const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
 
     //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([10]);
+    const [totalPages, setTotalPages] = useState([]);
 
 
 
@@ -126,7 +126,7 @@ function PageCollection() {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -154,12 +154,12 @@ function PageCollection() {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
                         onClick={() => onPageChange(totalPages)}
                     >
-                        {currentPage !== totalPages && totalPages}
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -180,6 +180,8 @@ function PageCollection() {
             </nav>
         );
     }
+
+
 
     useEffect(() => {
 
@@ -226,7 +228,7 @@ function PageCollection() {
                             .map(
                                 (collections) =>
                                 (
-                                    <div style={{ width: '180px', height: '450px' }}>
+                                    <div style={{ width: '180px', height: '350px' }}>
                                         <Collection data={collections} key={collections} />
                                     </div>
 
@@ -238,12 +240,15 @@ function PageCollection() {
             </div>
 
             <div style={{ marginTop: '10%' }}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
+                {
+                    totalPages <= 1 ? null : <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />
+                }
+
             </div>
         </div>
     )
