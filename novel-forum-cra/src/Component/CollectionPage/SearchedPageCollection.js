@@ -3,7 +3,11 @@ import Collection from "./Collection";
 import CollectionSearchBox from "./CollectionSearchBox";
 import { useLocation } from "react-router-dom";
 
-function PageCollection() {
+import SearchedPageCollectionTotal from "./SearchedPageCollectionTotal";
+import SearchedPageCollectionMember from "./SearchedPageCollectionMember";
+import SearchedPageCollectionCollection from "./SearchedPageCollectionCollection";
+
+function SearchedPageCollection() {
 
 
     const useQuery = () => {
@@ -12,7 +16,9 @@ function PageCollection() {
     let query = useQuery()
     const searchTerm = query.get('data')
 
-    const [collections, setCollections] = useState([]);
+    const [collectionsTitle, setCollectionsTitle] = useState([]);
+    const [collectionsMember, setCollectionsMember] = useState([]);
+
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
@@ -42,7 +48,13 @@ function PageCollection() {
         }
     }
 
+    //검색후 선택 버튼
+    const [selectedBtn, setSelectedBtn] = useState("전체");
 
+    //카운트(개수 각 카테고리별)
+    const [totalCnt, setTotalCnt] = useState(0);
+    const [novelCnt, setNovelCnt] = useState(0);
+    const [authorCnt, setAuthorCnt] = useState(0);
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
@@ -137,77 +149,57 @@ function PageCollection() {
     }
     console.log("서치", searchTerm)
 
-    useEffect(() => {
-
-        fetch(`/box/search?item=${searchTerm}&page=${currentPage}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("결과:", result.result)
-                // //useState이용하여 
-                setCollections(result.result.searchByTitle);
-                console.log("콜렉션", collections)
-                // // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.boxCntByTitle / itemsPerPage));
-
-            });
-
-    }, []);
 
 
 
 
     return (
-        <div>
-
-            <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>보관함</h1>
-            <hr style={{ width: '100%' }}></hr>
-            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3%' }} >
-                <div style={{ marginRight: 'auto' }}>
-                    {/*GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정.*/}
-                    <CollectionSearchBox></CollectionSearchBox>
-                    <div>
-                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
-                    </div>
-                </div>
-
-                <div >
-                    {/* <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
-                    <button style={{ border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button> */}
-                </div>
+        <div className="search-result">
+            <div className="search-result-title" style={{ margin: "1rem 0" }}>
+                <strong className="search-text">
+                    '{searchTerm}'
+                </strong>
+                에 대한 검색결과 입니다.
             </div>
-            <div style={{ marginTop: '3%' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '100px', justifyContent: 'center' }}>
-                    {
-                        collections
-                            .map(
-                                (collections) =>
-                                (
-                                    <div style={{ width: '180px', height: '450px' }}>
-                                        <Collection data={collections} key={collections} />
-                                    </div>
-
-                                )
-
-                            )
+            <div>
+                <button
+                    className={selectedBtn === "전체" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("전체")}
+                >
+                    전체{'('}{totalCnt}{')'}
+                </button>
+                <button
+                    className={selectedBtn === "작품" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("작품")}
+                >
+                    작품명{'('}{novelCnt}{')'}
+                </button>
+                <button
+                    className={selectedBtn === "작가" ? "active-btn-style" : "deactive-btn-style"}
+                    type="button"
+                    onClick={() => setSelectedBtn("작가")}
+                >
+                    작가명{'('}{authorCnt}{')'}
+                </button>
+            </div>
+            <div className="line1"></div>
+            <div className="search-result-contents">
+                <div className="contents">
+                    {selectedBtn === "전체" &&
+                        <SearchedPageCollectionTotal setSelectedBtn={setSelectedBtn} setTotalCnt={setTotalCnt} setNovelCnt1={setNovelCnt} setAuthorCnt1={setAuthorCnt} />
+                    }
+                    {selectedBtn === "작품" &&
+                        <SearchedPageCollectionCollection />
+                    }
+                    {selectedBtn === "작가" &&
+                        <SearchedPageCollectionMember />
                     }
                 </div>
             </div>
 
-            <div style={{ marginTop: '10%' }}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
-            </div>
         </div>
     )
 }
-export default PageCollection;
+export default SearchedPageCollection;
