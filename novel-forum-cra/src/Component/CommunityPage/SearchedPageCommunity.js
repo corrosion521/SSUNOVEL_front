@@ -263,6 +263,13 @@ function SearchedPageCommunity() {
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <CommunitySearchBox />
+                    <div className="search-result-title" style={{ margin: "1rem 0" }}>
+
+                        <strong className="search-text">
+                            '{searchTerm}'
+                        </strong>
+                        에 대한 검색결과 입니다.
+                    </div>
                 </div>
                 <div>
                     {/* <button

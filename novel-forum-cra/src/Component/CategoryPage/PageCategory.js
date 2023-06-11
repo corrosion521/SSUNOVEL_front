@@ -207,6 +207,22 @@ function PageCategory() {
         }
 
     };
+    //2.
+
+    //게시글 정렬 state
+    const [order, setOrder] = useState('download_cnt');
+
+    const onClickDown = () => {
+        setOrder("download_cnt")
+    }
+
+    const onClickReview = () => {
+        console.log("..")
+        setOrder("review_cnt")
+    }
+    const onClickLike = () => {
+        setOrder("rating")
+    }
 
 
     useEffect(() => console.log(selectedFnVal, selectedFlp, selectedGenre), [selectedFnVal, selectedGenre, selectedFlp]);
@@ -231,7 +247,7 @@ function PageCategory() {
                 isFinished: selectedFnVal,
                 platform: selectedFlp,
                 genre: selectedGenre,
-                orderBy: "download_cnt",
+                orderBy: order,
                 pageNum: currentPage - 1,
             }),
         })
@@ -244,33 +260,24 @@ function PageCategory() {
                 setTotalPages(Math.ceil(result.result.count / itemsPerPage));
 
             });
-    }, [selectedFnVal, selectedGenre, selectedFlp, currentPage]);
+    }, [selectedFnVal, selectedGenre, selectedFlp, currentPage, order]);
 
 
-    //2.
 
-    //게시글 정렬 state
-    const [order, setOrder] = useState('latest');
+
+
+
+
+
 
     const [writings, setWritings] = useState([])
-    useEffect(() => {
 
 
-        fetch(`/community?page=${currentPage - 1}&orderByDate=${order}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
 
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log("결과:", result)
-                setWritings(result.result)
-                // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
-            });
-    }, [currentPage, order]);
+
+
+
+
 
 
 
@@ -289,7 +296,12 @@ function PageCategory() {
 
 
                 </div>
-                <div  >
+                <div >
+                    <button onClick={onClickDown} style={{ color: order === 'download_cnt' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
+                    <button onClick={onClickReview} style={{ color: order === 'review_cnt' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>오래된순</button>
+                    <button onClick={onClickLike} style={{ color: order === 'rating' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
+                </div>
+                {/* <div  >
                     <button
 
                         style={{
@@ -321,7 +333,7 @@ function PageCategory() {
                     >
                         평점순
                     </button>
-                </div>
+                </div> */}
 
             </div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>

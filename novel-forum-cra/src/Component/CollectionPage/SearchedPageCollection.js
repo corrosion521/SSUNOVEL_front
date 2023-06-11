@@ -155,7 +155,19 @@ function SearchedPageCollection() {
 
     return (
         <div className="search-result">
+
+            <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>보관함</h1>
+            <hr style={{ width: '100%' }}></hr>
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '3%' }} >
+                <div style={{ marginRight: 'auto' }}>
+                    {/*GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정.*/}
+                    <CollectionSearchBox></CollectionSearchBox>
+                </div>
+                <div >
+                </div>
+            </div>
             <div className="search-result-title" style={{ margin: "1rem 0" }}>
+
                 <strong className="search-text">
                     '{searchTerm}'
                 </strong>
