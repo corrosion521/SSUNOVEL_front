@@ -49,7 +49,7 @@ const FavoritesMy = () => {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
+                console.log("보관함 결과:", result)
                 if (result.message === "성공") {
                     if (result.result.favoriteBoxCnt > 0) {
                         setCollections(result.result.memberBoxInfoList);

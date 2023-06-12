@@ -29,6 +29,9 @@ const WritingMy = () => {
                 console.log("결과:", result.result);
                 console.log("결과:", result);
                 // setItemList(result.result);
+                if(result.message === "로그인 필요"){
+                    navigate("/member/login")
+                }
             });
     }, []);
 

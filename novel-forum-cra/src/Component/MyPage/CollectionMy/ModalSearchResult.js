@@ -2,8 +2,6 @@
 
 import Novel from "../../NovelPage/Novel";
 import React, { useState } from "react";
-import Checkbox from "./Checkbox";
-import CheckboxGroup from "./CheckboxGroup";
 
 const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }) => {
 
@@ -162,30 +160,6 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }
                     <button type="button" className="select complete-btn" onClick={selectComplete}>선택완료</button>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', }}>
-                    {/* <CheckboxGroup
-                        values={checkedNovels}
-                        onChange={setCheckedNovels}>
-                        <div
-                            style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
-                        > */}
-                    {/* {itemList
-                                .map(
-                                    (novel) =>
-                                    (
-                                        // <div style={{ display: 'flex', marginTop: '5%' }}>
-                                        //     <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
-                                        //         {/* 소설 하나씩 value로 보내줌 */}
-                    {/* //         <Checkbox value={[novel]}>
-                                        //             <Novel info={novel} key={novel} />
-                                        //         </Checkbox>
-                                        //     </div>
-                                        // </div>
-                                    )
-                                )
-                                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                            } */}
-                    {/* </div>
-                    </CheckboxGroup> */}
                     <div
                         style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
                     >

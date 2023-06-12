@@ -124,7 +124,7 @@ const CollectionMy = () => {
                             (collections) =>
                             (
                                 <div style={{ width: '17%', height: '300px', fontSize:'0.6rem' }}>
-                                    <Collection info={collections} key={collections} />
+                                    <Collection data={collections} key={collections} />
                                 </div>
                             )
                         )
