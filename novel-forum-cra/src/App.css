@@ -37,3 +37,35 @@
     transform: rotate(360deg);
   }
 }
+
+/*카테고리 페이지 완결 버튼*/
+
+.finBtn {
+
+  display: block;
+  width: 70px;
+  height: 50px;
+  line-height: 40px;
+  border: 1px #3399dd solid;
+  ;
+  margin: 15px auto;
+  background-color: green;
+  text-align: center;
+  cursor: pointer;
+
+  color: white;
+  transition: all 0.9s, color 0.3;
+  font-size: 0.8rem;
+
+}
+
+
+
+
+.finBtn:hover {
+  color: #fff;
+}
+
+.hover1:hover {
+  box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.5) inset;
+}

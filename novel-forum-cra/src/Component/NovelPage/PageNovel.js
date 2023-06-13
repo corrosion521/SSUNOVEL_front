@@ -348,9 +348,9 @@ function PageNovel() {
 
     return (
         <div>
-            <div style={{ display: 'flex', width: '100%', gap: '7%' }}>
+            <div style={{ display: 'flex', width: '90%', gap: '3%', margin: 'auto' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', width: '65%' }}>
-                    <div style={{ width: '100%', height: '100%', marginLeft: 'auto', marginRight: 'auto', fontSize: '1.6rem' }}>
+                    <div style={{ width: '300px', height: '600px', marginLeft: 'auto', marginRight: 'auto', fontSize: '1.6rem', paddingTop: '23%' }}>
                         <Novel info={resultNovel}></Novel>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -361,54 +361,47 @@ function PageNovel() {
                         <hr></hr>
 
                     </div>
-                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '10%', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
+                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '5%', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
                         <br></br>
                         총 회차 : {resultNovel.total_episode}화 <br></br><br></br>
                         가격 : 회차 당 {resultNovel.price}원
                     </div>
                     <div style={{
                         display: resultNovel.is_kakao != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '150px', height: '55px', margin: '2% auto', marginTop: '10px'
                     }}>
-                        {
+                        {/* {
                             resultNovel.is_kakao != null ? "카카오페이지" : "..."
-                        }
+                        } */}
+                        {resultNovel.is_kakao && <img src="kakaopage.png" style={{ width: '80%' }}></img>}
                     </div>
 
                     <div style={{
                         display: resultNovel.is_munpia != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
                     }}>
-                        {
-                            resultNovel.is_munpia != null ? "문피아" : "..."
-                        }
+                        {resultNovel.is_munpia && <img src="munpia.png" style={{ width: '80%' }}></img>}
                     </div>
 
                     <div style={{
                         display: resultNovel.is_naver != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '70px', height: '40px', margin: '2% auto', marginTop: '10px'
                     }}>
-                        {
-                            resultNovel.is_naver != null ? "네이버시리즈" : "..."
-                        }
+                        {resultNovel.is_naver && <img src="naver.png" style={{ width: '80%' }}></img>}
                     </div>
 
                     <div style={{
+
+
                         display: resultNovel.is_ridi != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', backgroundColor: 'rgba(0, 0, 0, 0.3)'
-                        , borderRadius: '25px', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
+                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '100px', height: '40px', margin: '2% auto', marginTop: '10px'
                     }}>
-                        {
-                            resultNovel.is_ridi != null ? "리디" : "..."
-                        }
+                        {resultNovel.is_ridi && <img src="ridi.png" style={{ width: '80%' }}></img>}
                     </div>
 
 
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px', marginLeft: '5%' }}>
                             <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
                             <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
                         </div>
@@ -426,7 +419,7 @@ function PageNovel() {
                     </div>
 
                 </div>
-                <hr style={{ height: '1400px' }}></hr>
+                <hr style={{ height: '1900px' }}></hr>
                 <div style={{ width: '100%' }}>
                     <h3 style={{ fontSize: '1.3rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
@@ -442,7 +435,7 @@ function PageNovel() {
                             <span>{inputCount}</span>
                             <span>/100 자</span>
                         </p>
-                        <div style={{ marginLeft: '5%' }} >
+                        <div style={{ marginLeft: '0%' }} >
                             {/*3.1) */}
                             {ARRAY.map((index) => (
                                 <FaStar
