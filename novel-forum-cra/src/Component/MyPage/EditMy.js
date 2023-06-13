@@ -40,45 +40,32 @@ const EditMy = () => {
         event.preventDefault();
         if (password !== passwordConfirm) {
             // 다시확인 유도
-            return alert("비밀번호를 다시 확인해 주세요")
+            return alert("비밀번호를 다시 확인해 주세요");
         }
 
         // 서버로 전송
-        // fetch("/member/create", {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         email: email,
-        //         password: password,
-        //         nickname: nickname,
-        //         gender: gender,
-        //         age: birthYear,
-        //     }),
-        // })
-        //     .then((response) => response.json())
-        //     .then((result) => {
-        //         if (result.code === "OK") {    // 회원가입 성공시                    
-        //             fetch("/member/login", {    // 로그인 시키기 
-        //                 method: 'POST',
-        //                 headers: {
-        //                     'Content-Type': 'application/json',
-        //                 },
-        //                 body: JSON.stringify({
-        //                     email: email,
-        //                     password: password,
-        //                 }),
-        //             }).then((response) => response.json())
-        //                 .then((result) => console.log("결과: ", result))   // 로그인 여부 확인
-
-        //             navigate('../member/create/success'); // 성공페이지로 이동
-        //         } else if (result.code === "BAD_REQUEST") {    // 에러 메세지 출력 
-        //             return alert(result.message);
-        //         } else {
-        //             return alert(result.message);
-        //         }
-        //     });
+        fetch("/member/update", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                password: password,
+                nickname: nickname,
+                gender: gender,
+                age: birthYear,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result.code === "OK") {    // 회원정보 수정 성공시
+                    return alert("회원정보가 성공적으로 수정되었습니다!");
+                } else if (result.code === "BAD_REQUEST") {    // 에러 메세지 출력
+                    return alert(result.message);
+                } else {
+                    return alert(result.message);
+                }
+            });
     };
 
     return (
@@ -90,7 +77,7 @@ const EditMy = () => {
                 <div className="edit login-signup">
                     <div className="edit container" style={{}}>
                         <form onSubmit={handelSubmit} method="POST">
-                           
+
                             <label htmlFor="password">비밀번호</label>
                             <input
                                 name="password"
@@ -150,7 +137,7 @@ const EditMy = () => {
                 </div>
             </div>
         </div >
-    )
+    );
 }
 
 export default EditMy;

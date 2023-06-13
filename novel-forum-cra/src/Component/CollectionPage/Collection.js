@@ -19,14 +19,15 @@ function Collection({ data }) {
 
     // 2. 공감 상태와 이미지 상태
     const [like, setLike] = useState(false);
-    const [likeimg, setLikeimg] = useState("../IconLike.png");
+    // const [likeimg, setLikeimg] = useState("../IconLike.png");
+    const [likeimg, setLikeimg] = useState("/IconLike.png");
 
     const [likeCnt, setLikeCnt] = useState(data.likeCnt != null ? data.likeCnt : "에러")
     // 2. 공감(좋아요) 함수
     const onClickLike = () => {
         if (like === false) { // 
             setLike(true);
-            setLikeimg("../IconLikeOn.png");
+            setLikeimg("/IconLikeOn.png");
             setLikeCnt(data.likeCnt != null ? likeCnt + 1 : data.likeCnt + 1)
 
             //실질적 반영 
@@ -43,7 +44,7 @@ function Collection({ data }) {
                     console.log("결과:", result)
                     if (result.code == "BAD_REQUEST") {
                         alert("좋아요는 한 번만 누를 수 있습니다.")
-                        setLikeimg("../IconLike.png");
+                        setLikeimg("/IconLike.png");
                         setLike(false)
                     }
 
@@ -54,7 +55,7 @@ function Collection({ data }) {
         } else {
 
             setLike(false);
-            setLikeimg("../IconLike.png");
+            setLikeimg("/IconLike.png");
             setLikeCnt(data.likeCnt != null ? likeCnt - 1 : data.like_cnt)
 
 

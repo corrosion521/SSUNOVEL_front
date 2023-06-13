@@ -1,7 +1,7 @@
 const BtnMyPage = () => {
     return (
         <div className="BtnMyPage">
-            <img src="../BtnMyPage.png" />
+            <img src="/BtnMyPage.png" />
         </div>
     )
 }

@@ -16,7 +16,7 @@ const BtnNotification = () => {
                 className="notification-btn"
                 type="button" onClick={reverseState}
                 style={{ background: "none", border: "none", }}>
-                <img src="../BtnNotification.png" />
+                <img src="/BtnNotification.png" />
             </button>
             {/* {isModalOn && (
                 <ModalPortal closePortal={reverseState}>

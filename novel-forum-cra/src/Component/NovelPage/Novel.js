@@ -33,9 +33,6 @@ function Novel({ info }) {
                     <h3 style={{ fontSize: '0.7em', marginRight: '5px', fontWeight: 'normal' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem', fontWeight: 'normal' }} ></img><h3 style={{ fontSize: '0.7em', paddingBottom: '2px' }}>
                         {info.reivew_rating != null ? (Math.round(info.reivew_rating * 10) / 10).toFixed(1) : (info.rating != null ? (Math.round(info.rating * 10) / 10).toFixed(1) : '')}
                     </h3>
-
-
-
                 </div>
             </div>
 

@@ -93,7 +93,7 @@ function ModalReviewModify({ setModalOpen, reviewId, novelId }) {
             <div className='modalFrame'>
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '2px solid red', height: '260px', marginBottom: '5%' }}>
-                    <img onClick={closeModal} src="../IconCancel.png" style={{ width: '15px', height: '15px', border: 'none', background: 'none', position: 'relative', marginLeft: '92%', marginTop: '2%' }}></img>
+                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '15px', height: '15px', border: 'none', background: 'none', position: 'relative', marginLeft: '92%', marginTop: '2%' }}></img>
                     <textarea onChange={onInputHandler} maxLength="100" style={{ height: '100%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
 
                     </textarea>

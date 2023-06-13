@@ -40,7 +40,7 @@ const PageLogin = () => {
                     console.log(result);
                     // 로그인/회원가입 버튼을 로그아웃버튼으로 바꾸기(여기서 구현하는거 아닐수도..)
                 } else {    // 실패 시 에러 메세지
-                    alert.apply(result.message);
+                    alert(result.message);
                 }
             });
     };

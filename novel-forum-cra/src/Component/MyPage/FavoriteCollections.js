@@ -91,22 +91,24 @@ const FavoritesCollections = ({ collections }) => {
     return (
         <div>
             <div className="my-contents-list" >
-                {
+                {itemList.length > 0 ? (
                     itemList
                         .map(
                             (collections) =>
                             (
                                 <div style={{ fontSize: '0.6rem', width: '17%', height: '300px' }}>
-                                    <Collection info={collections} key={collections} />
+                                    <Collection data={collections} key={collections} />
                                 </div>
                             )
                         )
                         .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                }
+                ) : (
+                    <div style={{color:'#686868', marginLeft:0, }}>즐겨찾기한 보관함이 없습니다.</div>
+                )}
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', }}>
                 {
-                    itemList.length > itemsPerPage &&
+                    totalPages > 1 &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <Pagination
                             currentPage={currentPage}
