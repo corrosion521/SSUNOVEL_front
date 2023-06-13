@@ -1,6 +1,6 @@
 // '보관함 생성' 버튼 클릭시 열리는 모달
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalAddNovel from "./ModalAddNovel";
 
 const ModalCollectionMy = ({ setModalOpen }) => {
@@ -18,7 +18,9 @@ const ModalCollectionMy = ({ setModalOpen }) => {
 
     const [title, setTitle] = useState("");
     const [explanation, setExplanation] = useState("");
-    const [visibility, setVisibility] = useState();
+    const [isPrivate, setIsPrivate] = useState(1);
+    const [novelIDs, setNovelIDs] = useState([]);   // 작품 목록
+    const [repNovelID, setRepNovelID] = useState(); // 대표 작품
     // const novelList = [];
 
     // 생성완료버튼 누르면 --> 서버에 데이터 보내기
@@ -26,7 +28,31 @@ const ModalCollectionMy = ({ setModalOpen }) => {
         // 보낼 데이터 : 이름, 설명, 공개여부, 
         // 작품 목록, (대표 작품) --> 다른 창에서 보내도 됨
         console.log(title, explanation);
-        closeModal();
+        // useEffect(() => {
+        fetch(`/box`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                contents: explanation,
+                isPrivate: isPrivate,
+                boxItems: novelIDs,
+                leadItemID: repNovelID,
+            }),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("ModalCollectionMy:", result)
+                if (result.message === "성공") {
+                    // if (result.result.boxCnt > 0) {
+                    //     setCollections(result.result.memberBoxInfoList);
+                    // }
+                    closeModal();
+                }
+            });
+        // }, [])
     }
 
 
@@ -57,42 +83,42 @@ const ModalCollectionMy = ({ setModalOpen }) => {
                         >
                         </textarea>
                     </div>
-                    <div style={{ display: 'flex', justifyContent:'space-between'}}>
-                        <div style={{display:'flex', gap:'10px',}}>
-                        <button
-                            type="button"
-                            className="visibility-btn"
-                            onClick={() => { setVisibility(true) }}
-                            style={{
-                                backgroundColor: visibility === true ? 'black' : 'white',
-                                color: visibility === true ? 'white' : 'black'
-                            }}
-                        >
-                            공개
-                        </button>
-                        <button
-                            type="button"
-                            className="visibility-btn"
-                            onClick={() => { setVisibility(false) }}
-                            style={{
-                                backgroundColor: visibility === false ? 'black' : 'white',
-                                color: visibility === false ? 'white' : 'black'
-                            }}
-                        >
-                            비공개
-                        </button>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div style={{ display: 'flex', gap: '10px', }}>
+                            <button
+                                type="button"
+                                className="visibility-btn"
+                                onClick={() => { setIsPrivate(0) }}
+                                style={{
+                                    backgroundColor: isPrivate === 0 ? 'black' : 'white',
+                                    color: isPrivate === 0 ? 'white' : 'black'
+                                }}
+                            >
+                                공개
+                            </button>
+                            <button
+                                type="button"
+                                className="visibility-btn"
+                                onClick={() => { setIsPrivate(1) }}
+                                style={{
+                                    backgroundColor: isPrivate === 1 ? 'black' : 'white',
+                                    color: isPrivate === 1 ? 'white' : 'black'
+                                }}
+                            >
+                                비공개
+                            </button>
                         </div>
                         <button
-                        type="button"
-                        className="create complete-btn"
-                        onClick={createComplete}
+                            type="button"
+                            className="create complete-btn"
+                            onClick={createComplete}
                         >
                             생성 완료
                         </button>
                     </div>
                 </div>
             </div>
-            {addModalOpen && <ModalAddNovel setAddModalOpen={setAddModalOpen} />}
+            {addModalOpen && <ModalAddNovel setAddModalOpen={setAddModalOpen} novelIDs={novelIDs} setNovelIDs={setNovelIDs} setRepNovelID={setRepNovelID} />}
         </div >
     )
 }

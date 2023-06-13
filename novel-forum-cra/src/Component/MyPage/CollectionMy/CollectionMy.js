@@ -1,6 +1,6 @@
 // 마이페이지_나의보관함
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './CollectionMy.css';
 import Collection from "../../CollectionPage/Collection";
 import MyPageNav from "../MyPageNav";
@@ -13,11 +13,26 @@ const CollectionMy = () => {
         setModalOpen(true);
     }
 
-    const Collection1 =
-        ["https://novel-phinf.pstatic.net/20221128_157/novel_1669632860956WnqIv_JPEG/320%2B320.jpg?type=f100_80_2", "판타지모음", "김김김", "422"];
-    const collections = [Collection1, Collection1, Collection1, Collection1, Collection1, Collection1,
-        Collection1, Collection1, Collection1, Collection1, Collection1, Collection1,
-        Collection1, Collection1, Collection1, Collection1, Collection1, Collection1, ];
+    // 생성한 보관함 리스트
+    const [collections, setCollections] = useState([]);
+    useEffect(() => {
+        fetch(`/member/mypage/box`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("생성한 보관함:", result)
+                if (result.message === "성공") {
+                    if (result.result.boxCnt > 0) {
+                        setCollections(result.result.memberBoxInfoList);
+                    }
+                }
+            });
+    }, [])
     
     // 전체 아이템 리스트
     // const itemList = Array.from({ length: 10 }, (_, index) => [Collection1]);

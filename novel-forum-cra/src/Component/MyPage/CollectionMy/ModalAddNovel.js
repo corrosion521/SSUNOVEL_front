@@ -2,9 +2,9 @@
 
 import CollectionMySearchBox from "./CollectionMySearchBox";
 import Novel from "../../NovelPage/Novel";
-import { useState } from "react";
+import React, { useState } from "react";
 
-const ModalAddNovel = ({ setAddModalOpen }) => {
+const ModalAddNovel = ({ setAddModalOpen, novelIDs, setNovelIDs, setRepNovelIDs }) => {
     // *수정* novels에 선택한 작품들 계속 추가되도록 수정하기
     const [novels, setNovels] = useState([]);   // 작품 목록
     const [repNovel, setRepNovel] = useState(); // 대표 작품
@@ -13,14 +13,26 @@ const ModalAddNovel = ({ setAddModalOpen }) => {
         setAddModalOpen(false);
     }
 
+    const handleChange = (e) => {
+        console.log(`*****handleChange*****`);
+        console.log(`선택한 값 : ${e.target.value}`);
+
+        setRepNovel(e.target.value);
+    };
+
+
     const selectComplete = () => {
+        novels.map(
+            (novel) => {
+                setNovelIDs([...novelIDs, novel[6]]);
+                console.log(novelIDs);
+            }
+        )
         closeModal();
-        // 서버에 작품 목록, 대표 작품 데이터 보내기 
-        console.log(novels, repNovel);
     }
 
     const itemList = novels;
-    
+
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
@@ -116,21 +128,25 @@ const ModalAddNovel = ({ setAddModalOpen }) => {
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }} >
-                            {
-                            novels
-                                .map(
-                                    (novel) =>
-                                    (
-                                        novel.length>0 &&
-                                        <div style={{ display: 'flex', marginTop: '5%' }}>
-                                            <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
-                                                <Novel info={novel} key={novel} />
-                                            </div>
-                                        </div>
-                                    
-                                        
-                                    )
-                                )
+                            {novels.map((value, i) => (
+                                value.length > 0 &&
+                                <div style={{ display: 'flex', marginTop: '5%' }}>
+                                    <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
+                                        <React.Fragment key={i}>
+                                            <label>
+                                                <input
+                                                    id={value}
+                                                    value={value}
+                                                    name="platform"
+                                                    type="radio"
+                                                    checked={repNovel === value[6]} // 대표작품 선택
+                                                    onChange={handleChange} />
+                                                <Novel info={value} key={value} />
+                                            </label>
+                                        </React.Fragment>
+                                    </div>
+                                </div>
+                            ))
                                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                             }
                         </div>

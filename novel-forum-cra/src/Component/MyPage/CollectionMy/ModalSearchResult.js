@@ -13,7 +13,7 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }
         "3.2",
         "222",
         "123",
-        "네이버시리즈",
+        "12",
         "정통 무협 회귀 판타지!!",
     ];
     const Novel2 = [
@@ -21,11 +21,12 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }
         "이말년시리즈2",
         "이말년",
         "3.2",
-        "222",
+        "2222",
         "123",
-        "네이버시리즈",
+        "123",
         "정통 무협 회귀 판타지!!",
     ];
+    
     const itemList = [Novel1, Novel2, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1, Novel1];
     // const itemList = [Novel1, Novel1, Novel1];
 
@@ -174,11 +175,11 @@ const ModalSearchResult = ({ setSearchModalOpen, searchTerm, novels, setNovels }
                                             value={item}
                                             // onChange이벤트가 발생하면 check여부와 value(data)값을 전달하여 배열에 data를 넣어준다.
                                             onChange={e => {
-                                                onCheckedElement(e.target.checked, item[1], e.target.value);
+                                                onCheckedElement(e.target.checked, item[6], e.target.value);
                                                 // onCheckedElement(e.target.checked, e.target.value);
                                             }}
                                             // 3️⃣ 체크표시 & 해제를 시키는 로직. 배열에 data가 있으면 true, 없으면 false
-                                            checked={checkedIds.includes(item[1]) ? true : false}
+                                            checked={checkedIds.includes(item[6]) ? true : false}
                                         />
                                         <Novel info={item} key={item} />
                                     </div>
