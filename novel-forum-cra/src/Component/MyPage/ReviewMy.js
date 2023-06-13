@@ -148,7 +148,7 @@ const ReviewMy = () => {
                                 <Novel info={item}></Novel>
                             </div>
                             <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
-                                <Review review={item}></Review>
+                                <Review review={item} lflag={0}></Review>
                             </div>
 
                         </div>

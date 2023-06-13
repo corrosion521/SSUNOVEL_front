@@ -28,9 +28,22 @@ const WritingMy = () => {
             .then((result) => {
                 console.log("결과:", result.result);
                 console.log("결과:", result);
-                // setItemList(result.result);
                 if(result.message === "로그인 필요"){
                     navigate("/member/login")
+                }
+                else if (result.message == "성공") {
+                    if (result.result.memberPostCnt > 0) {
+                        setFlag(true);
+                        setItemList(result.result.memberPostList);
+                        console.log("result.result:", result.result);
+                        // console.log("result.result.memberReviewInfoList:", result.result.memberReviewInfoList);
+                    }
+                    else {
+                        setFlag(flag);
+                    }
+                }
+                else {
+                    setFlag(false)
                 }
             });
     }, []);
@@ -163,7 +176,7 @@ const WritingMy = () => {
             <div className="my-writing my-container">
                 <div className="my-container__title">작성글 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
-                {/* {itemList
+                {itemList
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     .map((item) => (
                         <Onewrt item={item} key={item[0]} />
@@ -178,7 +191,7 @@ const WritingMy = () => {
                             pageNumbers={pageNumbers}
                         />
                     </div>
-                } */}
+                }
             </div>
         </div>
     );
