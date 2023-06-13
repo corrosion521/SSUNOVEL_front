@@ -19,6 +19,7 @@ import { FaStar } from 'react-icons/fa'
 5. api 연동(작가의 다른 작품)
 1) 작가의 다른 작품 중 해당 본 작품은 제거 (filter이용)
 6. api 연동(리뷰)
+7. 추천 소설 (최초 api로 연동)
 *--------------------------------------------np--------------------------------------------------------------------------------------------
 */
 
@@ -251,6 +252,10 @@ function PageNovel() {
 
     const [authorId, setAuthorId] = useState("")
 
+
+    //7
+    const [recommendedNovels, setRecommendedNovels] = useState([]);
+
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 
     //useEffect의 두 번째 인자로 빈 배열([])을 전달하여 의존성 배열이 비어있음을 나타내어, 효과는 마운트될 때만 실행되고, 업데이트될 때는 실행되지 않도록 했습니다.
     useEffect(() => {
@@ -262,13 +267,15 @@ function PageNovel() {
         })
             .then((response) => response.json())
             .then((result) => {
+
+                console.log("novelpage최초", result)
                 //useState이용하여 ``
                 //4.1
                 setResultNovel(result.result);
                 //4.2
                 setResultNovelReviews(result.result.reviewInfos);
                 //이미 좋아요 했다면 
-
+                setRecommendedNovels(result.result.recommendNovels)
                 //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
                 // if(result.result.alreadyLike == )
                 setLike("")
@@ -486,12 +493,12 @@ function PageNovel() {
                     </div>
 
                     <h3>작가의 다른 작품</h3>
-                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '3%', justifyContent: 'center' }}>
                         {
 
                             resultAnotherNovel.map(
                                 (novels) =>
-                                (<div style={{ width: '100px', height: '300px', fontSize: '15px' }}>
+                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '15%' }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 
@@ -501,11 +508,11 @@ function PageNovel() {
                         }
                     </div>
                     <h3 style={{ marginTop: '10%' }}>비슷한 작품 추천</h3>
-                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '3%', justifyContent: 'center' }}>
                         {
-                            novels.map(
+                            recommendedNovels.map(
                                 (novels) =>
-                                (<div style={{ width: '100px', height: '200px', fontSize: '15px' }}>
+                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '15%' }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 

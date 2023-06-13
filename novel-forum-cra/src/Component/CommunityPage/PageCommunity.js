@@ -77,6 +77,7 @@ function PageCommunity() {
                     onClick={() => gotowrt(item)}
                 >
                     {item.title}
+                    &nbsp;[{item.comment_cnt}]
                 </div>
 
                 <div style={{ margin: '0', width: '15%', margin: 'auto' }}>
@@ -84,7 +85,7 @@ function PageCommunity() {
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item.writeAt}
+                    {item.writeAt.replace('T', '\n')}
                 </div>
             </div>
         );

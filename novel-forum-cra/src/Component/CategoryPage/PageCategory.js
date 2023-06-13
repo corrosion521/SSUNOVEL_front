@@ -286,7 +286,7 @@ function PageCategory() {
 
             <h1 style={{ fontSize: '2rem', textAlign: 'center' }}>카테고리</h1>
             <hr style={{ width: '100%' }}></hr>
-            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '2%' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', marginTop: '0%' }}>
 
 
 
@@ -338,7 +338,7 @@ function PageCategory() {
 
 
                     <div style={{ display: 'flex', flexDirection: 'column', width: '45%', alignItems: 'center' }}>
-                        <div style={{ display: 'flex', flexDirection: 'row', padding: '2%', width: '90%', height: '20%', border: '1px double black', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', padding: '2%', width: '90%', height: '20%', border: 'none', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
 
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '5%', boxSizing: 'border-box', alignItems: 'center', justifyContent: 'center' }}>
                                 <button
@@ -410,8 +410,8 @@ function PageCategory() {
 
 
                         </div>
-
-                        <div style={{ marginTop: '3%', marginBottom: '3%', display: 'flex', flexDirection: 'row', padding: '2%', width: '150%', height: '30%', border: '1px double black', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
+                        <hr style={{ width: '100%' }}></hr>
+                        <div style={{ marginTop: '0%', marginBottom: '3%', display: 'flex', flexDirection: 'row', padding: '2%', width: '150%', height: '30%', border: 'none', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
 
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
                                 <button className="r1"
@@ -518,7 +518,7 @@ function PageCategory() {
 
                 </div>
 
-                <div style={{ paddingLeft: '5%', paddingRight: '5%' }}>
+                <div style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '5%' }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <button onClick={onClickDown} style={{ fontSize: order === 'download_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'download_cnt' ? 'bold' : 'normal' }}>최신순</button>
                         <button onClick={onClickReview} style={{ fontSize: order === 'review_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'review_cnt' ? 'bold' : 'normal' }}>오래된순</button>
@@ -536,10 +536,10 @@ function PageCategory() {
                     >
                         {selectedFnVal === 1 ? '완결' : '연재중'}
                     </button>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '1100px', height: '100%', fontSize: '30px', margin: 'auto' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
                         {resultCategoryNovel
                             .map((item) => (
-                                <div style={{ display: 'flex', marginTop: '5%' }}>
+                                <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
                                     <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
@@ -565,7 +565,7 @@ function PageCategory() {
 
 
 
-            </div>
+            </div >
 
 
 
