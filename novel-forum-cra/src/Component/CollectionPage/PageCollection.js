@@ -216,9 +216,9 @@ function PageCollection() {
                     <CollectionSearchBox></CollectionSearchBox>
                 </div>
                 <div >
-                    <button onClick={onClickLatest} style={{ color: order === 'TIME_DESC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
-                    <button onClick={onClickOutdate} style={{ color: order === 'TIME_ASC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>오래된순</button>
-                    <button onClick={onClickLike} style={{ color: order === 'LIKE_DESC' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
+                    <button onClick={onClickLatest} style={{ fontSize: order === 'TIME_DESC' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'TIME_DESC' ? 'bold' : 'normal' }}>최신순</button>
+                    <button onClick={onClickOutdate} style={{ fontSize: order === 'TIME_ASC' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'TIME_ASC' ? 'bold' : 'normal' }}>오래된순</button>
+                    <button onClick={onClickLike} style={{ fontSize: order === 'LIKE_DESC' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'LIKE_DESC' ? 'bold' : 'normal' }}>공감순</button>
                 </div>
             </div>
             <div style={{ marginTop: '3%' }}>

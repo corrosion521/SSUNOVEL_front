@@ -411,28 +411,28 @@ function PageCategory() {
 
                         </div>
 
-                        <div style={{ marginTop: '3%', marginBottom: '3%', display: 'flex', flexDirection: 'row', padding: '2%', width: '90%', height: '20%', border: '1px double black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
+                        <div style={{ marginTop: '3%', marginBottom: '3%', display: 'flex', flexDirection: 'row', padding: '2%', width: '150%', height: '30%', border: '1px double black', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
 
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
                                 <button className="r1"
                                     onClick={() => onClickSelectedGr('로맨스')}
                                     style={{
-                                        color: selectedGenre === '로맨스' ? 'green' : 'black',
+
                                         fontWeight: selectedGenre === '로맨스' ? 'bold' : 'normal',
                                         border: "none",
                                         background: "none",
-                                        fontSize: "1rem",
+                                        fontSize: selectedGenre === '로맨스' ? '1rem' : '0.9rem',
 
                                     }}
                                     value='로맨스'                    >로맨스</button>
                                 <button
                                     onClick={() => onClickSelectedGr('로판')}
                                     style={{
-                                        color: selectedGenre === '로판' ? 'green' : 'black',
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                        fontSize: selectedGenre === '로판' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '로판' ? 'bold' : 'normal',
 
                                     }}
                                     value='로판'>
@@ -441,12 +441,12 @@ function PageCategory() {
                                 <button
                                     onClick={() => onClickSelectedGr('판타지')}
                                     style={{
-                                        color: selectedGenre === '판타지' ? 'green' : 'black',
-                                        fontWeight: selectedGenre === '로맨스' ? 'bold' : 'normal',
+
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                        fontSize: selectedGenre === '판타지' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '판타지' ? 'bold' : 'normal',
 
                                     }}
                                     value='판타지'
@@ -457,11 +457,11 @@ function PageCategory() {
 
                                     onClick={() => onClickSelectedGr('현판')}
                                     style={{
-                                        color: selectedGenre === '현판' ? 'green' : 'black',
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                        fontSize: selectedGenre === '현판' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '현판' ? 'bold' : 'normal',
 
                                     }}
                                     value='현판'  >
@@ -470,11 +470,11 @@ function PageCategory() {
                                 <button
                                     onClick={() => onClickSelectedGr('무협')}
                                     style={{
-                                        color: selectedGenre === '무협' ? 'green' : 'black',
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                        fontSize: selectedGenre === '무협' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '무협' ? 'bold' : 'normal',
 
                                     }}
                                     value='무협'
@@ -484,12 +484,11 @@ function PageCategory() {
                                 <button
                                     onClick={() => onClickSelectedGr('미스터리')}
                                     style={{
-                                        color: selectedGenre === '미스터리' ? 'green' : 'black',
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-
+                                        fontSize: selectedGenre === '미스터리' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '미스터리' ? 'bold' : 'normal',
                                     }}
                                     value='미스터리'
                                 >
@@ -498,11 +497,11 @@ function PageCategory() {
                                 <button
                                     onClick={() => onClickSelectedGr('라이트노벨')}
                                     style={{
-                                        color: selectedGenre === '라이트노벨' ? 'green' : 'black',
+
                                         border: 'none',
                                         background: 'none',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
+                                        fontSize: selectedGenre === '라이트노벨' ? '1rem' : '0.9rem',
+                                        fontWeight: selectedGenre === '라이트노벨' ? 'bold' : 'normal',
 
                                     }}
                                     value='라이트노벨'
@@ -521,9 +520,9 @@ function PageCategory() {
 
                 <div style={{ paddingLeft: '5%', paddingRight: '5%' }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <button onClick={onClickDown} style={{ color: order === 'download_cnt' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>최신순</button>
-                        <button onClick={onClickReview} style={{ color: order === 'review_cnt' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>오래된순</button>
-                        <button onClick={onClickLike} style={{ color: order === 'rating' ? 'green' : 'black', border: 'none', background: 'none', fontSize: '1rem', fontWeight: 'bold' }}>공감순</button>
+                        <button onClick={onClickDown} style={{ fontSize: order === 'download_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'download_cnt' ? 'bold' : 'normal' }}>최신순</button>
+                        <button onClick={onClickReview} style={{ fontSize: order === 'review_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'review_cnt' ? 'bold' : 'normal' }}>오래된순</button>
+                        <button onClick={onClickLike} style={{ fontSize: order === 'rating' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'rating' ? 'bold' : 'normal' }}>공감순</button>
                     </div>
                     <button
                         onClick={() => onClickSelectedFn()}

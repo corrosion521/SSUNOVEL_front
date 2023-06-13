@@ -263,11 +263,11 @@ function PageCommunity() {
                     <button
                         onClick={onClickLatest}
                         style={{
-                            color: order === 'latest' ? 'green' : 'black',
+
                             border: 'none',
                             background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
+                            fontSize: order === 'latest' ? '1rem' : '0.9rem',
+                            fontWeight: order === 'latest' ? 'bold' : 'normal'
 
                         }}
 
@@ -277,11 +277,11 @@ function PageCommunity() {
                     <button
                         onClick={onClickOutdate}
                         style={{
-                            color: order === 'outDate' ? 'green' : 'black',
+
                             border: 'none',
                             background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
+                            fontSize: order === 'outDate' ? '1rem' : '0.9rem',
+                            fontWeight: order === 'outDate' ? 'bold' : 'normal'
                         }}
                     >
                         오래된순
