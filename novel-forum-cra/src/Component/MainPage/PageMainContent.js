@@ -35,7 +35,7 @@ function PageMainContent() {
                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '32px', justifyContent: 'center' }}>
                     {
                         resultMainNovel.map((novel) => (
-                            <div style={{ width: '180px', height: '450px', border: 'solid', marginTop: '15px', fontSize: '1rem' }} >
+                            <div style={{ width: '180px', height: '450px', border: 'none', marginTop: '15px', fontSize: '1rem' }} >
                                 <Novel info={novel} />
                             </div>
                         ))

@@ -22,7 +22,7 @@ function Novel({ info }) {
 
 
             <img src={info.img_link || info.image_url || info.novelImage}
-                style={{ backgroundColor: 'black', width: '100%', height: '70%', objectFit: 'contain' }} onClick={onClickNovelImage} alt="소설이미지 안나옴" />
+                style={{ backgroundColor: 'white', width: '100%', height: '70%', objectFit: 'contain' }} onClick={onClickNovelImage} alt="소설이미지 안나옴" />
 
 
             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: '5%' }}>
@@ -30,7 +30,7 @@ function Novel({ info }) {
                 <h3 style={{ minHeight: '3em', margin: '0', marginTop: '1%', fontSize: '1em' }}>{info.title || info.novelName}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                    <h3 style={{ fontSize: '0.7em', marginRight: '5px' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.7em', paddingBottom: '2px' }}>
+                    <h3 style={{ fontSize: '0.7em', marginRight: '5px', fontWeight: 'normal' }}>{info.authorName}</h3><img src="../IconStarOn.png" style={{ width: '0.8rem', fontWeight: 'normal' }} ></img><h3 style={{ fontSize: '0.7em', paddingBottom: '2px' }}>
                         {info.reivew_rating != null ? (Math.round(info.reivew_rating * 10) / 10).toFixed(1) : (info.rating != null ? (Math.round(info.rating * 10) / 10).toFixed(1) : '')}
                     </h3>
 

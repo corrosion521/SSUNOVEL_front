@@ -256,7 +256,7 @@ function PageReview() {
                     <ReviewSearchBox />
                 </div>
 
-                <div>
+                {/* <div>
                     <button
                         style={{
                             border: 'none',
@@ -277,7 +277,7 @@ function PageReview() {
                     >
                         공감순
                     </button>
-                </div>
+                </div> */}
             </div>
 
             <div style={{ display: 'flex', marginTop: '10%', gap: '4%', justifyContent: 'flex-start' }}>

@@ -423,10 +423,10 @@ function PageNovel() {
                 <div style={{ width: '40%', marginRight: '10%' }}>
                     <h3 style={{ fontSize: '1.3rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
+                    {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>최신순</button>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>인기순</button>
-                    </div>
+                    </div> */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '2px solid red', height: '220px', marginBottom: '5%' }}>
                         <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
 
