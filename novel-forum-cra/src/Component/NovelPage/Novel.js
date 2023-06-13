@@ -10,6 +10,7 @@ function Novel({ info }) {
     const onClickNovelImage = (event) => {
         const data = [info.novelId || info.id, info.authorName, info.name]
         navigate(`/novel?data=${data}`);
+        window.location.reload()
 
     }
 

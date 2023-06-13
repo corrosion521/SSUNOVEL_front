@@ -348,8 +348,8 @@ function PageNovel() {
 
     return (
         <div>
-            <div style={{ display: 'flex', width: '90%', gap: '3%', margin: 'auto' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', width: '65%' }}>
+            <div style={{ display: 'flex', width: '90%', gap: '3%', margin: 'auto', marginLeft: '10%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', width: '30%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <div style={{ width: '300px', height: '600px', marginLeft: 'auto', marginRight: 'auto', fontSize: '1.6rem', paddingTop: '23%' }}>
                         <Novel info={resultNovel}></Novel>
                     </div>
@@ -361,10 +361,10 @@ function PageNovel() {
                         <hr></hr>
 
                     </div>
-                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '5%', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
+                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '20px', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
                         <br></br>
-                        총 회차 : {resultNovel.total_episode}화 <br></br><br></br>
-                        가격 : 회차 당 {resultNovel.price}원
+                        <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
+                        <strong>가격 :</strong> 회차 당 {resultNovel.price}원
                     </div>
                     <div style={{
                         display: resultNovel.is_kakao != null ? 'flex' : 'none',
@@ -420,7 +420,7 @@ function PageNovel() {
 
                 </div>
                 <hr style={{ height: '1900px' }}></hr>
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '40%', marginRight: '10%' }}>
                     <h3 style={{ fontSize: '1.3rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
@@ -447,7 +447,7 @@ function PageNovel() {
                             ))}
                         </div>
 
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginRight: '12%' }}>
+                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginRight: '17%' }}>
 
                             <button
                                 className="HomepageLogo"

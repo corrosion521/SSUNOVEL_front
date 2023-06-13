@@ -340,7 +340,7 @@ function PageCategory() {
                     <div style={{ display: 'flex', flexDirection: 'column', width: '45%', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'row', padding: '2%', width: '90%', height: '20%', border: '1px double black', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
 
-                            <div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'row', gap: '5%', boxSizing: 'border-box', alignItems: 'center', justifyContent: 'center' }}>
                                 <button
                                     className="f1"
                                     onClick={() => onClickSelectedFlp('is_kakao')}
@@ -350,8 +350,8 @@ function PageCategory() {
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
-                                        width: '100px',
-                                        height: '100px'
+                                        width: '20%',
+                                        height: '20%'
 
                                     }}
                                     value='is_kakao'
@@ -366,9 +366,9 @@ function PageCategory() {
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
-                                        width: '100px',
-                                        height: '100px',
-                                        padding: '16px'
+                                        width: '15%',
+                                        height: '15%',
+
                                     }}
                                     value='네이버시리즈'
                                 >
@@ -382,8 +382,8 @@ function PageCategory() {
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
-                                        width: '100px',
-                                        height: '100px'
+                                        width: '20%',
+                                        height: '20%'
                                     }}
                                     value='리디'
                                 >
@@ -397,8 +397,8 @@ function PageCategory() {
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
-                                        width: '100px',
-                                        height: '100px'
+                                        width: '20%',
+                                        height: '20%'
 
 
                                     }}
