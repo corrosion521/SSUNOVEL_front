@@ -56,7 +56,7 @@ function PageWriting() {
                 </div>
 
                 <div style={{ margin: '0', width: '15%', margin: 'auto', marginRight: 0, fontSize: '0.9em' }}>
-                    {item.writeAt}
+                    {item.writeAt.replace('T', '\n')}
                 </div>
 
 
@@ -279,7 +279,7 @@ function PageWriting() {
                 setTitle(result.result.title)
                 setContent(result.result.content)
                 setNickName(result.result.nickname)
-                setDate(result.result.writeAt)
+                setDate(result.result.writeAt.replace('T', '\n'))
                 console.log("음", result.result.title)
 
             });
