@@ -18,7 +18,7 @@ function Novel({ info }) {
 
     return (
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '100%', minWidth: '100px' }}>
 
 
             <img src={info.img_link || info.image_url || info.novelImage}

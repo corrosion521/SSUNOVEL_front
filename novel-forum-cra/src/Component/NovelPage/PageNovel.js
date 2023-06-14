@@ -355,86 +355,117 @@ function PageNovel() {
 
     return (
         <div>
-            <div style={{ display: 'flex', width: '90%', gap: '3%', margin: 'auto', marginLeft: '10%' }}>
+            <div style={{ display: 'flex', width: '100%', gap: '3%', margin: 'auto', marginTop: '6%' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1%', width: '30%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <div style={{ width: '300px', height: '600px', marginLeft: 'auto', marginRight: 'auto', fontSize: '1.6rem', paddingTop: '23%' }}>
                         <Novel info={resultNovel}></Novel>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <img onClick={onClickWriterLike} src={writerLikeimg} style={{ width: '27px', height: '27px', marginRight: '5px' }} ></img>
-                        <h3 style={{ fontSize: '0.7rem' }}>관심작가</h3>
+
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <img onClick={onClickWriterLike} src={writerLikeimg} style={{ width: '27px', height: '27px', marginRight: '5px' }} ></img>
+                            <h3 style={{ fontSize: '0.6rem' }}>관심작가</h3>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                                <h3 style={{ fontSize: '0.6rem' }}>즐겨찾기</h3>
+                            </div>
+                            {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                            <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                            <h3 style={{ fontSize: '1rem' }}>공감</h3>
+                        </div> */}
+                        </div>
                     </div>
+
                     <div style={{ marginTop: '4%' }}>
-                        <hr></hr>
+
 
                     </div>
+
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+                        <div style={{
+                            display: resultNovel.is_kakao != null ? 'flex' : 'none',
+                            alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '55px', margin: '2% auto', marginTop: '10px'
+                        }}>
+                            {/* {
+                            resultNovel.is_kakao != null ? "카카오페이지" : "..."
+                        } */}
+                            {resultNovel.is_kakao &&
+                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                    <img src="kakaopage.png" style={{ width: '60%', padding: 0 }}></img>
+                                    <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>카카오페이지</h3>
+                                </div>
+                            }
+                        </div>
+
+                        <div style={{
+                            display: resultNovel.is_munpia != null ? 'flex' : 'none',
+                            alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '40px', margin: '2% auto', marginTop: '10px'
+                        }}>
+                            {resultNovel.is_munpia &&
+                                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                    <img src="munpia.png" style={{ width: '60%' }}></img>
+                                    <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>문피아</h3>
+                                </div>}
+                        </div>
+
+                        <div style={{
+                            display: resultNovel.is_naver != null ? 'flex' : 'none',
+                            alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '40px', margin: '2% auto', marginTop: '10px'
+                        }}>
+                            {resultNovel.is_naver && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <img src="naver.png" style={{ width: '60%' }}></img>
+                                <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>네이버</h3>
+                            </div>}
+                        </div>
+
+                        <div style={{
+
+
+                            display: resultNovel.is_ridi != null ? 'flex' : 'none',
+                            alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '40px', margin: '2% auto', marginTop: '10px'
+                        }}>
+                            {resultNovel.is_ridi && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <img src="ridi.png" style={{ width: '60%' }}></img>
+                                <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>리디</h3>
+                            </div>}
+                        </div>
+
+
+                    </div>
+
                     <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '20px', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
                         <br></br>
                         <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
                         <strong>가격 :</strong> 회차 당 {resultNovel.price}원
                     </div>
-                    <div style={{
-                        display: resultNovel.is_kakao != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '150px', height: '55px', margin: '2% auto', marginTop: '10px'
-                    }}>
-                        {/* {
-                            resultNovel.is_kakao != null ? "카카오페이지" : "..."
-                        } */}
-                        {resultNovel.is_kakao && <img src="kakaopage.png" style={{ width: '80%' }}></img>}
-                    </div>
 
-                    <div style={{
-                        display: resultNovel.is_munpia != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '150px', height: '40px', margin: '2% auto', marginTop: '10px'
-                    }}>
-                        {resultNovel.is_munpia && <img src="munpia.png" style={{ width: '80%' }}></img>}
-                    </div>
-
-                    <div style={{
-                        display: resultNovel.is_naver != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '70px', height: '40px', margin: '2% auto', marginTop: '10px'
-                    }}>
-                        {resultNovel.is_naver && <img src="naver.png" style={{ width: '80%' }}></img>}
-                    </div>
-
-                    <div style={{
-
-
-                        display: resultNovel.is_ridi != null ? 'flex' : 'none',
-                        alignItems: 'center', justifyContent: 'center', border: 'none', width: '100px', height: '40px', margin: '2% auto', marginTop: '10px'
-                    }}>
-                        {resultNovel.is_ridi && <img src="ridi.png" style={{ width: '80%' }}></img>}
-                    </div>
-
-
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px', marginLeft: '5%' }}>
-                            <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
-                        </div>
-                        {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                            <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>공감</h3>
-                        </div> */}
-                    </div>
                     <div>
-                        <hr></hr>
+
 
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {resultNovel.content}
-                    </div>
+
+
 
                 </div>
-                <hr style={{ height: '1900px' }}></hr>
-                <div style={{ width: '40%', marginRight: '10%' }}>
-                    <h3 style={{ fontSize: '1.3rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
+                <hr style={{ height: '1800px', marginLeft: '5%', marginRight: '5%' }}></hr>
+                <div style={{ width: '58%', marginRight: '10%', marginTop: '7%' }}>
+                    {/*글자 자르기 */}
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '5px solid gray', fontSize: '16px', padding: '5%' }}>
+                        {resultNovel && resultNovel.content && resultNovel.content.length > 300 ? resultNovel.content.slice(0, 300) + "...." : resultNovel.content}
+                    </div>
+
+                    <h3 style={{ fontSize: '0.8rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
                     {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>최신순</button>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>인기순</button>
                     </div> */}
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '2px solid red', height: '220px', marginBottom: '5%' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '1px solid gray', height: '220px', marginBottom: '5%' }}>
                         <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
 
                         </textarea>
@@ -442,38 +473,43 @@ function PageNovel() {
                             <span>{inputCount}</span>
                             <span>/100 자</span>
                         </p>
-                        <div style={{ marginLeft: '0%' }} >
-                            {/*3.1) */}
-                            {ARRAY.map((index) => (
-                                <FaStar
-                                    onClick={() => starScore(index)}
-                                    key={index}
-                                    size="27"
-                                    color={score[index] ? "yellow" : "gray"}
-                                ></FaStar>
-                            ))}
+                        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                            <div style={{ marginLeft: '0%' }} >
+                                {/*3.1) */}
+                                {ARRAY.map((index) => (
+                                    <FaStar
+                                        onClick={() => starScore(index)}
+                                        key={index}
+                                        size="27"
+                                        color={score[index] ? "yellow" : "gray"}
+                                    ></FaStar>
+                                ))}
+                            </div>
+
+                            <div style={{ width: '60%', display: 'flex', flexDirection: 'column', marginRight: '24%' }}>
+
+                                <button
+                                    className="HomepageLogo"
+                                    style={{
+                                        color: 'white',
+                                        width: '100px',
+                                        height: '40px',
+
+                                        marginBottom: '2%',
+                                        fontSize: '14px',
+                                        margin: '10%'
+                                    }}
+                                    onClick={() => onSubmitRp({ rpCount, score })}
+                                >
+                                    작성완료
+                                </button>
+
+                            </div>
                         </div>
 
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginRight: '17%' }}>
-
-                            <button
-                                className="HomepageLogo"
-                                style={{
-                                    color: 'white',
-                                    width: '100px',
-                                    height: '40px',
-                                    marginLeft: '50%',
-                                    marginBottom: '2%'
-                                }}
-                                onClick={() => onSubmitRp({ rpCount, score })}
-                            >
-                                작성완료
-                            </button>
-
-                        </div>
 
                     </div>
-                    <div style={{ height: '380px', overflow: 'scroll', overflowX: "hidden" }}>
+                    <div className="scrollBar" >
 
                         {
                             resultNovelReviews != null ?
@@ -485,40 +521,47 @@ function PageNovel() {
 
                                     )
 
-                                ) : "리뷰가 없습니다"
+                                ) : <h3 style={{ fontSize: '20px' }}>리뷰가 없습니다</h3>
 
                         }
 
 
                     </div>
+                    {resultAnotherNovel.length != 0 ?
 
-                    <h3>작가의 다른 작품</h3>
-                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '3%', justifyContent: 'center' }}>
-                        {
+                        <h3 style={{ marginTop: '20%', fontSize: '14px' }}>작가의 다른 작품</h3>
+                        : null}
+                    {resultAnotherNovel.length != 0 ?
+                        <div className="scrollBarY">
+                            {
 
-                            resultAnotherNovel.map(
-                                (novels) =>
-                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '15%' }}>
-                                    <Novel info={novels} key={novels} />
-                                </div>
+                                resultAnotherNovel.map(
+                                    (novels) =>
+                                    (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '5%', flexShrink: 0 }}>
+                                        <Novel info={novels} key={novels} />
+                                    </div>
+
+                                    )
 
                                 )
 
-                            )
-                        }
-                    </div>
-                    <h3 style={{ marginTop: '10%' }}>비슷한 작품 추천</h3>
-                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '3%', justifyContent: 'center' }}>
+                            }
+                        </div>
+                        : null}
+                    < h3 style={{ marginTop: '10%', fontSize: '14px' }}>비슷한 작품 추천</h3>
+                    <div className="scrollBarY" >
                         {
+
                             recommendedNovels.map(
                                 (novels) =>
-                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '15%' }}>
+                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '5%', flexShrink: 0 }}>
                                     <Novel info={novels} key={novels} />
                                 </div>
 
                                 )
 
                             )
+
                         }
                     </div>
 

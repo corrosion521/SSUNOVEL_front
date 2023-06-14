@@ -98,11 +98,11 @@ function Collection({ data }) {
             {/*단, modalOpen이 true일때만 ModalCollection컴포넌트를 렌더링  
             모달창에, 보관함의 정보를 props로 보내줌.*/}
             {modalOpen && <ModalCollection data={data} setModalOpen={setModalOpen} />}
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', minHeight: '15%', boxSizing: 'border-box', paddingTop: '10%' }}>
-                <h3 style={{ margin: '0' }}>{data.title}</h3>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', minHeight: '15%', boxSizing: 'border-box', paddingTop: '5%' }}>
+                <h3 style={{ margin: '0', fontSize: '18px' }}>{data.title}</h3>
             </div>
-            <h3>{" [ " + data.itemCnt + " ]"}</h3>
-            <h5 style={{ margin: '0', marginTop: '3px' }}>{data.memberName}</h5>
+            <h3 style={{ fontWeight: 'normal', fontSize: '15px', marginTop: '10%' }}>{" [ " + data.itemCnt + " ]"}</h3>
+            <h5 style={{ margin: 0, marginTop: '3px', fontWeight: 'normal', fontSize: '13px' }}>{data.memberName}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                 <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{data.likeCnt}</h3>

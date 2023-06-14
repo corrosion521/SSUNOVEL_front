@@ -345,7 +345,7 @@ function PageCategory() {
                                     className="f1"
                                     onClick={() => onClickSelectedFlp('is_kakao')}
                                     style={{
-                                        color: selectedFlp === 'is_kakao' ? 'green' : 'black',
+                                        // color: selectedFlp === 'is_kakao' ? 'green' : 'black',
                                         border: selectedFlp === 'is_kakao' ? 'red 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
@@ -358,26 +358,28 @@ function PageCategory() {
 
                                 >
                                     <img src="kakaopage.png" style={{ width: '100%', height: 'auto' }}></img>
+                                    <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>카카오페이지</h3>
                                 </button>
                                 <button
                                     onClick={() => onClickSelectedFlp('is_naver')} style={{
-                                        color: selectedFlp === 'is_naver' ? 'green' : 'black',
+                                        // color: selectedFlp === 'is_naver' ? 'green' : 'black',
                                         border: selectedFlp === 'is_naver' ? 'red 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
-                                        width: '15%',
-                                        height: '15%',
+                                        width: '20%',
+                                        height: '20%',
 
                                     }}
                                     value='네이버시리즈'
                                 >
-                                    <img src="naver.png" style={{ width: '100%', height: 'auto' }}></img>
+                                    <img src="naver.png" style={{ objectFit: 'cover', width: '100%', height: 'auto' }}></img>
+                                    <h3 style={{ fontWeight: 'normal', fontSize: '5px' }}>네이버시리즈</h3>
                                 </button>
                                 <button
                                     onClick={() => onClickSelectedFlp('is_ridi')}
                                     style={{
-                                        color: selectedFlp === 'is_ridi' ? 'green' : 'black',
+                                        //color: selectedFlp === 'is_ridi' ? 'green' : 'black',
                                         border: selectedFlp === 'is_ridi' ? 'red 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
@@ -387,12 +389,13 @@ function PageCategory() {
                                     }}
                                     value='리디'
                                 >
-                                    <img src="ridi.png" style={{ width: '100%', height: 'auto' }}></img>
+                                    <img src="ridi.png" style={{ objectFit: 'contain', width: '100%', height: 'auto' }}></img>
+                                    <h3 style={{ fontWeight: 'normal', fontSize: '5px' }}>리디</h3>
                                 </button>
                                 <button
                                     onClick={() => onClickSelectedFlp('is_munpia')}
                                     style={{
-                                        color: selectedFlp === 'is_munpia' ? 'green' : 'black',
+                                        // color: selectedFlp === 'is_munpia' ? 'green' : 'black',
                                         border: selectedFlp === 'is_munpia' ? 'red 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
@@ -405,6 +408,7 @@ function PageCategory() {
                                     value='문피아'
                                 >
                                     <img src="munpia.png" style={{ width: '100%', height: 'auto' }}></img>
+                                    <h3 style={{ fontWeight: 'normal', fontSize: '5px' }}>문피아</h3>
                                 </button>
                             </div>
 

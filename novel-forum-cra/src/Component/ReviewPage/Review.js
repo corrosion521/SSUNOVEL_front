@@ -157,14 +157,14 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
                 <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexDirection: 'column', position: 'relative' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                     <div>
-                        <h3 style={{ fontSize: '1.2em' }}>{review.content}</h3>
+                        <h3 style={{ fontSize: '1em', fontWeight: 'normal' }}>{review.content}</h3>
 
                     </div>
 
 
                     <div style={{ display: 'flex', gap: '5%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                            <img src="/IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px' }}>{review.nickname}</h3>
+                            <img src="/IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px', fontWeight: 'normal' }}>{review.nickname}</h3>
 
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
