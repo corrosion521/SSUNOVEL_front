@@ -71,11 +71,29 @@ const WritingMy = () => {
         }
     }
 
+    function nowToday() {
+        let today = new Date();
+        let year = today.getFullYear(); // 년도
+        let month = (today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1);  // 월
+        let date = (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());  // 날짜
+
+        let hours = (today.getHours() < 10 ? '0' + today.getHours() : today.getHours());
+        let minutes = (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes());
+        let seconds = (today.getSeconds() < 10 ? '0' + today.getSeconds() : today.getSeconds());
+        // console.log(year + '' + month + '' + date + '' + hours + '' + minutes + '' + seconds);
+        return month + '/' + date + '\n' + hours + ':' + minutes;
+
+    }
+    let now = nowToday()
+
     const navigate = useNavigate();
 
     const gotowrt = (item) => {
-        navigate(`./writing?data=${item}`);
-        console.log("!!");
+        const data = item.postId;
+        const data2 = encodeURIComponent(now);
+        const url = `/community/writing?data=${data}&data2=${data2}`;
+
+        navigate(url);
     };
 
     //글 하나의 컴포넌트
@@ -97,7 +115,7 @@ const WritingMy = () => {
                 </div>
 
                 <div
-                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
+                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left', cursor:'pointer' }}
                     onClick={() => gotowrt(item)}
                 >
                     {item.title}
@@ -108,7 +126,7 @@ const WritingMy = () => {
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item.writeAt}
+                    {item.writeAt.replace('T', '\n')}
                 </div>
             </div>
         );

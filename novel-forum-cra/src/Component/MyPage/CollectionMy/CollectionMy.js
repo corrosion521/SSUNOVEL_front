@@ -2,16 +2,20 @@
 
 import React, { useEffect, useState } from "react";
 import './CollectionMy.css';
-import Collection from "../../CollectionPage/Collection";
+import MyCollection from "./MyCollection";
 import MyPageNav from "../MyPageNav";
 import ModalCollectionMy from "./ModalCollectionMy";
 
 const CollectionMy = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    
+
     const showModal = () => {
         setModalOpen(true);
     }
+
+
+    // 보관함 모달
+    const [collectionOpen, setCollectionOpen] = useState(false);
 
     // 생성한 보관함 리스트
     const [collections, setCollections] = useState([]);
@@ -27,17 +31,15 @@ const CollectionMy = () => {
             .then((result) => {
                 console.log("생성한 보관함:", result)
                 if (result.message === "성공") {
-                    if (result.result.boxCnt > 0) {
-                        setCollections(result.result.memberBoxInfoList);
-                    }
+                    setCollections(result.result.memberBoxInfoList);
                 }
             });
-    }, [])
-    
+    }, [modalOpen, collectionOpen])
+
     // 전체 아이템 리스트
     // const itemList = Array.from({ length: 10 }, (_, index) => [Collection1]);
     const itemList = collections;
-    
+
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -124,42 +126,42 @@ const CollectionMy = () => {
     }
 
 
-    return(
+    return (
         <div className="mypage">
             <MyPageNav></MyPageNav>
             <div className="my-collection my-container">
-                <div className="my-container__title">나의 보관함 {'('}{ collections.length }{')'}</div>
+                <div className="my-container__title">나의 보관함 {'('}{collections.length}{')'}</div>
                 <div className='my-container__line'></div>
-                <button type="button" className="create-collection-btn" onClick={showModal}>보관함 생성 {'>'}</button>
+                <button type="button" className="create-collection-btn" onClick={showModal} style={{ cursor: 'pointer' }}>보관함 생성 {'>'}</button>
                 {modalOpen && <ModalCollectionMy setModalOpen={setModalOpen} />}
                 <div style={{ marginTop: '3%' }}>
-                <div className="my-contents-list" >
-                    {
-                        itemList.map(
-                            (collections) =>
-                            (
-                                <div style={{ width: '17%', height: '300px', fontSize:'0.6rem' }}>
-                                    <Collection data={collections} key={collections} />
-                                </div>
+                    <div className="my-contents-list" >
+                        {
+                            itemList.map(
+                                (collections) =>
+                                (
+                                    <div style={{ width: '17%', height: '300px', fontSize: '0.6rem' }}>
+                                        <MyCollection data={collections} key={collections} modalOpen={collectionOpen} setModalOpen={setCollectionOpen} />
+                                    </div>
+                                )
                             )
-                        )
-                        .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
-                    }
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop:'15px',}}>
-                {
-                    itemList.length > itemsPerPage &&
-                    <div style={{ display: 'flex', justifyContent: 'center', }}>
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                            pageNumbers={pageNumbers}
-                        />
+                                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                        }
                     </div>
-                }
-            </div>
-            </div>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', }}>
+                        {
+                            itemList.length > itemsPerPage &&
+                            <div style={{ display: 'flex', justifyContent: 'center', }}>
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={handlePageChange}
+                                    pageNumbers={pageNumbers}
+                                />
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )

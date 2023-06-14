@@ -152,16 +152,17 @@ const SearchAuthor = () => {
             .then((result) => {
                 // UseState이용하여 작품, 작가 배열 초기화
                 if (result.message === "성공") {
-                    if (result.result["count"] > 0) {
+                    if (result.result.count > 0) {
                         setAuthorFlag(true);
-                        setAuthors(result.result["dto"]);
+                        setAuthors(result.result.dto);
+                        console.log("작가 dto[0].novelId:",result.result.dto[0].novelId)
                     }
                 }
                 else {
                     setAuthorFlag(false);
                 }
                 // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result["count"] / itemsPerPage))
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage))
             });
     }, [searchTerm, currentPage]);
 

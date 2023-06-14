@@ -1,9 +1,9 @@
-// '보관함 생성' 버튼 클릭시 열리는 모달
+// '보관함수정' 버튼 클릭시 열리는 모달
 
 import { useEffect, useState } from "react";
 import ModalAddNovel from "./ModalAddNovel";
 
-const ModalCollectionMy = ({ setModalOpen }) => {
+const ModalCollectionEdit = ({ setModalOpen, data }) => {
     // 현재 모달 닫기
     const closeModal = () => {
         setModalOpen(false);
@@ -16,8 +16,8 @@ const ModalCollectionMy = ({ setModalOpen }) => {
         setAddModalOpen(true);
     }
 
-    const [title, setTitle] = useState("");
-    const [explanation, setExplanation] = useState("");
+    const [title, setTitle] = useState(data.title);
+    const [explanation, setExplanation] = useState(data.content);
     const [isPrivate, setIsPrivate] = useState(1);
     const [novels, setNovels] = useState([]);   // 작품 목록
     let novelIDs = [];  // 작품 ID 목록
@@ -30,8 +30,8 @@ const ModalCollectionMy = ({ setModalOpen }) => {
         );
     }
 
-    // 생성완료버튼 누르면 --> 서버에 데이터 보내기
-    const createComplete = () => {
+    // 수정완료버튼 누르면 --> 서버에 데이터 보내기
+    const editComplete = () => {
         setID();    // 작품 ID 목록 초기화
         console.log(title, explanation, isPrivate, novelIDs, repNovelID);
         fetch(`/box`, {
@@ -117,9 +117,9 @@ const ModalCollectionMy = ({ setModalOpen }) => {
                         <button
                             type="button"
                             className="create complete-btn"
-                            onClick={createComplete}
+                            onClick={editComplete}
                         >
-                            생성 완료
+                            수정 완료
                         </button>
                     </div>
                 </div>
@@ -129,4 +129,4 @@ const ModalCollectionMy = ({ setModalOpen }) => {
     )
 }
 
-export default ModalCollectionMy;
+export default ModalCollectionEdit;

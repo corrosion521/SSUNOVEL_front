@@ -1,14 +1,30 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import Novel from "../NovelPage/Novel";
+// 검색 결과 모달 - 작품명
 
-const SearchNovel = () => {
+import Novel from "../../NovelPage/Novel";
+import React, { useState, useEffect } from "react";
+
+const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNovels, setCheckedNovels }) => {
+
+    
+    //--------------Checkbox-----------------
+    // 1️⃣ onChange함수를 사용하여 이벤트 감지, 필요한 값 받아오기
+    const onCheckedElement = (checked, id, item) => {
+        if (checked) {
+            setCheckedIds([...checkedIds, id]);
+            setCheckedNovels([...checkedNovels, item]);
+        } else if (!checked) {
+            setCheckedIds(checkedIds.filter(el => el !== id));
+            setCheckedNovels(checkedNovels.filter(el => el !== item));
+        }
+    };
+    // 2️⃣ x를 누르면 리스팅 목록에서 카테고리가 삭제되며 체크도 해제 된다
+    const onRemove = item => {
+        setCheckedNovels(checkedNovels.filter(el => el !== item));
+    };
+
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수 (dto의 length가 10임)
-
-
-
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -32,9 +48,6 @@ const SearchNovel = () => {
             pageNumbers.push(i);
         }
     }
-
-    const navigate = useNavigate();
-
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
@@ -126,19 +139,14 @@ const SearchNovel = () => {
         );
     }
 
+    // api로 가져온 데이터 내에서 검색 기능 구현
 
-    // 작품명 검색결과 가져오기
-    const useQuery = () => {
-        return new URLSearchParams(useLocation().search);
-    }
-    let query = useQuery();
-    const searchTerm = query.get('data');
+
+    const [itemList, setItemList] = useState([]);
     const [orderBy, setOrderBy] = useState("download_cnt");
-
-    const [novels, setNovels] = useState([]);
-    const [novelCnt, setNovelCnt] = useState([]);
     const [novelFlag, setNovelFlag] = useState(false); //작품 아무 것도 없는 것 생각
 
+    // 소설 정보 가져오기
     useEffect(() => {
 
         fetch(`/novel/search/novel?search=${searchTerm}&pageNum=${currentPage - 1}&orderBy=${orderBy}`, {
@@ -157,7 +165,7 @@ const SearchNovel = () => {
                 if (result.message === "성공") {
                     if (result.result.count > 0) {
                         setNovelFlag(true);
-                        setNovels(result.result.dto);
+                        setItemList(result.result.dto);
                     }
                 }
                 else {
@@ -166,37 +174,57 @@ const SearchNovel = () => {
                 // 전체 페이지 수 계산
                 setTotalPages(Math.ceil(result.result.count / itemsPerPage))
             });
-    }, [searchTerm, currentPage]);
-   
+    }, [currentPage]);
+
+
     return (
-        <div className="contents-frame">
-            <div
-                className="contents-list"
-                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '30px', justifyContent: 'flex-start', marginLeft: '3%', }}
-            >
-                {novelFlag == true ? (
-                    novels
-                        .map((item) => (
-                            <div style={{ width: '17%', height: '300px', fontSize: '0.8rem', }}>
-                                <Novel info={item} key={item}></Novel>
+        <div>
+            <div style={{ display: 'flex', justifyContent: 'center', }}>
+                <div
+                    style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', marginLeft: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }}
+                >
+                    {novelFlag == true ? (
+                    itemList.map(item => {
+                        return (
+                            <div style={{ display: 'flex',  }}>
+                                <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
+                                    {/* 소설 하나씩 value로 보내줌 */}
+                                    <input
+                                        type="checkbox"
+                                        // 이때 value값으로 data를 지정해준다.
+                                        value={item}
+                                        // onChange이벤트가 발생하면 check여부와 value(data)값을 전달하여 배열에 data를 넣어준다.
+                                        onChange={e => {
+                                            onCheckedElement(e.target.checked, item.novelId, item);
+                                            // onCheckedElement(e.target.checked, e.target.value);
+                                        }}
+                                        // 3️⃣ 체크표시 & 해제를 시키는 로직. 배열에 data가 있으면 true, 없으면 false
+                                        checked={checkedIds.includes(item.novelId) ? true : false}
+                                        style={{marginLeft:'8px', }}
+                                    />
+                                    <Novel info={item} key={item} />
+                                </div>
                             </div>
-                        ))
-                )
-                    : (
+                        );
+                    })
+                    ) : (
                         <div className="noresult">작품 검색 결과가 없습니다.</div>
-                    )}
+                    )
+                    }
+                </div>
             </div>
-            <div style={{ margin: '30px', }}></div>
-            {totalPages > 1 &&
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
+            {
+                totalPages > 1 &&
+                <div style={{ display: 'flex', justifyContent: 'center', }}>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />
+                </div>
             }
         </div>
-    )
+    );
 }
-
-export default SearchNovel;
+export default ModalSearchNovelMy;
