@@ -32,15 +32,20 @@ function PageMainContent() {
         <div>
             <div>
                 <h1>전체 랭킹 TOP 20</h1>
-                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '32px', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap:'40px', justifyContent: 'center' }}>
                     {
                         resultMainNovel.map((novel) => (
-                            <div style={{ width: '180px', height: '450px', border: 'none', marginTop: '15px', fontSize: '1rem' }} >
+                            <div style={{ width: '17%', border: 'none', marginTop: '15px', fontSize: '1rem' }} >
                                 <Novel info={novel} />
                             </div>
                         ))
                     }
+                    <img width="100" height="100" src="https://img.icons8.com/ios-filled/100/000000/number-1.png" alt="number-1"
+                    style={{position:'absolute', }}/>
+                    <img width="100" height="100" src="https://img.icons8.com/ios-filled/100/000000/number-2.png" alt="number-2"
+                    style={{position:'absolute', }}/>
                 </div>
+                
             </div>
         </div>
     );
