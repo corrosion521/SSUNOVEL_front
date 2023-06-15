@@ -28,10 +28,10 @@ const WritingMy = () => {
             .then((result) => {
                 console.log("결과:", result.result);
                 console.log("결과:", result);
-                if(result.message === "로그인 필요"){
-                    navigate("/member/login")
-                }
-                else if (result.message == "성공") {
+                // if(result.message === "로그인 필요"){
+                //     navigate("/member/login")
+                // }
+                if (result.message == "성공") {
                     if (result.result.memberPostCnt > 0) {
                         setFlag(true);
                         setItemList(result.result.memberPostList);

@@ -31,7 +31,7 @@ const MyPageNav = () => {
     return (
         <div className="mypage-nav">
             <div className="nickname">
-                <GetNickName setNickname={setNickname} />
+                <GetNickName nickname={nickname} setNickname={setNickname} />
                 {nickname}
             </div>
             <nav>

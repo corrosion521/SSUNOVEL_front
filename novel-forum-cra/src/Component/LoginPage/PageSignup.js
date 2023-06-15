@@ -59,7 +59,7 @@ const PageSignup = ({setIsLogin}) => {
             });
     }
 
-    const handelSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== passwordConfirm) {
             // 다시확인 유도
