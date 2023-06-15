@@ -11,7 +11,7 @@ const PageSignup = () => {
     const [birthYear, setBirthYear] = useState("");
     const [gender, setGender] = useState(["선택"]);
 
-    const handelChange = (event) => {
+    const handleChange = (event) => {
         const {
             target: { name, value },
         } = event;
@@ -34,7 +34,7 @@ const PageSignup = () => {
         }
     };
 
-    const handelSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== passwordConfirm) {
             // 다시확인 유도
@@ -84,7 +84,7 @@ const PageSignup = () => {
             <div className="signup container">
                 <div className="container__title">회원가입</div>
                 <div className="container__line"></div>
-                <form onSubmit={handelSubmit} method="POST">
+                <form onSubmit={handleSubmit} method="POST">
                     <label htmlFor="email">이메일 주소</label>
                     <div className="input-email">
                         <input
@@ -93,7 +93,7 @@ const PageSignup = () => {
                             type="email"
                             required
                             value={email}
-                            onChange={handelChange}
+                            onChange={handleChange}
                         />
                         <button className="dup-btn" type="button">중복확인</button>
                     </div>
@@ -104,7 +104,7 @@ const PageSignup = () => {
                         type="password"
                         required
                         value={password}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="password-confirm">비밀번호 확인</label>
                     <input
@@ -113,7 +113,7 @@ const PageSignup = () => {
                         type="password"
                         required
                         value={passwordConfirm}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="nickname">닉네임</label>
                     <input
@@ -122,7 +122,7 @@ const PageSignup = () => {
                         type="text"
                         required
                         value={nickname}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="birth-year">생년월일</label>
                     <input
@@ -131,7 +131,7 @@ const PageSignup = () => {
                         type="text"
                         required
                         value={birthYear}
-                        onChange={handelChange}
+                        onChange={handleChange}
                         placeholder="YYYY-MM-DD 형식으로 입력"
                     />
                     <label htmlFor="gender">성별</label>
