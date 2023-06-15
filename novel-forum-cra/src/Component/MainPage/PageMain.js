@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
 
 import GnbFirst from "./GnbFirst"
@@ -32,10 +32,34 @@ import SearchedPageReview from "../ReviewPage/SearchedPageReview"
 import SearchNovel from "../SearchResultPage/SearchNovel"
 
 function PageMain() {
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        fetch(`/member/mypage/post`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result.result);
+                console.log("결과:", result);
+                if (result.message === "로그인 필요") {
+                    setIsLogin(false);
+                }
+                else if (result.code == "OK") {
+                    setIsLogin(true);
+                }
+                else {
+                    setIsLogin(false);
+                }
+            });
+    },[isLogin]);
 
     return (
         <div className="page">
-            <GnbFirst></GnbFirst>
+            <GnbFirst isLogin={isLogin} setIsLogin={setIsLogin}></GnbFirst>
             <GnbSecond></GnbSecond>
 
             <Routes>
@@ -43,8 +67,8 @@ function PageMain() {
 
                 <Route path="/search" element={<PageSearchResult />}></Route>
 
-                <Route path="/member/login" element={<PageLogin />}></Route>
-                <Route path="/member/create" element={<PageSignup />}></Route>
+                <Route path="/member/login" element={<PageLogin setIsLogin={setIsLogin}/>}></Route>
+                <Route path="/member/create" element={<PageSignup  setIsLogin={setIsLogin}/>}></Route>
                 <Route path="/member/create/success" element={<PageSignupSuccess />}></Route>
 
 

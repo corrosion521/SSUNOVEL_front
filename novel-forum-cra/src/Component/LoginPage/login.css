@@ -181,3 +181,8 @@ a {
     white-space: nowrap;
     width: 100%;
 }
+
+.email-message {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+}
