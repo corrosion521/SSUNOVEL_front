@@ -23,7 +23,7 @@
   justify-content: center;
 
   /*마진 10%*/
-  margin-top: 7%;
+  margin-top: 2%;
   margin-left: 16%;
   margin-right: 16%;
   margin-bottom: 10%;
@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 8vh;
+  margin-top: 4%;
   margin-left: 4%;
   margin-right: 4%;
 
