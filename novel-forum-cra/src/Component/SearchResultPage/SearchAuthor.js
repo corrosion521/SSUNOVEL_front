@@ -57,7 +57,7 @@ const SearchAuthor = () => {
                     )}
 
                     {/* Display the 1st page button . 전체 페이지가 10페이지 이상이고 현재 1page가 아닌경우 1page보여주기*/}
-                    {currentPage !== 1 && totalPages>=10 && (
+                    {currentPage !== 1 && totalPages >= 10 && (
                         <button
                             style={{
                                 border: 'none',
@@ -92,19 +92,19 @@ const SearchAuthor = () => {
 
                     {/* 전체페이지가 10페이지 이상이면 마지막페이지 보여주기 */}
                     {totalPages >= 10 && (
-                    <button
-                        style={{
-                            border: 'none',
-                            background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                            color: currentPage === totalPages ? 'red' : 'inherit',
-                        }}
-                        key={totalPages}
-                        onClick={() => onPageChange(totalPages)}
-                    >
-                        {totalPages}
-                    </button>
+                        <button
+                            style={{
+                                border: 'none',
+                                background: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+                                color: currentPage === totalPages ? 'red' : 'inherit',
+                            }}
+                            key={totalPages}
+                            onClick={() => onPageChange(totalPages)}
+                        >
+                            {totalPages}
+                        </button>
                     )}
 
                     {/* Display the next button . 다음버튼*/}
@@ -133,6 +133,7 @@ const SearchAuthor = () => {
     }
     let query = useQuery();
     const searchTerm = query.get('data');
+
     const [orderBy, setOrderBy] = useState("download_cnt");
 
     const [authors, setAuthors] = useState([]);
@@ -155,6 +156,7 @@ const SearchAuthor = () => {
                     if (result.result["count"] > 0) {
                         setAuthorFlag(true);
                         setAuthors(result.result["dto"]);
+
                     }
                 }
                 else {
@@ -175,7 +177,7 @@ const SearchAuthor = () => {
                     authors
                         .map((item) => (
                             <div style={{ width: '17%', height: '300px', fontSize: '0.8rem', }}>
-                                    <Novel info={item} key={item}></Novel>
+                                <Novel info={item} key={item}></Novel>
                             </div>
                         ))
                 )
@@ -183,7 +185,7 @@ const SearchAuthor = () => {
                         <div className="noresult">작가 검색 결과가 없습니다.</div>
                     )}
             </div>
-            <div style={{margin:'30px', }}></div>
+            <div style={{ margin: '30px', }}></div>
             {totalPages > 1 &&
                 <Pagination
                     currentPage={currentPage}

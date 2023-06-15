@@ -48,12 +48,12 @@ function PageMain() {
                 <Route path="/member/create/success" element={<PageSignupSuccess />}></Route>
 
 
-                <Route path="/mypage/writing" element={<WritingMy/>}></Route>
-                <Route path="/mypage/review" element={<ReviewMy/>}></Route>
-                <Route path="/mypage/favorites/*" element={<FavoritesMy/>}></Route>
-                <Route path="/mypage/collection" element={<CollectionMy/>}></Route>
-                <Route path="/mypage/fav-author" element={<FavAuthorMy/>}></Route>
-                <Route path="/mypage/edit" element={<EditMy/>}></Route>
+                <Route path="/mypage/writing" element={<WritingMy />}></Route>
+                <Route path="/mypage/review" element={<ReviewMy />}></Route>
+                <Route path="/mypage/favorites/*" element={<FavoritesMy />}></Route>
+                <Route path="/mypage/collection" element={<CollectionMy />}></Route>
+                <Route path="/mypage/fav-author" element={<FavAuthorMy />}></Route>
+                <Route path="/mypage/edit" element={<EditMy />}></Route>
 
                 <Route path="/category" element={<PageCategory></PageCategory>}></Route>
                 <Route path="/category/search" element={<SearchedPageCategory></SearchedPageCategory>}></Route>

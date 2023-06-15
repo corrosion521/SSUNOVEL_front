@@ -31,13 +31,19 @@ import { FaStar } from 'react-icons/fa'
 
 function PageNovel() {
 
+
+
     const useQuery = () => {
         return new URLSearchParams(useLocation().search)
+
     }
     let query = useQuery();
     const dataString = query.get('data');
     const data = dataString ? dataString.split(',') : [];
+    console.log("데이터", data)
 
+    //소설변경(페이지 내 타 소설 클릭)
+    const [changeNovel, setChangeNovel] = useState(false)
 
     {/*여기서의 추천 반영 https://jaimemin.tistory.com/1539 참고해보기 */ }
 
@@ -303,7 +309,8 @@ function PageNovel() {
 
 
             });
-    }, []);
+
+    }, [data[0]]);
 
 
     //5`
@@ -340,7 +347,8 @@ function PageNovel() {
 
                 setResultAnotherNovel(filteredDto);
                 console.log("noveldata", result.result.dto)
-            });
+            })
+            ;
     }
 
     // useEffect 훅을 사용하여 컴포넌트가 마운트될 때(fetch 요청 전에) 한 번만 실행되도록 설정하였습니다. 

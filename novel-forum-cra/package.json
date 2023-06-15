@@ -7,8 +7,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
-    "react-cookie": "^4.1.1",
-    "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-paginate": "^8.2.0",
@@ -39,8 +37,6 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "web-vitals": "^3.3.2"
-  },
+  "devDependencies": {},
   "proxy": "https://www.novelforum.site/"
 }
