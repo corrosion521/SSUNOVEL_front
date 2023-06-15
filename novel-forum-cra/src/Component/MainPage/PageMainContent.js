@@ -42,7 +42,7 @@ function PageMainContent() {
                     }
                     <img width="100" height="100" src="https://img.icons8.com/ios-filled/100/000000/number-1.png" alt="number-1"
                     style={{position:'absolute', }}/>
-                    <img width="100" height="100" src="https://img.icons8.com/ios-filled/100/000000/number-2.png" alt="number-2"
+                    <img width="100" height="100" src="https://img.icons8.com/ios-filled/100/000000/number-1.png" alt="number-2"
                     style={{position:'absolute', }}/>
                 </div>
                 
