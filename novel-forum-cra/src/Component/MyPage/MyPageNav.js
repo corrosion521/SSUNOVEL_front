@@ -1,14 +1,37 @@
 // 마이페이지_메뉴
-import React from "react"
-import { NavLink } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
 import './MyPageNav.css'
 import './MyPageStyle.css'
+import GetNickName from "./GetNickName"
 
 const MyPageNav = () => {
-    const nickname = "닉네임";
+    const navigate = useNavigate();
+    const [nickname, setNickname] = useState("");
+
+    // useEffect(() => {
+    //     fetch(`/member`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log("회원 정보 :", result.result);
+    //             // if(result.message === "로그인 필요"){
+    //             //     navigate("/member/login")
+    //             // }
+    //             if (result.message == "성공") {
+    //                 setNickname(result.result.nickname);
+    //             }
+    //         });
+    // }, []);
+
     return (
         <div className="mypage-nav">
             <div className="nickname">
+                <GetNickName setNickname={setNickname} />
                 {nickname}
             </div>
             <nav>
