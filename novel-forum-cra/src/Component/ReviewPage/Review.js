@@ -164,7 +164,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
 
                     <div style={{ display: 'flex', gap: '5%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                            <img src="/IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px', fontWeight: 'normal' }}>{review.nickname}</h3>
+                            <img src="/IconStarOn.png" style={{ width: '0.5em', height: '0.5em' }} ></img><h3 style={{ fontSize: '0.65em', marginRight: '5px' }}>{(Math.round(review.rating * 10) / 10).toFixed(1)}</h3><h3 style={{ fontSize: '0.8em', paddingBottom: '2px', fontWeight: 'normal' }}>{review.nickname || review.nickName}</h3>
 
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>

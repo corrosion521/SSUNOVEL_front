@@ -352,17 +352,19 @@ function SearchedPageCommunity() {
 
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    pageNumbers={pageNumbers}
-                />
+                {
+                    totalPages <= 1 ? null : <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                        pageNumbers={pageNumbers}
+                    />}
             </div>
 
 
 
         </div >
+
     );
 }
 

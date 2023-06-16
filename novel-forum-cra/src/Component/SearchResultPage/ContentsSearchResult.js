@@ -73,7 +73,7 @@ const ContentsSearchResult = ({ title, resultCnt, resultAry, setSelectedBtn }) =
             {contentsHeader()}
             <div
                 className="contents-list"
-                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '15px', justifyContent: 'flex-start', marginLeft: '3%', }}
+                style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '15px', justifyContent: 'flex-start', marginLeft: '3%', marginBottom: '5%' }}
             >
                 {printContents()}
             </div>

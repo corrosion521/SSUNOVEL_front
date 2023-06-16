@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './login.css'
 
-const PageLogin = ({setIsLogin}) => {
+const PageLogin = ({ setIsLogin }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -80,12 +80,12 @@ const PageLogin = ({setIsLogin}) => {
                 </form>
 
                 <button className="signup-btn" type="button" onClick={() => navigate('/member/create')}>회원가입</button>
-                <div className="sns-login">
+                {/* <div className="sns-login">
                     <div className="group1">
                         <div className="line"></div>
                         <div className="sns-text">SNS 계정으로 로그인</div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

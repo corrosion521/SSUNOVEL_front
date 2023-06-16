@@ -260,7 +260,7 @@ function PageReview() {
                         <strong style={{ fontSize: '0.9rem' }}>'{searchTerm}'</strong><strong style={{ fontWeight: 'normal', fontSize: '0.9rem' }}>와 관련된 검색 결과입니다.</strong>
                     </div>
                 </div>
-                
+
             </div>
 
             <div style={{ display: 'flex', marginTop: '10%', gap: '4%', justifyContent: 'flex-start' }}>
@@ -270,7 +270,7 @@ function PageReview() {
                         resultCategoryReview
                             // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                             .map((item, index) => (
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '2%', borderRadius: '5px' }}>
+                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '3%', borderRadius: '5px' }}>
                                     <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
