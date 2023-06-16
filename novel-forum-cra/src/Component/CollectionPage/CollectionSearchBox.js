@@ -14,7 +14,7 @@ const CollectionSearchBox = () => {
         if (event.keyCode === 13) {
             {/*data싣자 */ }
             navigate(`../collection/search?data=${inputValue}`);
-            window.location.reload();
+            // window.location.reload();
         }
     };
 

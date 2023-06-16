@@ -15,7 +15,7 @@ const ReviewSearchBox = () => {
             {/*data싣자 */ }
             console.log(inputValue)
             navigate(`../review/search?data=${inputValue}`);
-            window.location.reload();
+            // window.location.reload();
         }
     };
 
