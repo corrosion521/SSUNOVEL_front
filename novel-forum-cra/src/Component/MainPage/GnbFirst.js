@@ -12,7 +12,7 @@ const GnbFirst = ({isLogin,setIsLogin}) => {
     return (
         <div>
             <nav className="GnbFirst">
-                <Link to="/" className="HomepageLogo"><HomepageLogo /></Link>
+                <Link to="/" className="Logo"><HomepageLogo /></Link>
                 <div className="SearchBoxWrapper">
                     <SearchBox />
                 </div>
