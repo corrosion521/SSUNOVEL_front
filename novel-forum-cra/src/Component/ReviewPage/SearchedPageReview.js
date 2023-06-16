@@ -45,9 +45,14 @@ function PageReview() {
 
 
 
+
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 15; // 한 페이지에 보여줄 아이템 개수
+    const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
+    const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
+
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([]);
 
 
 
@@ -56,10 +61,6 @@ function PageReview() {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
-
-    //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([10]);
 
     // 페이지 번호 배열 생성
     //최대 페이지넘버 10개 보이게 동적 조정중. (보이는 페이지 번호에 대한 리스트)
@@ -75,11 +76,14 @@ function PageReview() {
         }
     }
 
-    const navigate = useNavigate();
 
 
     //페이지네이션
     function Pagination({ currentPage, totalPages, onPageChange, pageNumbers }) {
+
+
+
+
         return (
             //nav태그 사용
             <nav style={{ display: 'flex', justifyContent: 'center' }}>
@@ -111,7 +115,7 @@ function PageReview() {
                             key={1}
                             onClick={() => onPageChange(1)}
                         >
-                            1
+                            처음
                         </button>
                     )}
 
@@ -139,12 +143,12 @@ function PageReview() {
                             background: 'none',
                             fontSize: '1rem',
                             fontWeight: 'bold',
-                            color: currentPage === 50 ? 'red' : 'inherit',
+                            color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
-                        key={50}
-                        onClick={() => onPageChange(50)}
+                        key={totalPages}
+                        onClick={() => onPageChange(totalPages)}
                     >
-                        50
+                        {currentPage === totalPages ? null : "마지막"}
                     </button>
 
                     {/* Display the next button . 다음버튼*/}
@@ -252,8 +256,8 @@ function PageReview() {
                 <div style={{ marginRight: 'auto' }}>
                     {/* GNB1의 SearchBox랑은 다름. 다른 페이지이기에 버튼도 달리 지정. */}
                     <ReviewSearchBox />
-                    <div >
-                        <h3>'{searchTerm}'와 관련된 검색 결과입니다.</h3>
+                    <div style={{ marginTop: '5%' }}>
+                        <strong style={{ fontSize: '0.9rem' }}>'{searchTerm}'</strong><strong style={{ fontWeight: 'normal', fontSize: '0.9rem' }}>와 관련된 검색 결과입니다.</strong>
                     </div>
                 </div>
                 <div>
@@ -287,7 +291,7 @@ function PageReview() {
                         resultCategoryReview
                             // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                             .map((item, index) => (
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '2%', borderRadius: '5px' }}>
                                     <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
@@ -311,12 +315,13 @@ function PageReview() {
 
 
 
-            <Pagination
+            {totalPages <= 1 ? null : <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
                 pageNumbers={pageNumbers}
             />
+            }
         </div >
     );
 }

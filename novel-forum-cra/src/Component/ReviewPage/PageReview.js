@@ -279,9 +279,110 @@ function PageReview() {
                     </button>
                 </div> */}
             </div>
+            <div style={{ marginTop: '10%', marginBottom: '3%', display: 'flex', flexDirection: 'row', padding: '2%', width: '100%', height: '30%', border: 'none', justifyContent: 'center', alignItems: 'center', gap: '10%' }}>
 
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
+                    <button className="r1"
+                        onClick={() => onClickSelectedGr('로맨스')}
+                        style={{
+
+                            fontWeight: selectedGenre === '로맨스' ? 'bold' : 'normal',
+                            border: "none",
+                            background: "none",
+                            fontSize: selectedGenre === '로맨스' ? '1rem' : '0.9rem',
+
+                        }}
+                        value='로맨스'                    >로맨스</button>
+                    <button
+                        onClick={() => onClickSelectedGr('로판')}
+                        style={{
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '로판' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '로판' ? 'bold' : 'normal',
+
+                        }}
+                        value='로판'>
+                        로판
+                    </button>
+                    <button
+                        onClick={() => onClickSelectedGr('판타지')}
+                        style={{
+
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '판타지' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '판타지' ? 'bold' : 'normal',
+
+                        }}
+                        value='판타지'
+                    >
+                        판타지
+                    </button>
+                    <button
+
+                        onClick={() => onClickSelectedGr('현판')}
+                        style={{
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '현판' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '현판' ? 'bold' : 'normal',
+
+                        }}
+                        value='현판'  >
+                        현판
+                    </button>
+                    <button
+                        onClick={() => onClickSelectedGr('무협')}
+                        style={{
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '무협' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '무협' ? 'bold' : 'normal',
+
+                        }}
+                        value='무협'
+                    >
+                        무협
+                    </button>
+                    <button
+                        onClick={() => onClickSelectedGr('미스터리')}
+                        style={{
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '미스터리' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '미스터리' ? 'bold' : 'normal',
+                        }}
+                        value='미스터리'
+                    >
+                        미스터리
+                    </button>
+                    <button
+                        onClick={() => onClickSelectedGr('라이트노벨')}
+                        style={{
+
+                            border: 'none',
+                            background: 'none',
+                            fontSize: selectedGenre === '라이트노벨' ? '1rem' : '0.9rem',
+                            fontWeight: selectedGenre === '라이트노벨' ? 'bold' : 'normal',
+
+                        }}
+                        value='라이트노벨'
+                    >
+                        라이트노벨
+                    </button>
+
+                </div>
+
+
+            </div>
             <div style={{ display: 'flex', marginTop: '10%', gap: '4%', justifyContent: 'flex-start' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
+                {/* <div style={{ display: 'flex', flexDirection: 'column', padding: '2%', width: '170px', height: '700px', border: '3px solid black', justifyContent: 'flex-start', alignItems: 'center', gap: '10%' }}>
                     <h3 style={{ fontSize: '2rem' }}>장르</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                         <button className="r1"
@@ -381,13 +482,13 @@ function PageReview() {
                     </div>
 
 
-                </div>
-                <div style={{ width: '70%', display: 'flex', flexDirection: 'column', margin: 'auto', justifyContent: 'center' }}>
+                </div> */}
+                <div style={{ width: '70%', display: 'flex', gap: '30px', flexDirection: 'column', margin: 'auto', justifyContent: 'center' }}>
                     {flag == true ? (
                         resultCategoryReview
                             // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                             .map((item, index) => (
-                                <div style={{ display: 'flex', justifyContent: 'flex-end', flexDirection: 'row' }}>
+                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '2%', borderRadius: '5px' }}>
                                     <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
                                         <Novel info={item}></Novel>
                                     </div>

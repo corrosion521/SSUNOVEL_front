@@ -63,7 +63,7 @@ function PageCollection() {
     const [resultCategoryNovel, setResultCategoryNovel] = useState([]);
 
     //전체 페이지 수 동적임
-    const [totalPages, setTotalPages] = useState([]);
+    const [totalPages, setTotalPages] = useState([10]);
 
 
 
@@ -104,8 +104,8 @@ function PageCollection() {
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                background: 'none', fontSize: '0.9rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -119,8 +119,8 @@ function PageCollection() {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                                 color: currentPage === 1 ? 'red' : 'inherit',
                             }}
                             key={1}
@@ -152,8 +152,8 @@ function PageCollection() {
                         style={{
                             border: 'none',
                             background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
+                            fontSize: '0.9rem',
+                            fontWeight: 'normal',
                             color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
@@ -168,8 +168,8 @@ function PageCollection() {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >
@@ -196,11 +196,12 @@ function PageCollection() {
             .then((result) => {
                 console.log("결과:", result.result)
                 // //useState이용하여 
-                setCollections(result.result);
+                setCollections(result.result.allBoxResponses);
                 // // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+                setTotalPages(Math.ceil(result.result.boxCnt / itemsPerPage));
+
             });
-    }, [order]);
+    }, [order, currentPage]);
 
 
 
@@ -220,14 +221,14 @@ function PageCollection() {
                     <button onClick={onClickLike} style={{ fontSize: order === 'LIKE_DESC' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'LIKE_DESC' ? 'bold' : 'normal' }}>공감순</button>
                 </div>
             </div>
-            <div style={{ marginTop: '3%' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '100px', justifyContent: 'center' }}>
+            <div style={{ marginTop: '10%' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'center' }}>
                     {
                         collections
                             .map(
                                 (collections) =>
                                 (
-                                    <div style={{ width: '180px', height: '350px' }}>
+                                    <div style={{ width: '17%', height: '350px' }}>
                                         <Collection data={collections} key={collections} />
                                     </div>
 
