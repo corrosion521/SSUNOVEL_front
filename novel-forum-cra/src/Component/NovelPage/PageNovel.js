@@ -586,9 +586,10 @@ function PageNovel() {
                     </div>
                 </div >
             </div >
-            )
+        </div>
+    )
 }
 
 
 
-            export default PageNovel;
+export default PageNovel;

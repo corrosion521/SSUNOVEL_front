@@ -254,7 +254,7 @@ function PageCategory() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
+                console.log("결과:", result.result.count)
                 //useState이용하여 
                 setResultCategoryNovel(result.result.dto);
                 // 전체 페이지 수 계산
@@ -532,6 +532,9 @@ function PageCategory() {
                 </div>
 
                 <div style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '5%' }}>
+
+
+
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <button
                             onClick={() => onClickSelectedFn()}
@@ -554,41 +557,34 @@ function PageCategory() {
                         <button onClick={onClickLike} style={{ fontSize: order === 'rating' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'rating' ? 'bold' : 'normal' }}>공감순</button>
                     </div>
 
-                    background: selectedFnVal === 1 ? 'black' :
-                    'green',
-                    marginRight: '0'
-                        }}
-                    >
-                    {selectedFnVal === 1 ? '완결' : '연재중'}
-                </button>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
-                    {resultCategoryNovel
-                        .map((item) => (
-                            <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
-                                <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
-                                    <Novel info={item}></Novel>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
+                        {resultCategoryNovel
+                            .map((item) => (
+                                <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
+                                    <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
+                                        <Novel info={item}></Novel>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
+                    </div>
+                    <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+                        {
+                            totalPages <= 1 ? null : <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                                pageNumbers={pageNumbers}
+                            />
+                        }
+                    </div>
                 </div>
-                <div style={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
-                    {
-                        totalPages <= 1 ? null : <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                            pageNumbers={pageNumbers}
-                        />
-                    }
-                </div>
-            </div>
 
 
 
 
 
-        </div >
+            </div >
 
 
 
