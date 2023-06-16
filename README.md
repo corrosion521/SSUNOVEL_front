@@ -1,35 +1,59 @@
-# SSUNOVEL_front
-노벨포럼
-프론트
+# Novel Forum
 
-<플로우차트 기준>
-- 웹사이트 실행
-    - 메인 페이지 이하
+<img src="./novel-forum-cra/public/logo.png" width="100">
 
-- GNB 1
-- GNB 2
-    1. 보관함
-        1. 보관함 즐겨찾기 등록, 공감하기
-        2. 보관함 목록
-            - 보관함의 이미지를 클릭했을 시(동적으로), 모달창의 on/off를 대응하기위해 useState훅 이용.
-            - &rarr;  보관함 안의 작품 목록
-                - &rarr;  해당 작품 정보 페이지
-                    - 보관함과 동일한 원리로, useState(즐찾,추천), useNavigate(작품 이미지클릭시)와 useLocation(PageNovel에서 받기)사용.
-        3. 보관함 검색
-            - CollectionSearchBox에서 검색창에 들어간 내용(inputvalue)가 동적으로 사용되기에, router의 link대신 useNavigate훅 사용.
-            - SearchedPageCollection에서는 이러한 동적으로 들어온 데이터를 받아내기 위해 useLocation훅 사용.
-            - &rarr; 보관함 목록
-                - 이하 생략
-    2. 커뮤니티
-        - 페이지네이션 사용. 10개의 페이지를 보여주나, 어떤 페이지에 위치해도 1,50은 보임.
-        1. 커뮤니티 글 목록
-            - &rarr; 해당 글 페이지
-                - &rarr; 댓글 작성
-                    - 댓글 작성후, 버튼을 누르면, 새로고침(후에 api적용)
-                - &rarr; 댓글 목록
-        2. 커뮤니티 글 작성
-        test
+<h3>소개</h3>
+<hr>
 
-- TOP 10 작품 목록 
-    - 해당 작품 정보 페이지
-        - 즐겨찾기, 공감, 작가알림 기능
+- 오늘날에는 웹소설 연재 플랫폼이 굉장히 많아 어디에 어떤 작품이 올라왔는지 확인하기 어려운 상황입니다.
+
+- 때문에, 어떤 플랫폼에 어떤 소설이 올라와 있는지 확인할 수 있는 사이트를 만들고자 합니다.
+- 다만, 단순히 어디에 어떤 소설이 있는지 확인하는 것에서 그치지 않고, 나에게 맞는 소설을 추천해주는 기능을 비롯하여 다양한 기능을 가진 사이트를 만들어보고자 합니다.
+
+
+<h3>팀</h3>
+<hr>
+
+숭실대학교 2023년 1학기 전공종합설계 
+<h5>프론트엔드</h5>
+
+- 20170575 김현정
+- 20180810 정지오
+<br>
+<br>
+<h5>백엔드</h5>
+
+- 20180736 김진수
+- 20182607 류정훈
+
+
+<br>
+<br>
+<h3>기술스택</h3>
+<hr>
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <br>
+   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
+
+
+  <br>
+  <br>
+
+  <h3> 메인 화면 </h3>
+  <hr>
+  <img src="./novel-forum-cra/public/readmeM.png" width="1200">
+
+
+  <br>
+  <br>
+  <h3>주요 기능</h3>
+  <hr>
+  
+  - <strong>소설 탐색<strong><br>
+  -  <strong>소설 추천<strong><br>
+  - <strong>보관함 공유<strong>

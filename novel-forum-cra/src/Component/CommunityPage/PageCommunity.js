@@ -242,10 +242,10 @@ function PageCommunity() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result)
-                setWritings(result.result)
+                console.log("결과:", result.result.postDto)
+                setWritings(result.result.postDto)
                 // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
             });
     }, [currentPage, order]);
 

@@ -14,7 +14,7 @@ const CommunitySearchBox = () => {
         if (event.keyCode === 13) {
             {/*data싣자 */ }
             navigate(`../community/search?data=${inputValue}`);
-            window.location.reload();
+
         }
     };
 

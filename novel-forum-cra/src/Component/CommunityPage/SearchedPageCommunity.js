@@ -20,7 +20,7 @@ function SearchedPageCommunity() {
     }
     let query = useQuery()
     const searchTerm = query.get('data')
-
+    console.log("서치텀", searchTerm)
 
     function nowToday() {
         let today = new Date();
@@ -233,7 +233,7 @@ function SearchedPageCommunity() {
 
     const [writings, setWritings] = useState([])
     useEffect(() => {
-
+        console.log("결결")
         //쿼리 
         fetch(`./search?keyword=${encodeURIComponent(searchTerm)}`, {
             method: 'GET',
@@ -245,13 +245,13 @@ function SearchedPageCommunity() {
             .then((response) => response.json())
             .then((result) => {
                 //정렬
-                result.result.sort((a, b) => b.postId - a.postId);
-                console.log("결과:", result)
-                setWritings(result.result)
+                //result.result.sort((a, b) => b.postId - a.postId);
+                console.log("se결과:", result)
+                setWritings(result.result.postDto)
                 // 전체 페이지 수 계산
-                setTotalPages(Math.ceil(result.result.length / itemsPerPage));
+                setTotalPages(Math.ceil(result.result.count / itemsPerPage));
             });
-    }, []);
+    }, [searchTerm]);
 
 
 
