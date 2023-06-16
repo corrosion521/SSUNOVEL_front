@@ -76,7 +76,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
                             style={{
                                 border: 'none',
                                 background: 'none', fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -108,7 +108,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >

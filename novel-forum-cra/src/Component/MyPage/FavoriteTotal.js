@@ -27,7 +27,9 @@ const FavoriteTotal = ({ novels, collections }) => {
                             .map(
                                 (novel) =>
                                 (
-                                    <div style={{ fontSize: '0.6rem', width: '17%', height: '230px' }}>
+                                    <div style={{ fontSize: '0.7rem', width: '17%', 
+                                    // height: '230px' 
+                                    }}>
                                         <Novel info={novel} key={novel} />
                                     </div>
                                 )

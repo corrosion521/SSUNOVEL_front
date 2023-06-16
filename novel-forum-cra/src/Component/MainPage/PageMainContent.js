@@ -26,21 +26,27 @@ function PageMainContent() {
             });
     }, []);
 
-
-
     return (
         <div>
             <div>
-                <h1>전체 랭킹 TOP 20</h1>
-                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '32px', justifyContent: 'center' }}>
+                <h1
+                style={{fontFamily:'Noto Sans KR, sans-serif', fontSize:'32px', fontWeight:'normal', }}
+                >전체 랭킹 TOP 20</h1>
+                <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'center' }}>
                     {
-                        resultMainNovel.map((novel) => (
-                            <div style={{ width: '180px', height: '450px', border: 'none', marginTop: '15px', fontSize: '1rem' }} >
+                        resultMainNovel.map((novel, i) => (
+                            <div style={{ width: '17%', border: 'none', marginTop: '15px', fontSize: '1rem' , position:'relative', }} >
                                 <Novel info={novel} />
+                                <i style={{ position: 'absolute', top: '-15px', left:'-15px', }}>
+                                    <img width="auto" height="70" src={require(`../../numberIMG/${i+1}.png`)} alt="number"
+                                        // style={{ position: 'relative'}} 
+                                        />
+                                </i>
                             </div>
                         ))
                     }
                 </div>
+
             </div>
         </div>
     );

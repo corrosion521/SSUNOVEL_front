@@ -199,7 +199,6 @@ function PageCollection() {
                 setCollections(result.result);
                 // // 전체 페이지 수 계산
                 setTotalPages(Math.ceil(result.result.length / itemsPerPage));
-
             });
     }, [order]);
 
@@ -224,7 +223,7 @@ function PageCollection() {
             <div style={{ marginTop: '3%' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '100px', justifyContent: 'center' }}>
                     {
-                        collections.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                        collections
                             .map(
                                 (collections) =>
                                 (
@@ -233,8 +232,8 @@ function PageCollection() {
                                     </div>
 
                                 )
-
                             )
+                            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     }
                 </div>
             </div>
@@ -248,7 +247,6 @@ function PageCollection() {
                         pageNumbers={pageNumbers}
                     />
                 }
-
             </div>
         </div>
     )

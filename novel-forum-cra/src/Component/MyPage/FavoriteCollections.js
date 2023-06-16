@@ -45,7 +45,7 @@ const FavoritesCollections = ({ collections }) => {
                             style={{
                                 border: 'none',
                                 background: 'none', fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -77,7 +77,7 @@ const FavoritesCollections = ({ collections }) => {
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >

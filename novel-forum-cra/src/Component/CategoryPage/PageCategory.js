@@ -518,7 +518,7 @@ function PageCategory() {
 
                 </div>
 
-                <div style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '5%' }}>
+                <div style={{ paddingTop: '5%', }}>
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <button onClick={onClickDown} style={{ fontSize: order === 'download_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'download_cnt' ? 'bold' : 'normal' }}>최신순</button>
                         <button onClick={onClickReview} style={{ fontSize: order === 'review_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'review_cnt' ? 'bold' : 'normal' }}>오래된순</button>
@@ -536,10 +536,10 @@ function PageCategory() {
                     >
                         {selectedFnVal === 1 ? '완결' : '연재중'}
                     </button>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
                         {resultCategoryNovel
                             .map((item) => (
-                                <div style={{ display: 'flex', marginTop: '5%', width:'17%' }}>
+                                <div style={{ display: 'flex', marginTop: '5%', width:'18%'}}>
                                     <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
@@ -547,7 +547,7 @@ function PageCategory() {
                             ))
                         }
                     </div>
-                    <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ marginTop: '5%', display: 'flex', justifyContent: 'center' }}>
                         {
                             totalPages <= 1 ? null : <Pagination
                                 currentPage={currentPage}
