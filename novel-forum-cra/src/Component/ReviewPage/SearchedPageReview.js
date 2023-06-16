@@ -260,28 +260,7 @@ function PageReview() {
                         <strong style={{ fontSize: '0.9rem' }}>'{searchTerm}'</strong><strong style={{ fontWeight: 'normal', fontSize: '0.9rem' }}>와 관련된 검색 결과입니다.</strong>
                     </div>
                 </div>
-                <div>
-                    <button
-                        style={{
-                            border: 'none',
-                            background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                        }}
-                    >
-                        최신순
-                    </button>
-                    <button
-                        style={{
-                            border: 'none',
-                            background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                        }}
-                    >
-                        공감순
-                    </button>
-                </div>
+                
             </div>
 
             <div style={{ display: 'flex', marginTop: '10%', gap: '4%', justifyContent: 'flex-start' }}>
