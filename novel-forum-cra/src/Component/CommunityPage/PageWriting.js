@@ -176,8 +176,8 @@ function PageWriting() {
     }
     //수정 함수
     const ModifyWriting = ({ data }) => {
-        console.log("이게맞나?", data[0])//얘도 나중에 이 글 번호가지고 api호출함. 글 번호 + 입력 데이터로 글 수정.
-        navigate(`./modify/?data=${data[0]}`)// 이동.
+        console.log("이게맞나?", data)//얘도 나중에 이 글 번호가지고 api호출함. 글 번호 + 입력 데이터로 글 수정.
+        navigate(`./modify/?data=${data}`)// 이동.
     }
 
     //댓글 작성함수

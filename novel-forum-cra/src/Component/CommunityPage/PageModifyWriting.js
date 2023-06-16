@@ -17,7 +17,7 @@ function PageModifyWriting() {
     let query = useQuery();
     const dataString = query.get("data");
     const data = dataString ? dataString.split(",") : [];
-    console.log(data);
+    console.log("수정데이터", data);
 
 
 
