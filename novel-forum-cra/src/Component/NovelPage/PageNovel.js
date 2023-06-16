@@ -445,132 +445,105 @@ function PageNovel() {
 
                     </div>
 
+                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', paddingBottom: '15px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem' }}>
+                        <br></br>
+                        <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
+                        <strong>가격 :</strong> 회차 당 {resultNovel.price}원
+                    </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px', marginLeft: '5%' }}>
-                            <img onClick={onClickStar} src={starimg} style={{ width: '1.2rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
-                        </div>
-                        {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                            <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>공감</h3>
-                        </div> */}
-                        <div style={{ border: '1px solid gray', width: '100%', height: '100px', paddingBottom: '15px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem' }}>
-                            <br></br>
-                            <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
-                            <strong>가격 :</strong> 회차 당 {resultNovel.price}원
-                        </div>
-
-                        <div>
-
-
-                        </div>
-
+                    <div>
 
 
                     </div>
-                    <hr style={{ height: '1800px', marginLeft: '5%', marginRight: '5%' }}></hr>
-                    <div style={{ width: '58%', marginRight: '10%', marginTop: '7%' }}>
-                        {/*글자 자르기 */}
 
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '5px solid gray', fontSize: '16px', padding: '5%' }}>
-                            {resultNovel && resultNovel.content && resultNovel.content.length > 300 ? resultNovel.content.slice(0, 300) + "...." : resultNovel.content}
-                        </div>
 
-                        <h3 style={{ fontSize: '0.8rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
 
-                        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
+                </div>
+                <hr style={{ height: '1800px', marginLeft: '5%', marginRight: '5%' }}></hr>
+                <div style={{ width: '58%', marginRight: '10%', marginTop: '7%' }}>
+                    {/*글자 자르기 */}
+
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', border: '5px solid gray', fontSize: '16px', padding: '5%' }}>
+                        {resultNovel && resultNovel.content && resultNovel.content.length > 300 ? resultNovel.content.slice(0, 300) + "...." : resultNovel.content}
+                    </div>
+
+                    <h3 style={{ fontSize: '0.8rem' }}>리뷰 [{resultNovel.review_cnt}]</h3>
+
+                    {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '3%' }}>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>최신순</button>
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>인기순</button>
                     </div> */}
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '1px solid gray', height: '220px', marginBottom: '5%' }}>
-                            <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'normal' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '1px solid gray', height: '220px', marginBottom: '5%' }}>
+                        <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'normal' }}>
 
-                            </textarea>
-                            <p style={{ fontSize: '0.7rem', marginLeft: '80%' }}>
-                                <span>{inputCount}</span>
-                                <span>/100 자</span>
-                            </p>
-                            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                                <div style={{ marginLeft: '0%' }} >
-                                    {/*3.1) */}
-                                    {ARRAY.map((index) => (
-                                        <FaStar
-                                            onClick={() => starScore(index)}
-                                            key={index}
-                                            size="27"
-                                            color={score[index] ? "yellow" : "gray"}
-                                        ></FaStar>
-                                    ))}
-                                </div>
-
-                                <div style={{ width: '60%', display: 'flex', flexDirection: 'column', marginRight: '24%' }}>
-
-                                    <button
-                                        className="HomepageLogo"
-                                        style={{
-                                            color: 'white',
-                                            width: '100px',
-                                            height: '40px',
-
-                                            marginBottom: '2%',
-                                            fontSize: '14px',
-                                            margin: '10%'
-                                        }}
-                                        onClick={() => onSubmitRp({ rpCount, score })}
-                                    >
-                                        작성완료
-                                    </button>
-
-                                </div>
+                        </textarea>
+                        <p style={{ fontSize: '0.7rem', marginLeft: '80%' }}>
+                            <span>{inputCount}</span>
+                            <span>/100 자</span>
+                        </p>
+                        <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                            <div style={{ marginLeft: '0%' }} >
+                                {/*3.1) */}
+                                {ARRAY.map((index) => (
+                                    <FaStar
+                                        onClick={() => starScore(index)}
+                                        key={index}
+                                        size="27"
+                                        color={score[index] ? "yellow" : "gray"}
+                                    ></FaStar>
+                                ))}
                             </div>
 
+                            <div style={{ width: '60%', display: 'flex', flexDirection: 'column', marginRight: '24%' }}>
 
+                                <button
+                                    className="HomepageLogo"
+                                    style={{
+                                        color: 'white',
+                                        width: '100px',
+                                        height: '40px',
+
+                                        marginBottom: '2%',
+                                        fontSize: '14px',
+                                        margin: '10%'
+                                    }}
+                                    onClick={() => onSubmitRp({ rpCount, score })}
+                                >
+                                    작성완료
+                                </button>
+
+                            </div>
                         </div>
-                        <div className="scrollBar" >
-
-                            {
-                                resultNovelReviews != null ?
-                                    resultNovelReviews.map(
-                                        (review) =>
-                                        (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
-                                            <Review review={review} novelId={data[0]} lflag={1}></Review>
-                                        </div>
-
-                                        )
-
-                                    ) : <h3 style={{ fontSize: '20px' }}>리뷰가 없습니다</h3>
-
-                            }
 
 
-                        </div>
-                        {resultAnotherNovel.length != 0 ?
+                    </div>
+                    <div className="scrollBar" >
 
-                            <h3 style={{ marginTop: '20%', fontSize: '14px' }}>작가의 다른 작품</h3>
-                            : null}
-                        {resultAnotherNovel.length != 0 ?
-                            <div className="scrollBarY">
-                                {
-
-                                    resultAnotherNovel.map(
-                                        (novels) =>
-                                        (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '5%', flexShrink: 0 }}>
-                                            <Novel info={novels} key={novels} />
-                                        </div>
-
-                                        )
+                        {
+                            resultNovelReviews != null ?
+                                resultNovelReviews.map(
+                                    (review) =>
+                                    (<div style={{ marginBottom: '2%', fontSize: '1rem' }}>
+                                        <Review review={review} novelId={data[0]} lflag={1}></Review>
+                                    </div>
 
                                     )
 
-                                }
-                            </div>
-                            : null}
-                        < h3 style={{ marginTop: '10%', fontSize: '14px' }}>비슷한 작품 추천</h3>
-                        <div className="scrollBarY" >
+                                ) : <h3 style={{ fontSize: '20px' }}>리뷰가 없습니다</h3>
+
+                        }
+
+
+                    </div>
+                    {resultAnotherNovel.length != 0 ?
+
+                        <h3 style={{ marginTop: '20%', fontSize: '14px' }}>작가의 다른 작품</h3>
+                        : null}
+                    {resultAnotherNovel.length != 0 ?
+                        <div className="scrollBarY">
                             {
 
-                                recommendedNovels.map(
+                                resultAnotherNovel.map(
                                     (novels) =>
                                     (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '5%', flexShrink: 0 }}>
                                         <Novel info={novels} key={novels} />
@@ -582,11 +555,27 @@ function PageNovel() {
 
                             }
                         </div>
+                        : null}
+                    < h3 style={{ marginTop: '10%', fontSize: '14px' }}>비슷한 작품 추천</h3>
+                    <div className="scrollBarY" >
+                        {
 
+                            recommendedNovels.map(
+                                (novels) =>
+                                (<div style={{ width: '100px', height: '180px', fontSize: '11px', marginBottom: '5%', flexShrink: 0 }}>
+                                    <Novel info={novels} key={novels} />
+                                </div>
+
+                                )
+
+                            )
+
+                        }
                     </div>
-                </div >
+
+                </div>
             </div >
-        </div>
+        </div >
     )
 }
 

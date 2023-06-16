@@ -488,7 +488,7 @@ function PageReview() {
                         resultCategoryReview
                             // .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                             .map((item, index) => (
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '2%', borderRadius: '5px' }}>
+                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '3%', borderRadius: '5px' }}>
                                     <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
