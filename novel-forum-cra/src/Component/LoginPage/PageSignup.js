@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './login.css';
 
-const PageSignup = () => {
+const PageSignup = ({setIsLogin}) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -11,7 +11,7 @@ const PageSignup = () => {
     const [birthYear, setBirthYear] = useState("");
     const [gender, setGender] = useState(["선택"]);
 
-    const handelChange = (event) => {
+    const handleChange = (event) => {
         const {
             target: { name, value },
         } = event;
@@ -34,7 +34,32 @@ const PageSignup = () => {
         }
     };
 
-    const handelSubmit = (event) => {
+    const [emailMessage,setEmailMessage] = useState("");
+    const [messageColor, setMessageColor] = useState("black");
+
+    const checkEmail = () => {
+        fetch(`/member/email?check=${email}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            
+        })
+            .then((response) => response.json())
+            .then((result) => { 
+                if (result.code==="OK") {    // 중복 아니면                
+                    setEmailMessage("사용 가능한 이메일입니다.");
+                    setMessageColor("#4e8cc9");
+                } else if(result.message==="해당 필드 값으로 이미 회원 가입이 되어 있습니다.") {    // 에러 메세지 출력 
+                    setEmailMessage("이미 가입된 이메일입니다.");
+                    setMessageColor("#ea5454");
+                } else {
+                    return alert(result.message);
+                }
+            });
+    }
+
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (password !== passwordConfirm) {
             // 다시확인 유도
@@ -68,7 +93,11 @@ const PageSignup = () => {
                             password: password,
                         }),
                     }).then((response) => response.json())
-                    .then((result) => console.log("결과: ", result))   // 로그인 여부 확인
+                    .then((result) => {
+                        if(result.code==="OK"){
+                            setIsLogin(true);
+                        }
+                    })   // 로그인 여부 확인
                     
                     navigate('../member/create/success'); // 성공페이지로 이동
                 } else if(result.code==="BAD_REQUEST") {    // 에러 메세지 출력 
@@ -84,7 +113,7 @@ const PageSignup = () => {
             <div className="signup container">
                 <div className="container__title">회원가입</div>
                 <div className="container__line"></div>
-                <form onSubmit={handelSubmit} method="POST">
+                <form onSubmit={handleSubmit} method="POST">
                     <label htmlFor="email">이메일 주소</label>
                     <div className="input-email">
                         <input
@@ -93,10 +122,11 @@ const PageSignup = () => {
                             type="email"
                             required
                             value={email}
-                            onChange={handelChange}
+                            onChange={handleChange}
                         />
-                        <button className="dup-btn" type="button">중복확인</button>
+                        <button className="dup-btn" type="button" onClick={checkEmail}>중복확인</button>                        
                     </div>
+                    <div className="email-message" style={{color:messageColor, }}>{emailMessage}</div>
                     <label htmlFor="password">비밀번호</label>
                     <input
                         name="password"
@@ -104,7 +134,7 @@ const PageSignup = () => {
                         type="password"
                         required
                         value={password}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="password-confirm">비밀번호 확인</label>
                     <input
@@ -113,7 +143,7 @@ const PageSignup = () => {
                         type="password"
                         required
                         value={passwordConfirm}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="nickname">닉네임</label>
                     <input
@@ -122,7 +152,7 @@ const PageSignup = () => {
                         type="text"
                         required
                         value={nickname}
-                        onChange={handelChange}
+                        onChange={handleChange}
                     />
                     <label htmlFor="birth-year">생년월일</label>
                     <input
@@ -131,7 +161,7 @@ const PageSignup = () => {
                         type="text"
                         required
                         value={birthYear}
-                        onChange={handelChange}
+                        onChange={handleChange}
                         placeholder="YYYY-MM-DD 형식으로 입력"
                     />
                     <label htmlFor="gender">성별</label>

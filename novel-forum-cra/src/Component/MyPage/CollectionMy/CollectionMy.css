@@ -90,4 +90,33 @@
 }
 
 /* ModalAddNovel */
+.repNovel-select {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3%;
+}
 
+/* ModalMyCollection */
+.ModalMyCollection-header {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.collection-edit {
+    display: flex;
+    gap: 10%;
+    margin-right: 10%;
+}
+
+.collection-edit-btn {
+    background-color: #000000;
+    border: solid 0.05rem #000000;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Inter, 'Source Sans Pro';
+    font-size: 1rem;
+    font-weight: 400;
+    height: 2rem;
+    width: 6rem;
+}

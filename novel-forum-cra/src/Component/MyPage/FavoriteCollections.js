@@ -96,7 +96,7 @@ const FavoritesCollections = ({ collections }) => {
                         .map(
                             (collections) =>
                             (
-                                <div style={{ fontSize: '0.6rem', width: '17%', height: '300px' }}>
+                                <div style={{ fontSize: '0.6rem', width: '17%', }}>
                                     <Collection data={collections} key={collections} />
                                 </div>
                             )

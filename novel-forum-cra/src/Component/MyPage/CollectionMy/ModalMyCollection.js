@@ -1,47 +1,47 @@
-// '작품 추가' 버튼 클릭시 열리는 모달
-
-import CollectionMySearchBox from "./CollectionMySearchBox";
 import Novel from "../../NovelPage/Novel";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import ModalCollectionEdit from "./ModalCollectionEdit";
 
-const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) => {
-    const [repNovel, setRepNovel] = useState(null); // 대표 작품
+const ModalMyCollection = ({ setModalOpen, data }) => {
 
+    //모달 끄기
     const closeModal = () => {
-        setAddModalOpen(false);
+        setModalOpen(false);
     }
 
-    // 라디오 버튼으로 대표 작품 선택
-    const handleChange = (item) => {
-        console.log(`*****handleChange*****`);
-        console.log(`선택한 값 : ${item.novelId}`);
-
-        setRepNovel(item.novelId);
-    };
-
-    // 리스트(novels)에서 작품 삭제
-    const onRemove = item => {
-        setNovels(novels.filter(el => el !== item));
-    };
-
-    // 선택완료 버튼 클릭시
-    const selectComplete = () => {
-        if(repNovel===null){
-            alert("대표작품을 선택하세요.");
-        }
-        setRepNovelID(repNovel);
-        closeModal();
+    // 보관함 수정 모달
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    // 작품추가 모달 열기
+    const showModal = () => {
+        setEditModalOpen(true);
     }
 
-    const itemList = novels;
+    // 보관함 삭제
+    const deleteCollection = () => {
+        fetch(`/box/${data.boxId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                if(result.result="삭제 성공"){
+                    closeModal();
+                }
+            });
+    }
+
+    console.log("박스아이템인포", data.boxId)
 
     //------페이지네이션-----------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // 한 페이지에 보여줄 아이템 개수
 
-
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(itemList.length / itemsPerPage);
+    //전체 페이지 수 동적임
+    const [totalPages, setTotalPages] = useState([]);
 
     // 페이지 변경 이벤트 핸들러
     const handlePageChange = (pageNumber) => {
@@ -120,53 +120,58 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
         );
     }
 
+    //novel 지정
+    const [novels, setNovels] = useState([])
+
+    useEffect(() => {
+
+        fetch(`/box/info/${data.boxId}?page=${currentPage}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log("결과:", result)
+                // //useState이용하여 
+                setNovels(result.result.boxItemInfo)
+                setTotalPages(Math.ceil(data.itemCnt / itemsPerPage));
+            });
+    }, [currentPage, editModalOpen]);
+
+
     return (
-        <div>
-            <div className="modalframe" style={{ position: 'fixed' }}>
+        <div className="modalbackground" >
+            <div className="modalframe">
+                <div style={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
+                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
+                </div>
                 <div className="modal-contents">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', }}>
-                        <CollectionMySearchBox novels={novels} setNovels={setNovels} />
-                        <button type="button" className="select complete-btn" onClick={selectComplete}>선택완료</button>
+                    <div className="ModalMyCollection-header">
+                        {data.title}
+                        <div className="collection-edit">
+                        {/* <button type="button" className="collection-edit-btn" onClick={showModal}>보관함수정</button> */}
+                        <button type="button" className="collection-edit-btn" onClick={deleteCollection}>보관함삭제</button>
+                    </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }} >
-                            {novels.map((value, i) => {
+                            {novels.map((value) => {
                                 return (
                                     <div style={{ display: 'flex', }}>
                                         <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
-                                            <React.Fragment key={i}>
-                                                <label>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', }}>
-                                                        <div className="repNovel-select">
-                                                            <input
-                                                                id={value}
-                                                                value={value}
-                                                                name="platform"
-                                                                type="radio"
-                                                                checked={repNovel === value.novelId} // 대표작품 선택
-                                                                onChange={() => handleChange(value)} />
-                                                            대표</div>
-                                                        <button
-                                                            type="button"
-                                                            onClick={() => onRemove(value)}
-                                                            style={{ background: 'none', border: 'none', cursor: 'pointer', }}
-                                                        >
-                                                            X
-                                                        </button>
-                                                    </div>
-                                                    <Novel info={value} key={value} />
-                                                </label>
-                                            </React.Fragment>
+                                            <Novel info={value} key={value} />
                                         </div>
                                     </div>
                                 );
                             })
-                                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)    //페이지 슬라이싱
                             }
                         </div>
                     </div>
                     {
-                        totalPages>1 &&
+                        totalPages > 1 &&
                         <div style={{ display: 'flex', justifyContent: 'center', }}>
                             <Pagination
                                 currentPage={currentPage}
@@ -178,9 +183,9 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                     }
                 </div>
             </div>
-        </div >
-    );
+            {/* {editModalOpen && <ModalCollectionEdit setModalOpen={setEditModalOpen} data={data} />} */}
+        </div>
+    )
 }
 
-
-export default ModalAddNovel;
+export default ModalMyCollection;

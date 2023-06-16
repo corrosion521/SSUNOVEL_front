@@ -28,9 +28,22 @@ const WritingMy = () => {
             .then((result) => {
                 console.log("결과:", result.result);
                 console.log("결과:", result);
-                // setItemList(result.result);
-                if(result.message === "로그인 필요"){
-                    navigate("/member/login")
+                // if(result.message === "로그인 필요"){
+                //     navigate("/member/login")
+                // }
+                if (result.message == "성공") {
+                    if (result.result.memberPostCnt > 0) {
+                        setFlag(true);
+                        setItemList(result.result.memberPostList);
+                        console.log("result.result:", result.result);
+                        // console.log("result.result.memberReviewInfoList:", result.result.memberReviewInfoList);
+                    }
+                    else {
+                        setFlag(flag);
+                    }
+                }
+                else {
+                    setFlag(false)
                 }
             });
     }, []);
@@ -58,11 +71,29 @@ const WritingMy = () => {
         }
     }
 
+    function nowToday() {
+        let today = new Date();
+        let year = today.getFullYear(); // 년도
+        let month = (today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1);  // 월
+        let date = (today.getDate() < 10 ? '0' + today.getDate() : today.getDate());  // 날짜
+
+        let hours = (today.getHours() < 10 ? '0' + today.getHours() : today.getHours());
+        let minutes = (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes());
+        let seconds = (today.getSeconds() < 10 ? '0' + today.getSeconds() : today.getSeconds());
+        // console.log(year + '' + month + '' + date + '' + hours + '' + minutes + '' + seconds);
+        return month + '/' + date + '\n' + hours + ':' + minutes;
+
+    }
+    let now = nowToday()
+
     const navigate = useNavigate();
 
     const gotowrt = (item) => {
-        navigate(`./writing?data=${item}`);
-        console.log("!!");
+        const data = item.postId;
+        const data2 = encodeURIComponent(now);
+        const url = `/community/writing?data=${data}&data2=${data2}`;
+
+        navigate(url);
     };
 
     //글 하나의 컴포넌트
@@ -84,7 +115,7 @@ const WritingMy = () => {
                 </div>
 
                 <div
-                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left' }}
+                    style={{ margin: '0', width: '50%', margin: 'auto', textAlign: 'left', cursor:'pointer' }}
                     onClick={() => gotowrt(item)}
                 >
                     {item.title}
@@ -95,7 +126,7 @@ const WritingMy = () => {
                 </div>
 
                 <div style={{ margin: '0', width: '10%', margin: 'auto' }}>
-                    {item.writeAt}
+                    {item.writeAt.replace('T', '\n')}
                 </div>
             </div>
         );
@@ -163,7 +194,7 @@ const WritingMy = () => {
             <div className="my-writing my-container">
                 <div className="my-container__title">작성글 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
-                {/* {itemList
+                {itemList
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     .map((item) => (
                         <Onewrt item={item} key={item[0]} />
@@ -178,7 +209,7 @@ const WritingMy = () => {
                             pageNumbers={pageNumbers}
                         />
                     </div>
-                } */}
+                }
             </div>
         </div>
     );

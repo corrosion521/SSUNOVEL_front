@@ -55,7 +55,6 @@ const SearchTotal = ({ setSelectedBtn, setTotalCnt, setNovelCnt1, setAuthorCnt1 
                         //         }
                         //     }
                         // )                        
-                        // console.log(result.result.forAuthor.dto[0].authorName);
                     } else {
                         setAuthorFlag(false);
                         setAuthors([]);

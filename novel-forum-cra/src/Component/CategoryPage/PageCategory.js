@@ -543,12 +543,10 @@ function PageCategory() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
                         {resultCategoryNovel
                             .map((item) => (
-                                <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
+                                <div style={{ display: 'flex', marginTop: '5%', width:'17%' }}>
                                     <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
                                         <Novel info={item}></Novel>
                                     </div>
-
-
                                 </div>
                             ))
                         }
