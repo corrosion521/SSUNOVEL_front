@@ -77,17 +77,21 @@ function PageWriting() {
                     </button> */}
                     <button
                         onClick={() => onDeleteRp({ numRp })}
-                        className="HomepageLogo"
+
                         style={{
-                            backgroundColor: 'red',
-                            color: 'white',
-                            width: '60px',
-                            height: '50px',
-                            fontSize: '0.7em'
+                            background: 'none',
+                            color: 'black',
+                            width: '20px',
+                            height: '20px',
+                            fontSize: '1em',
+                            margin: 'auto',
+                            border: 'none',
+                            fontWeight: 'bold',
+
 
                         }}
                     >
-                        삭제
+                        X
                     </button>
                 </div>
 

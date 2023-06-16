@@ -91,17 +91,18 @@ function Collection({ data }) {
 
     return (
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "100%", height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "100%", height: '100%', alignItems: 'flex-start' }}>
             {/*이미지 클릭시 모달 창보여주기 */}
             <img src={data.imgSrc} onClick={showModal}
-                style={{ backgroundColor: 'black', width: '100%', height: '70%', objectFit: 'contain' }} alt="소설이미지 안나옴" />
+                style={{ backgroundColor: 'white', width: '100%', height: '70%', objectFit: 'cover' }} alt="소설이미지 안나옴" />
             {/*단, modalOpen이 true일때만 ModalCollection컴포넌트를 렌더링  
             모달창에, 보관함의 정보를 props로 보내줌.*/}
             {modalOpen && <ModalCollection data={data} setModalOpen={setModalOpen} />}
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%', minHeight: '15%', boxSizing: 'border-box', paddingTop: '5%' }}>
-                <h3 style={{ margin: '0', fontSize: '18px' }}>{data.title}</h3>
+            <div style={{ display: 'flex', justifyContent: 'left', width: '100%', boxSizing: 'border-box', paddingTop: '5%' }}>
+                <h3 style={{ margin: '0', fontSize: '0.8rem' }}>{data.title} <strong style={{ fontWeight: 'bold', fontSize: '13px' }}>{" [ " + data.itemCnt + " ]"} </strong> </h3>
+
             </div>
-            <h3 style={{ fontWeight: 'normal', fontSize: '15px', marginTop: '10%' }}>{" [ " + data.itemCnt + " ]"}</h3>
+
             <h5 style={{ margin: 0, marginTop: '3px', fontWeight: 'normal', fontSize: '13px' }}>{data.memberName}</h5>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                 {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}

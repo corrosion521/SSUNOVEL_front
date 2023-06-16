@@ -65,8 +65,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                background: 'none', fontSize: '0.9rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -80,8 +80,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                                 color: currentPage === 1 ? 'red' : 'inherit',
                             }}
                             key={1}
@@ -113,8 +113,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
                         style={{
                             border: 'none',
                             background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
+                            fontSize: '0.9rem',
+                            fontWeight: 'normal',
                             color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
@@ -129,8 +129,8 @@ const ModalCollection = ({ setModalOpen, data }) => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >
@@ -312,56 +312,54 @@ const ModalCollection = ({ setModalOpen, data }) => {
 
     return (
         <div className="modalbackground" >
-            <div className="modalframe" style={{ height: '62%' }}>
+            <div className="modalframe">
                 <div style={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
-                    <h3>{data.title}</h3>
-                    <div style={{ display: 'flex', position: 'absolute', right: '30%' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px' }}>
-                            <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
+                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
+                </div>
+                <div className="modal-contents">
+                    <div className="ModalMyCollection-header">
+                        {data.title}
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '10%' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', gap: '5px' }}>
+                                <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                                <h3 style={{ fontSize: '1rem' }}>즐겨찾기</h3>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                                <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                                <h3 style={{ fontSize: '1rem' }}>공감</h3>
+                            </div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                            <img onClick={onClickLike} src={likeimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
-                            <h3 style={{ fontSize: '1rem' }}>공감</h3>
+
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '400px', }} >
+                            {novels.map((value) => {
+                                return (
+                                    <div style={{ display: 'flex', }}>
+                                        <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
+                                            <Novel info={value} key={value} />
+                                        </div>
+                                    </div>
+                                );
+                            })
+                            }
                         </div>
                     </div>
-                    <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
-
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', flexWrap: 'wrap', gap: '5%', height: '80%' }}>
                     {
-                        novels
-                            //.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//얘낸 한방에 보내줌. 한페이지에
-                            .map
-                            (
-                                (novels) =>
-                                (<div style={{ width: '100px', height: '200px', fontSize: '12px' }}>
-                                    <Novel info={novels} key={novels} />
-                                </div>
-
-                                )
-
-                            )
+                        totalPages > 1 &&
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                                pageNumbers={pageNumbers}
+                            />
+                        </div>
                     }
                 </div>
-                <div style={{ marginTop: '3%', display: 'flex', justifyContent: 'center' }}>
-                    {
-                        totalPages <= 1 ? null : <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                            pageNumbers={pageNumbers}
-                        />
-                    }
-
-                </div>
-
             </div>
-        </div >
+            {/* {editModalOpen && <ModalCollectionEdit setModalOpen={setEditModalOpen} data={data} />} */}
+        </div>
     )
 }
 

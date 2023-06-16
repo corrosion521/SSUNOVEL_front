@@ -92,7 +92,8 @@ function PageCategory() {
                             style={{
                                 border: 'none',
                                 background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
+                                fontSize: '0.9rem'
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -106,8 +107,8 @@ function PageCategory() {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                                 color: currentPage === 1 ? 'red' : 'inherit',
                             }}
                             key={1}
@@ -139,8 +140,8 @@ function PageCategory() {
                         style={{
                             border: 'none',
                             background: 'none',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
+                            fontSize: '0.9rem',
+                            fontWeight: 'normal',
                             color: currentPage === totalPages ? 'red' : 'inherit',
                         }}
                         key={totalPages}
@@ -155,8 +156,8 @@ function PageCategory() {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.9rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >
@@ -253,7 +254,7 @@ function PageCategory() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log("결과:", result.result.count)
+                console.log("결과:", result)
                 //useState이용하여 
                 setResultCategoryNovel(result.result.dto);
                 // 전체 페이지 수 계산
@@ -346,12 +347,14 @@ function PageCategory() {
                                     onClick={() => onClickSelectedFlp('is_kakao')}
                                     style={{
                                         // color: selectedFlp === 'is_kakao' ? 'green' : 'black',
-                                        border: selectedFlp === 'is_kakao' ? 'red 3px solid' : 'None',
+                                        border: selectedFlp === 'is_kakao' ? 'gray 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
                                         width: '20%',
-                                        height: '20%'
+                                        height: '20%',
+                                        borderRadius: '10%',
+                                        padding: '2%'
 
                                     }}
                                     value='is_kakao'
@@ -363,12 +366,14 @@ function PageCategory() {
                                 <button
                                     onClick={() => onClickSelectedFlp('is_naver')} style={{
                                         // color: selectedFlp === 'is_naver' ? 'green' : 'black',
-                                        border: selectedFlp === 'is_naver' ? 'red 3px solid' : 'None',
+                                        border: selectedFlp === 'is_naver' ? 'gray 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
                                         width: '20%',
                                         height: '20%',
+                                        borderRadius: '10%',
+                                        padding: '2%'
 
                                     }}
                                     value='네이버시리즈'
@@ -380,12 +385,15 @@ function PageCategory() {
                                     onClick={() => onClickSelectedFlp('is_ridi')}
                                     style={{
                                         //color: selectedFlp === 'is_ridi' ? 'green' : 'black',
-                                        border: selectedFlp === 'is_ridi' ? 'red 3px solid' : 'None',
+                                        border: selectedFlp === 'is_ridi' ? 'gray 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
                                         width: '20%',
-                                        height: '20%'
+                                        height: '20%',
+                                        borderRadius: '10%',
+                                        padding: '2%'
+
                                     }}
                                     value='리디'
                                 >
@@ -396,13 +404,14 @@ function PageCategory() {
                                     onClick={() => onClickSelectedFlp('is_munpia')}
                                     style={{
                                         // color: selectedFlp === 'is_munpia' ? 'green' : 'black',
-                                        border: selectedFlp === 'is_munpia' ? 'red 3px solid' : 'None',
+                                        border: selectedFlp === 'is_munpia' ? 'gray 3px solid' : 'None',
                                         background: 'none',
                                         fontSize: '1rem',
                                         fontWeight: 'bold',
                                         width: '20%',
-                                        height: '20%'
-
+                                        height: '20%',
+                                        borderRadius: '10%',
+                                        padding: '2%'
 
                                     }}
                                     value='문피아'
@@ -523,27 +532,35 @@ function PageCategory() {
                 </div>
 
                 <div style={{ paddingLeft: '5%', paddingRight: '5%', paddingTop: '5%' }}>
+
+
+
                     <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <button
+                            onClick={() => onClickSelectedFn()}
+                            className="finBtn hover1"
+                            style={{
+
+                                color: selectedFnVal === 1 ? 'black' : 'green',
+                                marginLeft: 0,
+                                height: '40px',
+                                borderRadius: '10%',
+                                backgroundColor: 'white',
+                                borderColor: selectedFnVal === 1 ? 'black' : 'green',
+
+                            }}
+                        >
+                            {selectedFnVal === 1 ? '완결' : '연재중'}
+                        </button>
                         <button onClick={onClickDown} style={{ fontSize: order === 'download_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'download_cnt' ? 'bold' : 'normal' }}>최신순</button>
                         <button onClick={onClickReview} style={{ fontSize: order === 'review_cnt' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'review_cnt' ? 'bold' : 'normal' }}>오래된순</button>
                         <button onClick={onClickLike} style={{ fontSize: order === 'rating' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'rating' ? 'bold' : 'normal' }}>공감순</button>
                     </div>
-                    <button
-                        onClick={() => onClickSelectedFn()}
-                        className="finBtn hover1"
-                        style={{
 
-                            background: selectedFnVal === 1 ? 'black' :
-                                'green',
-                            marginRight: '0'
-                        }}
-                    >
-                        {selectedFnVal === 1 ? '완결' : '연재중'}
-                    </button>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
                         {resultCategoryNovel
                             .map((item) => (
-                                <div style={{ display: 'flex', marginTop: '5%', width:'17%' }}>
+                                <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
                                     <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
                                         <Novel info={item}></Novel>
                                     </div>

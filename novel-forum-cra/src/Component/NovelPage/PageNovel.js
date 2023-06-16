@@ -445,7 +445,7 @@ function PageNovel() {
 
                     </div>
 
-                    <div style={{ border: '2px solid black', width: '100%', height: '100px', paddingBottom: '20px', margin: '10% auto', textAlign: 'center', fontSize: '1rem' }}>
+                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', paddingBottom: '15px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem' }}>
                         <br></br>
                         <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
                         <strong>가격 :</strong> 회차 당 {resultNovel.price}원
@@ -474,7 +474,7 @@ function PageNovel() {
                         <button style={{ border: 'none', background: 'none', fontSize: '0.8rem', fontWeight: 'bold', color: 'gray' }}>인기순</button>
                     </div> */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center ', border: '1px solid gray', height: '220px', marginBottom: '5%' }}>
-                        <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                        <textarea onChange={onInputHandler} maxLength="100" style={{ height: '80%', marginTop: '2%', width: '90%', resize: 'none', border: '2px solid black', fontSize: '0.8rem', fontWeight: 'normal' }}>
 
                         </textarea>
                         <p style={{ fontSize: '0.7rem', marginLeft: '80%' }}>

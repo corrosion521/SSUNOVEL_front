@@ -6,11 +6,11 @@ function Novel({ info }) {
     {/*review_rating이 아니라 reivew임 이것만 좀 이상함 이름 */ }
 
     const navigate = useNavigate();
-    console.log(info)
+    console.log("인포", info.name)
     const onClickNovelImage = (event) => {
 
         //const data = [info.novelId || info.id, info.authorName, info.name]
-        const data = [info.novelId || info.id, info.authorName, info.name]
+        const data = [info.novelId || info.id, info.authorName || info.name]
         navigate(`/novel?data=${data}`);
         //navigate(`/novel/77777`);
 
@@ -29,9 +29,9 @@ function Novel({ info }) {
                 style={{ backgroundColor: 'white', width: '100%', height: '70%', objectFit: 'contain' }} onClick={onClickNovelImage} alt="소설이미지 안나옴" />
 
 
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', marginTop: '5%' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'left', marginTop: '5%' }}>
                 {/*minHeight이용한 고정 크기 확보 */}
-                <h3 style={{ minHeight: '3em', margin: '0', marginTop: '1%', fontSize: '1em' }}>{info.title || info.novelName || info.novelTitle}</h3>
+                <h3 style={{ minHeight: '3em', margin: '0', marginTop: '1%', fontSize: '0.8em' }}>{info.title || info.novelName || info.novelTitle}</h3>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                     <h3 style={{ fontSize: '0.7em', marginRight: '5px', fontWeight: 'normal' }}>{info.authorName}</h3><img src="/IconStarOn.png" style={{ width: '0.8rem', fontWeight: 'normal' }} ></img><h3 style={{ fontSize: '0.7em', paddingBottom: '2px' }}>

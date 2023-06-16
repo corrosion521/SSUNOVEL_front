@@ -153,7 +153,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
 
     return (
         <div>
-            {modalOpen === false && (<div style={{ border: '2px solid black', width: '100%', height: '100%', margin: 'auto', textAlign: 'center', fontSize: '1em', boxSizing: 'border-box' }}>
+            {modalOpen === false && (<div style={{ border: '1px solid black', width: '100%', height: '100%', margin: 'auto', textAlign: 'center', fontSize: '1em', boxSizing: 'border-box' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '7px', flexDirection: 'column', position: 'relative' }}>
                     {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
                     <div>
