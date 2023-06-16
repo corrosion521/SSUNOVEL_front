@@ -68,8 +68,6 @@ function PageModifyWriting() {
                 console.log("결과:", result)
                 setTitle(result.result.title)
                 setContent(result.result.content)
-
-
             });
     }, []);
 
