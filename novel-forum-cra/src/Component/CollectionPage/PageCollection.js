@@ -228,13 +228,13 @@ function PageCollection() {
                             .map(
                                 (collections) =>
                                 (
-                                    <div style={{ width: '17%'}}>
+                                    <div style={{ width: '17%' }}>
                                         <Collection data={collections} key={collections} />
                                     </div>
 
                                 )
                             )
-                            .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
+                        //.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     }
                 </div>
             </div>
