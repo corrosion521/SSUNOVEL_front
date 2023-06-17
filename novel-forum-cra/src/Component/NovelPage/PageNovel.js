@@ -41,6 +41,12 @@ function PageNovel() {
     const data = dataString ? dataString.split(',') : [];
     console.log("데이터", data)
 
+    //소설링크
+    const [kakaol, setkakaol] = useState("");
+    const [naverl, setnaverl] = useState("");
+    const [ridil, setridil] = useState("");
+    const [munpial, setmunpial] = useState("");
+
     //소설변경(페이지 내 타 소설 클릭)
     const [changeNovel, setChangeNovel] = useState(false)
 
@@ -334,8 +340,15 @@ function PageNovel() {
                 //[!!] 아직 상세소설 페이지의 alreadyLike 작동이 안되는듯
                 // if(result.result.alreadyLike == )
                 setLike("")
-                console.log("LL", result)
+                console.log("LL", result.result.is_kakao)
                 setAuthorId(result.result.authorId)
+
+                //사이트 링크
+                setridil(result.result.is_ridi)
+                setnaverl(result.result.is_naver)
+                setmunpial(result.result.is_munpia)
+                setkakaol(result.result.is_kakao)
+
 
                 if (result.result.alreadyLike == 1) {
                     console.log("들어는감")
@@ -455,8 +468,14 @@ function PageNovel() {
                         } */}
                             {resultNovel.is_kakao &&
                                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                    <img src="kakaopage.png" style={{ width: '60%', padding: 0 }}></img>
+
+                                    <a href={kakaol} target="_blank" style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <img src="kakaopage.png" style={{ width: '60%', padding: 0 }}></img>
+
+                                    </a>
                                     <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>카카오페이지</h3>
+
+
                                 </div>
                             }
                         </div>
@@ -467,7 +486,10 @@ function PageNovel() {
                         }}>
                             {resultNovel.is_munpia &&
                                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                    <img src="munpia.png" style={{ width: '60%' }}></img>
+                                    <a href={munpial} target="_blank" style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <img src="munpia.png" style={{ width: '60%', padding: 0 }}></img>
+
+                                    </a>
                                     <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>문피아</h3>
                                 </div>}
                         </div>
@@ -477,7 +499,10 @@ function PageNovel() {
                             alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '40px', margin: '2% auto', marginTop: '10px'
                         }}>
                             {resultNovel.is_naver && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <img src="naver.png" style={{ width: '60%' }}></img>
+                                <a href={naverl} target="_blank" style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <img src="naver.png" style={{ width: '60%', padding: 0 }}></img>
+
+                                </a>
                                 <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>네이버</h3>
                             </div>}
                         </div>
@@ -489,7 +514,10 @@ function PageNovel() {
                             alignItems: 'center', justifyContent: 'center', border: 'none', width: '25%', height: '40px', margin: '2% auto', marginTop: '10px'
                         }}>
                             {resultNovel.is_ridi && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <img src="ridi.png" style={{ width: '60%' }}></img>
+                                <a href={ridil} target="_blank" style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <img src="ridi.png" style={{ width: '60%', padding: 0 }}></img>
+
+                                </a>
                                 <h3 style={{ marginTop: '2%', fontWeight: 'normal', fontSize: '5px' }}>리디</h3>
                             </div>}
                         </div>
@@ -497,13 +525,13 @@ function PageNovel() {
 
                     </div>
 
-                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem', padding:'1%' }}>
+                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem', padding: '1%' }}>
                         <br></br>
                         <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
                         <strong>가격 :</strong> 회차 당 {resultNovel.price}원
                         <br></br>
                     </div>
-                    
+
                 </div>
                 <hr style={{ height: '1800px', marginLeft: '5%', marginRight: '5%' }}></hr>
                 <div style={{ width: '58%', marginRight: '10%', marginTop: '7%' }}>
