@@ -43,12 +43,14 @@ function PageModifyWriting() {
             .then((response) => response.json())
             .then((result) => {
                 console.log("결과:", result)
+                navigate('/community')
                 if (result.result == null)
                     alert("본인의 게시물만 수정할 수 있습니다")
 
             });
 
-        navigate('../community')
+
+
     };
 
     //2. 기존 글 내용 가져와야 함.

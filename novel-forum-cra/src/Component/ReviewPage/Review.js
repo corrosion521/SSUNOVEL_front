@@ -14,16 +14,16 @@ import ModalReviewModify from "./ModalReviewModify";
 
 
 
-const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클릭 x
+const Review = ({ review, lflag, novelId, patch }) => {//flag =0 : 좋아요 기능 클릭 x
     console.log("review:", review)
 
     // 2. 공감 상태와 이미지 상태
     const [like, setLike] = useState(review.already_like === 1 ? true : false);
     const [likeCnt, setLikeCnt] = useState(review.like_cnt != null ? review.like_cnt : review.like_count)
-    const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "/iconLikeOn.png" : "/IconLike.png");
+    const [likeimg, setLikeimg] = useState(review.already_like === 1 ? "/IconLikeOn.png" : "/IconLike.png");
 
 
-    // 댓글 삭제함수
+    // 리뷰 삭제함수
     const onDeleteRp = () => {
         // API 호출 및 데이터 저장 코드 작성
         // 완료된 후 페이지 새로고침
@@ -40,13 +40,36 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
             .then((result) => {
                 console.log("결과:", result)
 
-                if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
-                    alert("댓글 삭제권한이 없습니다.")
+                // if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
+                //     alert("댓글 삭제권한이 없습니다.")
+
+                fetch(`/novel/${novelId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then((response) => response.json())
+                    .then((result) => {
+
+                        console.log("novelpage최초", result)
+
+
+
+
+                        //4.2
+                        patch(result.result.reviewInfos);
+
+
+
+                    });
+
 
 
             });
 
-        window.location.reload();
+
+
 
 
     }
@@ -227,7 +250,7 @@ const Review = ({ review, lflag, novelId }) => {//flag =0 : 좋아요 기능 클
                 </div>
             </div>
             )}
-            {modalOpen && <ModalReviewModify reviewId={review.review_id} novelId={novelId} setModalOpen={setModalOpen} />}
+            {modalOpen && <ModalReviewModify reviewId={review.review_id} novelId={novelId} setModalOpen={setModalOpen} patch={patch} />}
 
 
         </div>)

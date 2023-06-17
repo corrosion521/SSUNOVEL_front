@@ -33,11 +33,13 @@ function PageWriteWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
+                navigate('../community')
                 console.log("결과:", result)
 
             });
 
-        navigate('../community')
+
+
     };
 
     return (

@@ -2,7 +2,7 @@
 import { FaStar } from 'react-icons/fa'
 import { useState } from 'react';
 
-function ModalReviewModify({ setModalOpen, reviewId, novelId }) {
+function ModalReviewModify({ setModalOpen, reviewId, novelId, patch }) {
     // 모달 끄기 
     const closeModal = () => {
         setModalOpen(false);
@@ -72,9 +72,32 @@ function ModalReviewModify({ setModalOpen, reviewId, novelId }) {
                 else {
                     setResultNovel(result.result);
                     setResultNovelReviews(result.result.reviewInfos);
-                    window.location.reload();
+
+                    fetch(`/novel/${novelId}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then((response) => response.json())
+                        .then((result) => {
+
+                            console.log("novelpage최초", result)
+
+
+
+
+                            //4.2
+                            patch(result.result.reviewInfos);
+                            setModalOpen(false);
+
+
+                        });
+
 
                 }
+
+
             });
 
 

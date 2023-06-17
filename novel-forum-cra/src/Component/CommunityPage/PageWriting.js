@@ -116,8 +116,17 @@ function PageWriting() {
 
     //전체 댓글 
     const [commentLists, setCommentLists] = useState([]);
-    //전체 댓글 
+
+    //댓글 flag
+    const [rflag, setrflag] = useState(false);
+
+    //게시글 flag
+    const [wflag, setwflag] = useState(false);
+
+
     const [date, setDate] = useState([]);
+
+
     const onInputHandler = (e) => {
         const currentLength = e.target.value.length;
 
@@ -165,19 +174,24 @@ function PageWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
+                setwflag(true)
                 console.log("결과:", result)
-                if (result.result == "잘못된 유저 아이디입니다.")
+
+                navigate("/community")//뒷페이지 이동.
+                if (result.result == "잘못된 유저 아이디입니다.") {
                     alert("본인의 게시물만 삭제할 수 있습니다")
+                }
 
             });
 
 
-        navigate("../community")//뒷페이지 이동.
+
     }
     //수정 함수
     const ModifyWriting = ({ data }) => {
         console.log("이게맞나?", data)//얘도 나중에 이 글 번호가지고 api호출함. 글 번호 + 입력 데이터로 글 수정.
         navigate(`./modify/?data=${data}`)// 이동.
+
     }
 
     //댓글 작성함수
@@ -198,6 +212,7 @@ function PageWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
+                setrflag(true)
                 console.log("결과:", result)
 
 
@@ -205,7 +220,7 @@ function PageWriting() {
 
 
 
-        window.location.reload();
+        //window.location.reload();
     }
 
     //댓글 삭제함수
@@ -223,15 +238,16 @@ function PageWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
+                setrflag(true)
                 console.log("결과:", result)
 
-                if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
-                    alert("댓글 삭제권한이 없습니다.")
+                // if (result.result = "해당 댓글 삭제 권한이 없는 사용자의 요청입니다.")
+                //     alert("댓글 삭제권한이 없습니다.")
 
 
             });
 
-        window.location.reload();
+        //window.location.reload();
 
 
     }
@@ -255,6 +271,7 @@ function PageWriting() {
         })
             .then((response) => response.json())
             .then((result) => {
+                setrflag(true)
                 console.log("결과:", result)
 
 
@@ -262,7 +279,7 @@ function PageWriting() {
 
 
 
-        window.location.reload();
+        //window.location.reload();
     }
 
 
@@ -286,10 +303,12 @@ function PageWriting() {
                 setDate(result.result.writeAt.replace('T', '\n'))
                 console.log("음", result.result.title)
 
+                setrflag(false)
+
             });
 
 
-    }, []);
+    }, [rflag]);
 
 
     return (

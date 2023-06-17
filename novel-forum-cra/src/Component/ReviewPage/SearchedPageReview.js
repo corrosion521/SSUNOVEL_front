@@ -244,7 +244,7 @@ function PageReview() {
 
             });
 
-    }, []);
+    }, [searchTerm]);
 
     return (
 
