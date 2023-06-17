@@ -544,7 +544,7 @@ function PageCategory() {
                                 color: selectedFnVal === 1 ? 'black' : 'green',
                                 marginLeft: 0,
                                 height: '40px',
-                                borderRadius: '10%',
+                                borderRadius: '5px',
                                 backgroundColor: 'white',
                                 borderColor: selectedFnVal === 1 ? 'black' : 'green',
 
@@ -558,7 +558,7 @@ function PageCategory() {
                     </div>
 
                     {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}> */}
-                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'center' }}>
+                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'flex-start', marginLeft:'3%' }}>
                         {resultCategoryNovel
                             .map((item) => (
                                 // <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
