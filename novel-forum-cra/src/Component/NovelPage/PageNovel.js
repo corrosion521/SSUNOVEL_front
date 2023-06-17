@@ -445,19 +445,13 @@ function PageNovel() {
 
                     </div>
 
-                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem' }}>
+                    <div style={{ border: '1px solid gray', width: '100%', height: '100px', margin: '10% auto', textAlign: 'center', fontSize: '0.8rem', padding:'1%' }}>
                         <br></br>
                         <strong>총 회차 :</strong> {resultNovel.total_episode}화 <br></br><br></br>
                         <strong>가격 :</strong> 회차 당 {resultNovel.price}원
+                        <br></br>
                     </div>
-
-                    <div>
-
-
-                    </div>
-
-
-
+                    
                 </div>
                 <hr style={{ height: '1800px', marginLeft: '5%', marginRight: '5%' }}></hr>
                 <div style={{ width: '58%', marginRight: '10%', marginTop: '7%' }}>
