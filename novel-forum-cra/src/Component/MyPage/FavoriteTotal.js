@@ -27,7 +27,9 @@ const FavoriteTotal = ({ novels, collections }) => {
                             .map(
                                 (novel) =>
                                 (
-                                    <div style={{ fontSize: '0.7rem', width: '17%', 
+                                    <div style={{ 
+                                        fontSize: '0.9rem', 
+                                        width: '17%', 
                                     // height: '230px' 
                                     }}>
                                         <Novel info={novel} key={novel} />
@@ -56,7 +58,7 @@ const FavoriteTotal = ({ novels, collections }) => {
                         .map(
                             (collections) =>
                             (
-                                <div style={{ fontSize: '0.6rem', width: '17%', height: '300px' }}>
+                                <div style={{ fontSize: '0.6rem', width: '17%' }}>
                                     <Collection data={collections} />
                                 </div>
                             )

@@ -228,7 +228,7 @@ function PageCollection() {
                             .map(
                                 (collections) =>
                                 (
-                                    <div style={{ width: '17%', height: '350px' }}>
+                                    <div style={{ width: '17%'}}>
                                         <Collection data={collections} key={collections} />
                                     </div>
 
@@ -239,7 +239,7 @@ function PageCollection() {
                 </div>
             </div>
 
-            <div style={{ marginTop: '10%' }}>
+            <div style={{ marginTop: '8%' }}>
                 {
                     totalPages <= 1 ? null : <Pagination
                         currentPage={currentPage}

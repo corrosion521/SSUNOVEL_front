@@ -105,8 +105,8 @@ const WritingMy = () => {
                     backgroundColor: 'white',
                     display: 'flex',
                     width: '100%',
-                    height: '80px',
-                    fontSize: '1rem',
+                    height: '70px',
+                    fontSize: '0.8rem',
                     textAlign: 'center'
                 }}
             >
@@ -143,8 +143,9 @@ const WritingMy = () => {
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                background: 'none',
+                                fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -158,9 +159,9 @@ const WritingMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}
@@ -175,8 +176,8 @@ const WritingMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >

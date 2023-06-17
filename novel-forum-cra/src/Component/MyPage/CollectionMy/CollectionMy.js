@@ -140,7 +140,7 @@ const CollectionMy = () => {
                             itemList.map(
                                 (collections) =>
                                 (
-                                    <div style={{ width: '17%', height: '300px', fontSize: '0.6rem' }}>
+                                    <div style={{ width: '17%', fontSize: '0.6rem' }}>
                                         <MyCollection data={collections} key={collections} modalOpen={collectionOpen} setModalOpen={setCollectionOpen} />
                                     </div>
                                 )

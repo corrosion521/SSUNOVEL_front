@@ -60,8 +60,8 @@ const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNove
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                background: 'none', fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -75,9 +75,9 @@ const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNove
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: currentPage === 1 ? 'red' : 'inherit',
+                                color: currentPage === 1 ? '#4e8cc9' : 'inherit',
                             }}
                             key={1}
                             onClick={() => onPageChange(1)}
@@ -92,9 +92,9 @@ const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNove
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}
@@ -109,9 +109,9 @@ const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNove
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: currentPage === totalPages ? 'red' : 'inherit',
+                                color: currentPage === totalPages ? '#4e8cc9' : 'inherit',
                             }}
                             key={totalPages}
                             onClick={() => onPageChange(totalPages)}
@@ -126,8 +126,8 @@ const ModalSearchNovelMy = ({ searchTerm, checkedIds, setCheckedIds, checkedNove
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >

@@ -61,7 +61,7 @@ const FavoriteNovels = ({ novels }) => {
                                 background: 'none',
                                 fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}
@@ -97,7 +97,7 @@ const FavoriteNovels = ({ novels }) => {
                         .map(
                             (novel) =>
                             (
-                                <div style={{ fontSize: '0.6rem', width: '17%', height: '230px' }}>
+                                <div style={{ fontSize: '0.9rem', width: '17%'}}>
                                     <Novel info={novel} key={novel} />
                                 </div>
                             )

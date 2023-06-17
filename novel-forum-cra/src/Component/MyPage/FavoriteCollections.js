@@ -61,7 +61,7 @@ const FavoritesCollections = ({ collections }) => {
                                 background: 'none',
                                 fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}

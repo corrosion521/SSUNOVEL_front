@@ -557,18 +557,20 @@ function PageCategory() {
                         <button onClick={onClickLike} style={{ fontSize: order === 'rating' ? '1rem' : '0.9rem', border: 'none', background: 'none', fontWeight: order === 'rating' ? 'bold' : 'normal' }}>공감순</button>
                     </div>
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}>
+                    {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3%', justifyContent: 'center', width: '100%', height: '100%', fontSize: '30px', margin: 'auto' }}> */}
+                    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'center' }}>
                         {resultCategoryNovel
                             .map((item) => (
-                                <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
-                                    <div style={{ fontSize: '0.5em', height: '350px', width: '180px' }}>
-                                        <Novel info={item}></Novel>
-                                    </div>
+                                // <div style={{ display: 'flex', marginTop: '5%', width: '17%' }}>
+                                //     <div style={{ fontSize: '0.6em', height: '350px', width: '180px' }}>
+                                <div style={{ width: '17%', border: 'none', marginTop: '15px', fontSize: '1rem', position: 'relative', }} >
+                                    <Novel info={item}></Novel>
                                 </div>
+                                // </div>
                             ))
                         }
                     </div>
-                    <div style={{ marginTop: '10%', display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ marginTop: '6%', display: 'flex', justifyContent: 'center' }}>
                         {
                             totalPages <= 1 ? null : <Pagination
                                 currentPage={currentPage}

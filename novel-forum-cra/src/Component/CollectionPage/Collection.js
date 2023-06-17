@@ -91,23 +91,45 @@ function Collection({ data }) {
 
     return (
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "100%", height: '100%', alignItems: 'flex-start' }}>
-            {/*이미지 클릭시 모달 창보여주기 */}
-            <img src={data.imgSrc} onClick={showModal}
-                style={{ backgroundColor: 'white', width: '100%', height: '70%', objectFit: 'cover' }} alt="소설이미지 안나옴" />
+        // <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: "100%", height: '100%', alignItems: 'flex-start'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', height: '100%' }}>
+            <div style={{ width: '100%', height: 'auto', position: 'relative', overflow: 'hidden', padding: '142% 0 0' }}>
+                {/*이미지 클릭시 모달 창보여주기 */}
+                <img src={data.imgSrc} onClick={showModal}
+                    // style={{ backgroundColor: 'white', width: '100%', objectFit: 'cover' }}
+                    style={{ backgroundColor: 'white', width: '100%', height: '100%', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%', position: 'absolute', inset: '0', }}
+                    alt="소설이미지 안나옴" />
+            </div>
             {/*단, modalOpen이 true일때만 ModalCollection컴포넌트를 렌더링  
             모달창에, 보관함의 정보를 props로 보내줌.*/}
             {modalOpen && <ModalCollection data={data} setModalOpen={setModalOpen} />}
-            <div style={{ display: 'flex', justifyContent: 'left', width: '100%', boxSizing: 'border-box', paddingTop: '5%' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'left', width: '100%', boxSizing: 'border-box', paddingTop: '5%' }}>
                 <h3 style={{ margin: '0', fontSize: '0.8rem' }}>{data.title} <strong style={{ fontWeight: 'bold', fontSize: '13px' }}>{" [ " + data.itemCnt + " ]"} </strong> </h3>
 
             </div>
 
             <h5 style={{ margin: 0, marginTop: '3px', fontWeight: 'normal', fontSize: '13px' }}>{data.memberName}</h5>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
-                <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{data.likeCnt}</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px', height: '30px', }}>*/}
+            {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
+            {/* <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{data.likeCnt}</h3>
+            </div>  */}
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '5%', gap:'10%' }}>
+                {/*minHeight이용한 고정 크기 확보 */}
+                <h3 style={{ margin: '1% 0', fontSize: '0.8rem', display:'flex', alignItems:'center', flexWrap:'wrap' }}>
+                        {data.title}
+                        <strong style={{ fontWeight: 'bold', fontSize: '13px', marginLeft: '5px'}}>{" [ " + data.itemCnt + " ]"} </strong>
+                    </h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10%', height: '50%' }}>
+                    {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
+                    
+                    <h5 style={{ margin: 0, marginTop: '3px', fontWeight: 'normal', fontSize: '13px' }}>{data.memberName}</h5>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', height: '30px', }}>
+                        {/*평점부분에만 paddingBottom: 글자크기 정렬 안되어서*/}
+                        <img src={likeimg} style={{ width: '0.8rem' }} ></img><h3 style={{ fontSize: '0.8rem', paddingBottom: '2px' }}>{data.likeCnt}</h3>
+                    </div>
+                </div>
             </div>
+
 
 
         </div>

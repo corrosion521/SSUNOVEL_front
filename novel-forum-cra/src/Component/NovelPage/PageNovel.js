@@ -377,7 +377,7 @@ function PageNovel() {
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <img onClick={onClickStar} src={starimg} style={{ width: '1.8rem', objectFit: 'cover' }}></img>
+                                <img onClick={onClickStar} src={starimg} style={{ width: '27px', objectFit: 'cover', marginRight: '5px' }}></img>
                                 <h3 style={{ fontSize: '0.6rem' }}>즐겨찾기</h3>
                             </div>
                             {/* <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>

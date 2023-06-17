@@ -76,7 +76,7 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                             style={{
                                 border: 'none',
                                 background: 'none', fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -92,7 +92,7 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                                 background: 'none',
                                 fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}
@@ -108,7 +108,7 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                                 border: 'none',
                                 background: 'none',
                                 fontSize: '0.8rem',
-                                fontWeight: 'bold',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >

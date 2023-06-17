@@ -89,8 +89,8 @@ const ReviewMy = () => {
                         <button
                             style={{
                                 border: 'none',
-                                background: 'none', fontSize: '1rem',
-                                fontWeight: 'bold',
+                                background: 'none', fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage - 1)}
                         >
@@ -104,9 +104,9 @@ const ReviewMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
+                                fontSize: '0.8rem',
                                 fontWeight: 'bold',
-                                color: pageNumber === currentPage ? 'red' : 'inherit',
+                                color: pageNumber === currentPage ? '#4e8cc9' : 'inherit',
                             }}
                             key={pageNumber}
                             onClick={() => onPageChange(pageNumber)}
@@ -121,8 +121,8 @@ const ReviewMy = () => {
                             style={{
                                 border: 'none',
                                 background: 'none',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
+                                fontSize: '0.8rem',
+                                fontWeight: 'normal',
                             }}
                             onClick={() => onPageChange(currentPage + 1)}
                         >
@@ -140,22 +140,23 @@ const ReviewMy = () => {
             <div className="my-review my-container">
                 <div className="my-container__title">작성리뷰 {'('}{itemList.length}{')'}</div>
                 <div className='my-container__line'></div>
+                <div style={{ width: '70%', display: 'flex', gap: '30px', flexDirection: 'column', margin: 'auto', justifyContent: 'center' }}>
                 {flag == true ? (itemList
                     .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)//페이지 슬라이싱 1~15
                     .map((item) => (
-                        <div style={{ display: 'flex', marginTop: '5%' }}>
-                            <div style={{ fontSize: '0.5em', height: '230px', width: '150px' }}>
+                        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'flex-end', flexDirection: 'row', border: '1px solid #686868', padding: '3%', borderRadius: '5px' }}>
+                            <div style={{ fontSize: '0.8em', width: '150px' }}>
                                 <Novel info={item}></Novel>
                             </div>
-                            <div style={{ height: '170px', width: '500px', marginLeft: '20px' }}>
+                            <div style={{ width: '80%', marginLeft: '20px' }}>
                                 <Review review={item} lflag={0}></Review>
                             </div>
-
                         </div>
                     ))
                 ) : (
                     <div className="noresult">작성한 리뷰가 없습니다.</div>
                 )}
+                        </div>
                 {
                     itemList.length > itemsPerPage &&
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
