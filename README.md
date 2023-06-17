@@ -1,6 +1,6 @@
 # Novel Forum
 
-<img src="./novel-forum-cra/public/logo.png" width="100">
+<img src="./novel-forum-cra/public/novelforum_logo_2.png" width="200">
 
 <h3>소개</h3>
 <hr>
