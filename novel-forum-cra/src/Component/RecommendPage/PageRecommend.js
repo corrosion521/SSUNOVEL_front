@@ -8,6 +8,7 @@ function PageRecommend() {
 
     const [recoNovel, setRecoNovel] = useState([])
 
+    const [invisible, setInvisible] = useState(false)
 
     //새로고침 대용
     const [replay, setReplay] = useState(false)
@@ -38,6 +39,7 @@ function PageRecommend() {
 
     }
 
+
     useEffect(() => {
 
         fetch("/recommend", {
@@ -48,10 +50,22 @@ function PageRecommend() {
         })
             .then((response) => response.json())
             .then((result) => {
-                console.log(result.result.dto);
-                setRecoNovel(result.result.dto);
-                setReplay(false)
 
+                console.log(result.message)
+                if (result.message == "로그인 필요") {
+                    alert("로그인하여 리뷰를 남겨보세요!")
+                    setInvisible(true)
+
+                }
+                else if (result.message == "서버 내부 오류") {
+                    alert("추천을 위해서는 더 많은 리뷰 작성이 필요합니다!")
+                    setInvisible(true)
+                }
+                else {
+                    console.log(result.result.dto);
+                    setRecoNovel(result.result.dto);
+                    setReplay(false)
+                }
             });
 
     }, [replay]);
@@ -66,26 +80,34 @@ function PageRecommend() {
             <div style={{ display: "flex", justifyContent: "center", fontSize: '0.7rem' }}>
                 <h2 style={{ fontWeight: 'normal' }}>회원님의 리뷰를 기반으로 추천하는 작품들입니다</h2>
             </div>
-            <button onClick={onClickre} style={{
-                color: "white",
-                width: "90px",
-                height: "50px",
-                fontSize: '0.8rem',
-                background: 'black',
-                fontWeight: 'bold',
-                marginBottom: '3%'
+            {
+                invisible === false ? <button onClick={onClickre} style={{
+                    color: "white",
+                    width: "90px",
+                    height: "50px",
+                    fontSize: '0.8rem',
+                    background: 'black',
+                    fontWeight: 'bold',
+                    marginBottom: '3%'
 
-            }}>추천 받기</button>
-            <div style={{ display: "flex", gap: "2%", flexWrap: "wrap", alignItems: 'center', justifyContent: 'center' }}>
-                {recoNovel.map((novel, index) => (
-                    <div key={index} style={{ marginBottom: '5%' }}>
-                        <div style={{ width: "180px", height: "320px" }}>
+                }}>추천 받기</button> : null
+            }
+
+
+            {
+                invisible === false ? <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', columnGap: '3%', rowGap: '40px', justifyContent: 'center' }}>
+
+                    {recoNovel.map((novel, index) => (
+                        <div style={{ width: '17%', border: 'none', marginTop: '15px', fontSize: '1rem', position: 'relative', }} >
+
+                            {/* <div style={{ width: "180px", height: "320px" }}> */}
                             <Novel info={novel}></Novel>
-                        </div>
+                            {/* </div> */}
 
-                        <div style={{ display: 'flex', width: '150px', height: '50px', alignItems: 'center', justifyContent: 'center', margin: 'auto' }}>
 
-                            {/* <button
+                            <div style={{ display: 'flex', width: '150px', height: '50px', alignItems: 'center', justifyContent: 'center', margin: 'auto' }}>
+
+                                {/* <button
                                 onClick={() => onClickrate(index)}
                                 style={{ backgroundColor: rate[index] === 2 ? 'green' : 'gray', color: 'white' }}>
                                 Good
@@ -98,14 +120,17 @@ function PageRecommend() {
                                 style={{ backgroundColor: rate[index] === -2 ? 'red' : 'gray', color: 'white' }}>
                                 Bad
                             </button> */}
+                            </div>
+
+
+
                         </div>
 
+                    ))}
+                </div> : null
+            }
 
 
-                    </div>
-
-                ))}
-            </div>
 
         </div >
     );
