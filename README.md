@@ -1,6 +1,6 @@
-# Novel Forum
+# Novel Forum [프론트엔드]
 
-<img src="./novel-forum-cra/public/novelforum_logo_2.png" width="200">
+<img src="./novel-forum-cra/public/novelforum_logo_2.png" width="500">
 
 <h3>소개</h3>
 <hr>
@@ -54,6 +54,15 @@
   <h3>주요 기능</h3>
   <hr>
   
-  - <strong>소설 탐색<strong><br>
-  -  <strong>소설 추천<strong><br>
-  - <strong>보관함 공유<strong>
+  - <strong>소설 탐색</strong><br>
+  -  <strong>소설 추천</strong><br>
+  - <strong>보관함 공유</strong>
+
+
+  <br>
+  <br>
+
+  <h3>작업 기간</h3>
+  <hr>
+
+  - <strong>3.22~6.18</strong>
