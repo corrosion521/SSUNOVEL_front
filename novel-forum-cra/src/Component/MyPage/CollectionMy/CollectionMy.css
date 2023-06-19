@@ -120,3 +120,17 @@
     height: 2rem;
     width: 6rem;
 }
+
+/* ModalCollectionEdit */
+.edit-novel-btn {
+    background-color: #000000;
+    border: solid 0.05rem #000000;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Inter, 'Source Sans Pro';
+    font-size: 1rem;
+    font-weight: 400;
+    height: 2rem;
+    width: 8rem;
+}

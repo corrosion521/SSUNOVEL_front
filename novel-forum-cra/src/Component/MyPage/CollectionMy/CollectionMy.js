@@ -15,7 +15,10 @@ const CollectionMy = () => {
 
 
     // 보관함 모달
-    const [collectionOpen, setCollectionOpen] = useState(false);
+    // const [collectionOpen, setCollectionOpen] = useState(false);
+
+    // 보관함 수정/삭제 여부
+    const [isEdit, setIsEdit] = useState(false);
 
     // 생성한 보관함 리스트
     const [collections, setCollections] = useState([]);
@@ -34,7 +37,7 @@ const CollectionMy = () => {
                     setCollections(result.result.memberBoxInfoList);
                 }
             });
-    }, [modalOpen, collectionOpen])
+    }, [modalOpen, isEdit])
 
     // 전체 아이템 리스트
     // const itemList = Array.from({ length: 10 }, (_, index) => [Collection1]);
@@ -141,7 +144,7 @@ const CollectionMy = () => {
                                 (collections) =>
                                 (
                                     <div style={{ width: '17%', fontSize: '0.6rem' }}>
-                                        <MyCollection data={collections} key={collections} modalOpen={collectionOpen} setModalOpen={setCollectionOpen} />
+                                        <MyCollection data={collections} key={collections} setIsEdit={setIsEdit} />
                                     </div>
                                 )
                             )

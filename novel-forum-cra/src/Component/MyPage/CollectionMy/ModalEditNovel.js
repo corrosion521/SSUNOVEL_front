@@ -1,14 +1,15 @@
-// '작품 추가' 버튼 클릭시 열리는 모달
+// 보관함 수정 모달에서 '작품목록 수정' 버튼 클릭시 열리는 모달
 
 import CollectionMySearchBox from "./CollectionMySearchBox";
 import Novel from "../../NovelPage/Novel";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) => {
-    const [repNovel, setRepNovel] = useState(null); // 대표 작품
+const ModalEditNovel = ({ data, setModalOpen, novels, setNovels, repNovelID, setRepNovelID }) => {
+    const [repNovel, setRepNovel] = useState(repNovelID); // 대표 작품
+    // const [onDelete, setOnDelete] = useState(false); // 작품 삭제할때마다 fetch 재실행
 
     const closeModal = () => {
-        setAddModalOpen(false);
+        setModalOpen(false);
     }
 
     // 라디오 버튼으로 대표 작품 선택
@@ -22,11 +23,12 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
     // 리스트(novels)에서 작품 삭제
     const onRemove = item => {
         setNovels(novels.filter(el => el !== item));
+        // setOnDelete(true);
     };
 
     // 선택완료 버튼 클릭시
     const selectComplete = () => {
-        if(repNovel===null){
+        if (repNovel === null) {
             alert("대표작품을 선택하세요.");
         }
         else {
@@ -122,6 +124,18 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
         );
     }
 
+    if(repNovel===null){
+        novels.map(
+            (novel) => {
+                console.log("isLeadItem:", novel.isLeadItem);
+                if(novel.isLeadItem == 1){
+                    setRepNovel(novel.novelId);
+                    console.log("대표작품 :" , novel.novelId);
+                }
+            }
+        );
+    }
+
     return (
         <div>
             <div className="modalframe" style={{ position: 'fixed' }}>
@@ -133,6 +147,9 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                     <div style={{ display: 'flex', justifyContent: 'center', }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: '3%', gap: '3%', justifyContent: 'flex-start', width: '700px', height: '470px', }} >
                             {novels.map((value, i) => {
+                                // if (value.isLeadItem == 1) {
+                                //     setRepNovel(value.novelId);
+                                // }
                                 return (
                                     <div style={{ display: 'flex', }}>
                                         <div style={{ fontSize: '0.5em', height: '200px', width: '120px' }}>
@@ -168,7 +185,7 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
                         </div>
                     </div>
                     {
-                        totalPages>1 &&
+                        totalPages > 1 &&
                         <div style={{ display: 'flex', justifyContent: 'center', }}>
                             <Pagination
                                 currentPage={currentPage}
@@ -185,4 +202,4 @@ const ModalAddNovel = ({ setAddModalOpen, novels, setNovels, setRepNovelID }) =>
 }
 
 
-export default ModalAddNovel;
+export default ModalEditNovel;

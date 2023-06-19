@@ -2,7 +2,7 @@ import Novel from "../../NovelPage/Novel";
 import { useEffect, useState } from "react";
 import ModalCollectionEdit from "./ModalCollectionEdit";
 
-const ModalMyCollection = ({ setModalOpen, data }) => {
+const ModalMyCollection = ({ data, setModalOpen, setIsEdit }) => {
 
     //모달 끄기
     const closeModal = () => {
@@ -11,7 +11,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
 
     // 보관함 수정 모달
     const [editModalOpen, setEditModalOpen] = useState(false);
-    // 작품추가 모달 열기
+    // 보관함 수정 모달 열기
     const showModal = () => {
         setEditModalOpen(true);
     }
@@ -29,6 +29,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
             .then((result) => {
                 console.log("결과:", result)
                 if(result.result="삭제 성공"){
+                    setIsEdit(true);
                     closeModal();
                 }
             });
@@ -121,8 +122,8 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
     }
 
     //novel 지정
-    const [novels, setNovels] = useState([])
-
+    const [novels, setNovels] = useState([]);
+    const [myCollecion, setMyCollection] = useState([]);
     useEffect(() => {
 
         fetch(`/box/info/${data.boxId}?page=${currentPage}`, {
@@ -136,7 +137,8 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
             .then((result) => {
                 console.log("결과:", result)
                 // //useState이용하여 
-                setNovels(result.result.boxItemInfo)
+                setMyCollection(result.result);
+                setNovels(result.result.boxItemInfo);
                 setTotalPages(Math.ceil(data.itemCnt / itemsPerPage));
             });
     }, [currentPage, editModalOpen]);
@@ -152,7 +154,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
                     <div className="ModalMyCollection-header">
                         {data.title}
                         <div className="collection-edit">
-                        {/* <button type="button" className="collection-edit-btn" onClick={showModal}>보관함수정</button> */}
+                        <button type="button" className="collection-edit-btn" onClick={showModal}>보관함수정</button>
                         <button type="button" className="collection-edit-btn" onClick={deleteCollection}>보관함삭제</button>
                     </div>
                     </div>
@@ -183,7 +185,7 @@ const ModalMyCollection = ({ setModalOpen, data }) => {
                     }
                 </div>
             </div>
-            {/* {editModalOpen && <ModalCollectionEdit setModalOpen={setEditModalOpen} data={data} />} */}
+            {editModalOpen && <ModalCollectionEdit setModalOpen={setEditModalOpen} data={data} content={myCollecion.content} />}
         </div>
     )
 }

@@ -1,32 +1,69 @@
 // '보관함수정' 버튼 클릭시 열리는 모달
 
 import { useEffect, useState } from "react";
-import ModalAddNovel from "./ModalAddNovel";
+import ModalEditNovel from "./ModalEditNovel";
 
-const ModalCollectionEdit = ({ setModalOpen, data }) => {
+const ModalCollectionEdit = ({ setModalOpen, data, content }) => {
     // 현재 모달 닫기
     const closeModal = () => {
         setModalOpen(false);
     }
 
-    // 작품추가 모달
-    const [addModalOpen, setAddModalOpen] = useState(false);
-    // 작품추가 모달 열기
+    // 작품목록 수정 모달
+    const [editNovelOpen, setEditNovelOpen] = useState(false);
+    // 작품목록 수정 모달 열기
     const showModal = () => {
-        setAddModalOpen(true);
+        setEditNovelOpen(true);
     }
 
-    const [title, setTitle] = useState(data.title);
-    const [explanation, setExplanation] = useState(data.content);
-    const [isPrivate, setIsPrivate] = useState(1);
-    const [novels, setNovels] = useState([]);   // 작품 목록
-    let novelIDs = [];  // 작품 ID 목록
-    const [repNovelID, setRepNovelID] = useState(); // 대표 작품
 
+
+    const [title, setTitle] = useState(data.title);
+    const [explanation, setExplanation] = useState(content);
+    const [isPrivate, setIsPrivate] = useState(data.isPrivate);
+    const [novels, setNovels] = useState(null);   // 작품 목록
+    let novelIDs = [];  // 작품 ID 목록
+    const [repNovelID, setRepNovelID] = useState(null); // 대표 작품
+
+    // 작품 목록 초기화
+    const novelsInit = () => {
+        const totalPages = Math.ceil(data.itemCnt / 10);
+        let novelList = []; // let으로 하기!!!!! const로 하면 push() 안먹음
+        for (let i = 0; i < totalPages; i++) {
+            fetch(`/box/info/${data.boxId}?page=${i + 1}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result.result.boxItemInfo);
+                    // setNovels([...novels, ...result.result.boxItemInfo]);
+                    novelList.push(...result.result.boxItemInfo);
+                });
+        console.log("novelList : ", novelList);
+
+        }
+        console.log("novelList : ", novelList);
+        // novelList.map(
+        //     (novel) => {
+        //         console.log("isLeadItem:", novel.isLeadItem);
+        //         if(novel.isLeadItem == 1){
+        //             // setRepNovelID(novel.novelId);
+        //             console.log("대표작품 :" , novel.novelId);
+        //         }
+        //     }
+        // );
+        return novelList;
+    }
+
+    // 작품 ID 목록 초기화
     const setID = () => {
         novelIDs = novels.map(
-            (novel) => 
-                novel.novelId            
+            (novel) =>
+                novel.novelId
         );
     }
 
@@ -59,7 +96,9 @@ const ModalCollectionEdit = ({ setModalOpen, data }) => {
             });
     }
 
-
+    if(novels===null){
+        setNovels(novelsInit());
+    }
 
     return (
         <div className="modalbackground">
@@ -67,9 +106,9 @@ const ModalCollectionEdit = ({ setModalOpen, data }) => {
                 <div style={{ display: 'flex', position: 'relative', alignItems: 'center' }}>
                     <img onClick={closeModal} src="/IconCancel.png" style={{ width: '25px', height: '25px', border: 'none', background: 'none', position: 'absolute', right: '0' }}></img>
                 </div>
-                {console.log(novels)}
+                {console.log("novels 초기화 확인 :", novels)}
                 <div className="modal-contents">
-                    <button type="button" className="add-novel-btn" onClick={showModal}>작품추가</button>
+                    <button type="button" className="edit-novel-btn" onClick={showModal}>작품목록 수정</button>
                     <div className="collection-title">
                         <label htmlFor="title">보관함 이름</label>
                         <input
@@ -124,7 +163,7 @@ const ModalCollectionEdit = ({ setModalOpen, data }) => {
                     </div>
                 </div>
             </div>
-            {addModalOpen && <ModalAddNovel setAddModalOpen={setAddModalOpen} novels={novels} setNovels={setNovels} setRepNovelID={setRepNovelID} />}
+            {editNovelOpen && <ModalEditNovel data={data} setModalOpen={setEditNovelOpen} novels={novels} setNovels={setNovels} repNovelID={repNovelID} setRepNovelID={setRepNovelID} />}
         </div >
     )
 }
